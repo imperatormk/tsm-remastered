@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "874619178274",
+    "firebase_url": "https://thatsmontrealcomments.firebaseio.com",
+    "project_id": "thatsmontrealcomments",
+    "storage_bucket": "thatsmontrealcomments.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874619178274:android:6ec83e9807d22e08",
+        "android_client_info": {
+          "package_name": "io.thats.montreal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874619178274-u0iq3e5uiabll9agvoc88j0nfb7set53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvU_mNoHILQJ_as397H86k5E5O6mNgA8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
