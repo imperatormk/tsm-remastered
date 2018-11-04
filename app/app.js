@@ -7,11 +7,14 @@ import RadListView from "nativescript-ui-listview/vue";
 
 Vue.use(RadListView);
 
+Vue.registerElement("Carousel", () => require("nativescript-carousel").Carousel);
+Vue.registerElement("CarouselItem", () => require("nativescript-carousel").CarouselItem);
+
 Vue.config.silent = (TNS_ENV === 'production');
-import StationDetails from '@/components/views/StationDetails'
+import LineDetails from '@/components/views/LineDetails';
 
 new Vue({
-  render: h => h('frame', [h(StationDetails)]),
+  render: h => h('frame', [h(LineDetails)]),
   created() {
     firebase.init(config)
       .then((instance) => {

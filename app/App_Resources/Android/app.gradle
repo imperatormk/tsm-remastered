@@ -17,7 +17,7 @@ android {
     additionalParameters "--no-version-vectors"
   }
   project.ext {
-    googlePlayServicesVersion = "+"
+    googlePlayServicesVersion = "16.0.1"
   }
 }
 

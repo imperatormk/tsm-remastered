@@ -1,17 +1,24 @@
 <template>
   <Page :verticalAlignment="loading ? 'center' : 'top'" actionBarHidden="true">
-    <ActivityIndicator v-if="loading" busy="true" width="100" height="100"/>
+    <StackLayout v-if="loading">
+      <LoadingIndicator/>
+    </StackLayout>
     <slot v-else/>
   </Page>
 </template>
 
 <script>
+import LoadingIndicator from '@/components/common/LoadingIndicator'
+
 export default {
   props: {
     loading: {
       type: Boolean,
       default: true
     }
+  },
+  components: {
+    LoadingIndicator
   }
 }
 </script>
