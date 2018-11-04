@@ -18,6 +18,7 @@
     "nativescript-theme-core": "~1.0.4",
     "nativescript-ui-listview": "~3.7.0",
     "nativescript-vue": "~2.0.0",
+    "nativescript-youtubeplayer": "^3.0.1",
     "pug": "^2.0.3",
     "tns-core-modules": "~5.0.0"
   },

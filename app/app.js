@@ -9,6 +9,7 @@ Vue.use(RadListView);
 
 Vue.registerElement("Carousel", () => require("nativescript-carousel").Carousel);
 Vue.registerElement("CarouselItem", () => require("nativescript-carousel").CarouselItem);
+Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer").YoutubePlayer)
 
 Vue.config.silent = (TNS_ENV === 'production');
 import LineDetails from '@/components/views/LineDetails';
