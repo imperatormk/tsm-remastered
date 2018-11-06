@@ -40,7 +40,7 @@ export default {
 
       const obj = {
         'border-color': 'black',
-        'border-width': this.isSelected ? '2px' : '0px',
+        'border-width': this.isSelected ? '2' : '0',
         'background-color': lineColor,
         'opacity': this.stationItem.totalCount > 0 ? '1' : '0.5',
       }
@@ -51,7 +51,6 @@ export default {
       return this.stationItem.latestCount > 0
     },
     isSelected() {
-      console.log(this.selectedStation, this.stationItem.locId)
       return this.selectedStation === Number(this.stationItem.locId)
     }
   }
