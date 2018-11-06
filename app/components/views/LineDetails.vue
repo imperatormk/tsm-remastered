@@ -7,15 +7,17 @@
         </ScrollView>
       </StackLayout>
       <StackLayout>
-        <MediaCarousel :eventBus="getEventBus()" @pageChanged="pageChanged"/>
+        <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
+        <Label v-else textAlignment="center" text="Please select a station..." />
       </StackLayout>
     </StackLayout>
   </ViewContainer>
 </template>
 
 <script>
+import Vue from 'vue'
 import ViewContainer from '@/components/containers/ViewContainer'
-import StationContainer from '@/components/blocks/media/StationContainer'
+import StationContainer from '@/components/blocks/stations/StationContainer'
 import MediaCarousel from '@/components/blocks/media/MediaCarousel'
 import firebase from "nativescript-plugin-firebase"
 import MessageBus from '@/services/MessageBus'
@@ -40,10 +42,10 @@ export default {
         })
     },
     stationSelected(station) {
-      this.getEventBus().$emit('newStationData', station)
-    },
-    pageChanged(e) {
-      // this.getStations()
+      this.selectedStation = station
+      Vue.nextTick(() => {
+        this.getEventBus().$emit('newStationData', station)
+      })
     },
     getEventBus() {
       return this
@@ -52,7 +54,8 @@ export default {
   data() {
     return {
       stations: [],
-      lineId: 1,
+      selectedStation: null,
+      lineId: 0,
       loaded: false
     }
   },

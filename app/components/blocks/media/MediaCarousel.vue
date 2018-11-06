@@ -1,16 +1,24 @@
 <template>
-  <StackLayout>
-    <Carousel v-if="loaded" height="300" width="100%" @pageChanged="pageChanged" @pageTapped="pageTapped" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">
-      <CarouselItem v-for="mediaItem in media" :key="mediaItem.mediaId" backgroundColor="#b3cde0" verticalAlignment="middle">
-        <MediaContainer :mediaItem="mediaItem"/>
-      </CarouselItem>
-    </Carousel>
+  <StackLayout verticalAlignment="center">
+    <StackLayout verticalAlignment="center" v-if="loaded">
+      <Carousel v-if="media.length > 0" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+        <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
+          <StackLayout v-if="selectedIndex === idx">
+            <MediaContainer :station="currentStation" :mediaItem="mediaItem"/>
+            <CommentContainer marginTop="5" :mediaItem="mediaItem"/>
+          </StackLayout>
+        </CarouselItem>
+      </Carousel>
+      <Label v-else textAlignment="center" color="#8c8c8c" text="No media in this station..."/>
+    </StackLayout>
     <LoadingIndicator v-else />
   </StackLayout>
 </template>
 
 <script>
+import Vue from 'vue'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
+import CommentContainer from '@/components/blocks/comments/CommentContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 
 export default {
@@ -20,17 +28,22 @@ export default {
   mounted() {
     this.eventBus.$on('newStationData', (station) => {
       this.getMediaForStation(station.locId)
+      this.currentStation = station // fix duplicates plz
     })
   },
   data() {
     return {
       media: [],
+      selectedIndex: 0,
+      currentStation: null,
       loaded: true
     }
   },
   methods: {
     pageChanged(e) {
-      this.$emit('pageChanged', e)
+      Vue.nextTick(() => {
+        this.selectedIndex = e.index
+      })
     },
     getMediaForStation(stationId) {
       const apiUrl = `https://thatsmontreal.ca/api/getVideos.php?locId=${stationId}`
@@ -41,16 +54,13 @@ export default {
         .then((media) => {
           this.media = media
           this.loaded = true
-          console.log(media)
         })
-    },
-    pageTapped(e) {
-
     }
   },
   components: {
     MediaContainer,
-    LoadingIndicator
+    LoadingIndicator,
+    CommentContainer
   }
 }
 </script>

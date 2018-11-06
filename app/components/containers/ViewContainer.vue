@@ -1,6 +1,6 @@
 <template>
   <Page :verticalAlignment="loading ? 'center' : 'top'" actionBarHidden="true" xmlns:ui="nativescript-youtubeplayer" ref="pageRef">
-    <StackLayout v-if="loading">
+    <StackLayout v-if="loading" verticalAlignment="center">
       <LoadingIndicator/>
     </StackLayout>
     <slot v-else/>

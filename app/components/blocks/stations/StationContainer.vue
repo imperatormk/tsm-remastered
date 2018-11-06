@@ -1,11 +1,11 @@
 <template>
   <GridLayout class="m-15" :columns="getAutoCount">
-    <StationItem @selected="stationSelected" v-for="(stationItem, idx) in stations" :col="idx" :key="stationItem.locId" :stationItem="stationItem"/>
+    <StationItem :eventBus="getEventBus()" @selected="stationSelected" v-for="(stationItem, idx) in stations" :col="idx" :key="stationItem.locId" :stationItem="stationItem"/>
   </GridLayout>
 </template>
 
 <script>
-import StationItem from '@/components/blocks/media/StationItem'
+import StationItem from '@/components/blocks/stations/StationItem'
 
 export default {
   props: {
@@ -23,6 +23,10 @@ export default {
   methods: {
     stationSelected(item) {
       this.$emit('stationSelected', item)
+      this.getEventBus().$emit('itemSelected', item.locId)
+    },
+    getEventBus() {
+      return this
     }
   },
   components: {

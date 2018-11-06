@@ -1,11 +1,18 @@
 <template>
   <StackLayout>
-    <Label :text="mediaItem.mediaId" backgroundColor="#50000000" horizontalAlignment="center"/>
-    <YoutubePlayer id="player" @videoLoaded="videoLoaded" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y" :src="mediaItem.mediaUrl" width="100%" backgroundColor="gray"/>
+    <Label :text="station.locTitle" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
+    <StackLayout v-if="loaded" backgroundColor="black">
+      <YoutubePlayer v-show="videoLoaded" :id="'player' + mediaItem.mediaId" @videoLoaded="onVideoLoaded" :src="mediaItem.mediaUrl" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
+    </StackLayout>
+    <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="200">
+      <LoadingIndicator/>
+    </StackLayout>
+    <Label :text="mediaItem.mediaDesc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
   </StackLayout>
 </template>
 
 <script>
+import LoadingIndicator from '@/components/common/LoadingIndicator'
 import MessageBus from '@/services/MessageBus'
 
 export default {
@@ -13,19 +20,42 @@ export default {
     mediaItem: {
       type: Object,
       required: true
+    },
+    station: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted() {
+    MessageBus.$emit('getPageRef', (ref) => {
+      this.pageRef = ref
+      this.loaded = true
+    })
+  },
+  data() {
+    return {
+      loaded: false,
+      videoLoaded: false,
+      currentState: null,
+      pageRef: null
     }
   },
   methods: {
-    videoLoaded() {
-      this.playVideo()
-    },
-    playVideo() {
-      MessageBus.$emit('getPageRef', (ref) => {
-        const player = ref.getViewById('player')
+    onVideoLoaded() {
+      const player = this.getPlayer()
+      if (player) {
         player.playerStyle = 2
-        player.play()
-      })
+      }
+
+      this.currentState = 'paused'
+      this.videoLoaded = true
+    },
+    getPlayer() {
+      return this.pageRef.getViewById(`player${this.mediaItem.mediaId}`)
     }
+  },
+  components: {
+    LoadingIndicator
   }
 }
 </script>
