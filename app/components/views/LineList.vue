@@ -30,7 +30,14 @@ import ViewContainer from '@/components/containers/ViewContainer'
 export default {
   methods: {
     goToStation(locLine) {
-      this.$navigateTo(LineDetails, { props: { locLine } })
+      this.$navigateTo(LineDetails,
+      {
+        props: { locLine },
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
     },
     temp() {}
   },
