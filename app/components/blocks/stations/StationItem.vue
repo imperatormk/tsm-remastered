@@ -40,7 +40,7 @@ export default {
 
       const obj = {
         'border-color': 'black',
-        'border-width': this.isSelected ? '2' : '0',
+        // 'border-width': this.isSelected ? '2' : '0',
         'background-color': lineColor,
         'opacity': this.stationItem.totalCount > 0 ? '1' : '0.5',
       }
