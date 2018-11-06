@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:874619178274:android:6ec83e9807d22e08",
+        "mobilesdk_app_id": "1:874619178274:android:28927e75d66edfe6",
         "android_client_info": {
-          "package_name": "io.thats.montreal"
+          "package_name": "ca.thatsmontreal"
         }
       },
       "oauth_client": [

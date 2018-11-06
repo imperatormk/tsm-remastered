@@ -1,8 +1,7 @@
 module.exports = {
     persist: false,
-    apiKey: "AIzaSyBCe4EnDbovfd4bniTr7F43EwsjoiIBy30",
-    authDomain: "that-s-montreal.firebaseapp.com",
-    databaseURL: "https://that-s-montreal.firebaseio.com",
-    projectId: "that-s-montreal",
-    messagingSenderId: "546358480268"
+    apiKey: "AIzaSyCsKFd4B8n4p0qmH42BccPDWVzDD0QhtQU",
+    authDomain: "thatsmontrealcomments.firebaseapp.com",
+    databaseURL: "https://thatsmontrealcomments.firebaseio.com",
+    project_id: "thatsmontrealcomments"
 };

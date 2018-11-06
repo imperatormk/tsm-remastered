@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "io.thats.montreal",
+    "id": "ca.thatsmontreal",
     "tns-ios": {
       "version": "5.0.0"
     },
@@ -8,7 +8,7 @@
       "version": "4.2.0"
     }
   },
-  "description": "NativeScript Application",
+  "description": "That's Montreal App",
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
