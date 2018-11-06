@@ -1,17 +1,19 @@
 <template>
   <StackLayout verticalAlignment="center">
     <StackLayout verticalAlignment="center" v-if="loaded">
-      <Carousel v-if="media.length > 0" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-        <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
-          <StackLayout v-if="selectedIndex === idx">
-            <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
-            <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
-              <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
-            </FlexboxLayout>
-            <CommentContainer marginTop="5" :mediaItem="mediaItem"/>
-          </StackLayout>
-        </CarouselItem>
-      </Carousel>
+      <StackLayout verticalAlignment="center" v-if="media.length > 0">
+        <Carousel height="300" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+          <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
+            <StackLayout v-if="selectedIndex === idx">
+              <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
+            </StackLayout>
+          </CarouselItem>
+        </Carousel>
+        <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
+          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
+        </FlexboxLayout>
+        <CommentContainer marginTop="5" v-if="!!media[selectedIndex]" :mediaItem="media[selectedIndex]"/>
+      </StackLayout>
       <Label v-else textAlignment="center" color="#8c8c8c" text="No media in this station..."/>
     </StackLayout>
     <LoadingIndicator v-else />

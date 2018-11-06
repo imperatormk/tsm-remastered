@@ -51,9 +51,12 @@ export default {
         })
     },
     stationSelected(station) {
-      this.selectedStation = station
+      this.selectedStation = null
       Vue.nextTick(() => {
-        this.getEventBus().$emit('newStationData', station)
+        this.selectedStation = station
+        Vue.nextTick(() => {
+          this.getEventBus().$emit('newStationData', station)
+        })
       })
     },
     getEventBus() {
