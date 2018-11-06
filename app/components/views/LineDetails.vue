@@ -35,6 +35,11 @@ export default {
     })
 
     this.getStations()
+      .then(() => {
+        if (this.stations.length) {
+          this.stationSelected(this.stations[0])
+        }
+      })
   },
   destroyed() {
     MessageBus.$off('authStateChanged')
@@ -43,11 +48,12 @@ export default {
     getStations() {
       const apiUrl = `https://thatsmontreal.ca/api/getLocations.php?line=${this.locLine}`
       this.loaded = false
-      fetch(apiUrl)
+      return fetch(apiUrl)
         .then(stations => stations.json())
         .then((stations) => {
           this.stations = stations
           this.loaded = true
+          return Promise.resolve()
         })
     },
     stationSelected(station) {
