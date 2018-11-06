@@ -1,5 +1,5 @@
 <template>
-  <GridLayout class="m-15" :columns="getAutoCount">
+  <GridLayout class="p-15" :columns="getAutoCount">
     <StationItem :eventBus="getEventBus()" @selected="stationSelected" v-for="(stationItem, idx) in stations" :col="idx" :key="stationItem.locId" :stationItem="stationItem"/>
   </GridLayout>
 </template>
