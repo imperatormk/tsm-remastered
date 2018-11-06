@@ -25,6 +25,9 @@ export default {
       cb(this.$refs.pageRef.nativeView)
     })
   },
+  destroyed() {
+    MessageBus.$off('getPageRef')
+  },
   components: {
     LoadingIndicator
   }
