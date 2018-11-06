@@ -12,19 +12,9 @@ export default {
       type: Object,
       required: true
     },
-    eventBus: Object
-  },
-  created() {
-    this.eventBus.$on('itemSelected', (itemId) => {
-      // this.isSelected = this.stationItem.locId === itemId // TODO
-    })
-  },
-  destroyed() {
-    this.eventBus.$off('itemSelected')
-  },
-  data() {
-    return {
-      isSelected: false
+    selectedStation: {
+      type: Number,
+      default: null
     }
   },
   methods: {
@@ -59,6 +49,10 @@ export default {
     },
     hasLatest() {
       return this.stationItem.latestCount > 0
+    },
+    isSelected() {
+      console.log(this.selectedStation, this.stationItem.locId)
+      return this.selectedStation === Number(this.stationItem.locId)
     }
   }
 }
