@@ -1,8 +1,8 @@
 <template>
   <ViewContainer :loading="!loaded">
     <StackLayout>
-      <StackLayout>
-        <ScrollView orientation="horizontal" height="120">
+      <StackLayout class="p-b-20">
+        <ScrollView orientation="horizontal" height="100">
           <StationContainer :stations="stations" @stationSelected="stationSelected"/>
         </ScrollView>
       </StackLayout>
