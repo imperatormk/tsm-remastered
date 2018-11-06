@@ -4,9 +4,9 @@
       <Carousel v-if="media.length > 0" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
         <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout v-if="selectedIndex === idx">
-            <MediaContainer :station="currentStation" :mediaItem="mediaItem"/>
-            <FlexboxLayout flexDirection="row" justifyContent="center" margin="5">
-              <StackLayout height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
+            <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
+            <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
+              <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
             </FlexboxLayout>
             <CommentContainer marginTop="5" :mediaItem="mediaItem"/>
           </StackLayout>
@@ -39,14 +39,17 @@ export default {
       media: [],
       selectedIndex: 0,
       currentStation: null,
+      hideMediaContainer: false,
       loaded: true
     }
   },
   methods: {
     pageChanged(e) {
-      Vue.nextTick(() => {
+      this.hideMediaContainer = true
+      setTimeout(() => {
         this.selectedIndex = e.index
-      })
+        this.hideMediaContainer = false
+      }, 300)
     },
     getMediaForStation(stationId) {
       const apiUrl = `https://thatsmontreal.ca/api/getVideos.php?locId=${stationId}`
