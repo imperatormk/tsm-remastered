@@ -36,6 +36,9 @@ export default {
 
     this.getStations()
   },
+  destroyed() {
+    MessageBus.$off('authStateChanged')
+  },
   methods: {
     getStations() {
       const apiUrl = `https://thatsmontreal.ca/api/getLocations.php?line=${this.locLine}`

@@ -34,6 +34,9 @@ export default {
       this.currentStation = station // fix duplicates plz
     })
   },
+  destroyed() {
+    this.eventBus.$off('newStationData')
+  },
   data() {
     return {
       media: [],

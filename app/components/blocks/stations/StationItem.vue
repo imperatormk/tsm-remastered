@@ -19,6 +19,9 @@ export default {
       // this.isSelected = this.stationItem.locId === itemId // TODO
     })
   },
+  destroyed() {
+    this.eventBus.$off('itemSelected')
+  },
   data() {
     return {
       isSelected: false
