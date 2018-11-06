@@ -22,6 +22,7 @@
 
 <script>
 import CommentItem from '@/components/blocks/comments/CommentItem'
+import LoginModal from '@/components/views/LoginModal'
 
 export default {
   props: {
@@ -49,7 +50,12 @@ export default {
         })
     },
     postComment() {
-
+      this.$showModal(LoginModal, {
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
     },
     onReturnPress(e) {
 
