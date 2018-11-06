@@ -12,7 +12,8 @@
         <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
           <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.locLine] : 'lightgray'" borderRadius="100"/>
         </FlexboxLayout>
-        <CommentContainer marginTop="5" v-if="!!media[selectedIndex]" :mediaItem="media[selectedIndex]"/>
+        <Button marginTop="5" text="Share with the world!" @tap="shareMedia" style="border-width: 1;margin:0px;color:black;border-bottom-width: 0"/>
+        <CommentContainer v-if="!!media[selectedIndex]" :mediaItem="media[selectedIndex]"/>
       </StackLayout>
       <Label v-else textAlignment="center" color="#8c8c8c" text="No media in this station..."/>
     </StackLayout>
@@ -26,6 +27,7 @@ import MediaContainer from '@/components/blocks/media/MediaContainer'
 import CommentContainer from '@/components/blocks/comments/CommentContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import lineColorMixin from '@/mixins/lineColorMixin'
+import * as SocialShare from "nativescript-social-share"
 
 export default {
   mixins: [lineColorMixin],
@@ -68,6 +70,12 @@ export default {
           this.media = media
           this.loaded = true
         })
+    },
+    shareMedia() {
+      const media = this.media[this.selectedIndex]
+      if (media) {
+        SocialShare.shareUrl(`https://www.youtube.com/watch?v=${media.mediaUrl}`, media.mediaDesc)
+      }
     }
   },
   components: {
