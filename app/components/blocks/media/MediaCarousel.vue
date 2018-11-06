@@ -5,6 +5,9 @@
         <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout v-if="selectedIndex === idx">
             <MediaContainer :station="currentStation" :mediaItem="mediaItem"/>
+            <FlexboxLayout flexDirection="row" justifyContent="center" margin="5">
+              <StackLayout height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
+            </FlexboxLayout>
             <CommentContainer marginTop="5" :mediaItem="mediaItem"/>
           </StackLayout>
         </CarouselItem>
