@@ -13,7 +13,6 @@ Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer")
 
 Vue.config.silent = (TNS_ENV === 'production');
 import LineList from '@/components/views/LineList';
-import LineDetails from '@/components/views/LineDetails';
 
 new Vue({
   render: h => h('frame', [h(LineList)]),
