@@ -17,21 +17,19 @@ export default {
           scope: ['public_profile', 'email']
         }
       }).then((result) => {
-          console.log(result)
-        },
-        (errorMessage) => {
-          console.log(errorMessage)
-        })
+        console.log(result)
+      }, (errorMessage) => {
+        console.log(errorMessage)
+      })
     },
     loginWithGoogle() {
       firebase.login({
         type: firebase.LoginType.GOOGLE,
       }).then((result) => {
-          console.log(result)
-        },
-        (errorMessage) => {
-          console.log(errorMessage)
-        })
+        console.log(result)
+      }, (errorMessage) => {
+        console.log(errorMessage)
+      })
     }
   }
 }
