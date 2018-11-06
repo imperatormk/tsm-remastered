@@ -6,7 +6,10 @@
 </template>
 
 <script>
+import lineColorMixin from '@/mixins/lineColorMixin'
+
 export default {
+  mixins: [lineColorMixin],
   props: {
     stationItem: {
       type: Object,
@@ -33,9 +36,8 @@ export default {
       return title
     },
     getStyle() {
-      const lineColors = { 0: '#ed8900',  1: '#007cc1', 2: '#ffd400', 3: '#0cad26' }
       const locLine = Number(this.stationItem.locLine)
-      const lineColor = lineColors[locLine]
+      const lineColor = this.lineColors[locLine]
       // globalize?
 
       const obj = {

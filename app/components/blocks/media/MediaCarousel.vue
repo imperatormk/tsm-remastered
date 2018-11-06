@@ -2,7 +2,7 @@
   <StackLayout verticalAlignment="center">
     <StackLayout verticalAlignment="center" v-if="loaded">
       <StackLayout verticalAlignment="center" v-if="media.length > 0">
-        <Carousel height="300" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+        <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
           <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
             <StackLayout v-if="selectedIndex === idx">
               <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
@@ -10,7 +10,7 @@
           </CarouselItem>
         </Carousel>
         <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
-          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? 'red' : 'black'" borderRadius="100"/>
+          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.locLine] : 'lightgray'" borderRadius="100"/>
         </FlexboxLayout>
         <CommentContainer marginTop="5" v-if="!!media[selectedIndex]" :mediaItem="media[selectedIndex]"/>
       </StackLayout>
@@ -25,8 +25,10 @@ import Vue from 'vue'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import CommentContainer from '@/components/blocks/comments/CommentContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
+import lineColorMixin from '@/mixins/lineColorMixin'
 
 export default {
+  mixins: [lineColorMixin],
   props: {
     eventBus: Object
   },
