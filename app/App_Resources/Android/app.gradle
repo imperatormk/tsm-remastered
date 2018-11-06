@@ -1,9 +1,11 @@
 // Add your native dependencies here:
 
 // Uncomment to add recyclerview-v7 dependency
-//dependencies {
+dependencies {
+  compile ("com.facebook.android:facebook-android-sdk:4.35.0"){ exclude group: 'com.google.zxing' }
+  compile "com.google.android.gms:play-services-auth:16.0.0"
 //	implementation 'com.android.support:recyclerview-v7:+'
-//}
+}
 
 // If you want to add something to be applied before applying plugins' include.gradle files 
 // e.g. project.ext.googlePlayServicesVersion = "15.0.1"
