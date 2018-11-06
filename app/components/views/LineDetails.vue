@@ -23,6 +23,12 @@ import firebase from "nativescript-plugin-firebase"
 import MessageBus from '@/services/MessageBus'
 
 export default {
+  props: {
+    locLine: {
+      type: Number,
+      required: true
+    }
+  },
   created() {
     MessageBus.$on('authStateChanged', (data) => { // addValueEventListener
       console.log(data)
@@ -32,7 +38,7 @@ export default {
   },
   methods: {
     getStations() {
-      const apiUrl = `https://thatsmontreal.ca/api/getLocations.php?line=${this.lineId}`
+      const apiUrl = `https://thatsmontreal.ca/api/getLocations.php?line=${this.locLine}`
       this.loaded = false
       fetch(apiUrl)
         .then(stations => stations.json())
@@ -55,14 +61,13 @@ export default {
     return {
       stations: [],
       selectedStation: null,
-      lineId: 0,
       loaded: false
     }
   },
   components: {
     ViewContainer,
     StationContainer,
-    MediaCarousel,
+    MediaCarousel
   }
 }
 </script>

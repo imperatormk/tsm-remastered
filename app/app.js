@@ -12,10 +12,11 @@ Vue.registerElement("CarouselItem", () => require("nativescript-carousel").Carou
 Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer").YoutubePlayer)
 
 Vue.config.silent = (TNS_ENV === 'production');
+import LineList from '@/components/views/LineList';
 import LineDetails from '@/components/views/LineDetails';
 
 new Vue({
-  render: h => h('frame', [h(LineDetails)]),
+  render: h => h('frame', [h(LineList)]),
   created() {
     firebase.init(config)
       .then((instance) => {

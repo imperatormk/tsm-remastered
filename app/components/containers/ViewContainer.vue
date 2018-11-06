@@ -1,9 +1,11 @@
 <template>
   <Page :verticalAlignment="loading ? 'center' : 'top'" actionBarHidden="true" xmlns:ui="nativescript-youtubeplayer" ref="pageRef">
     <StackLayout v-if="loading" verticalAlignment="center">
-      <LoadingIndicator/>
+      <LoadingIndicator :full="true"/>
     </StackLayout>
-    <slot v-else/>
+    <StackLayout verticalAlignment="top" v-else height="100%">
+      <slot/>
+    </StackLayout>
   </Page>
 </template>
 
@@ -15,7 +17,7 @@ export default {
   props: {
     loading: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   created() {
