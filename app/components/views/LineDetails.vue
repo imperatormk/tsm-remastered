@@ -19,7 +19,6 @@ import Vue from 'vue'
 import ViewContainer from '@/components/containers/ViewContainer'
 import StationContainer from '@/components/blocks/stations/StationContainer'
 import MediaCarousel from '@/components/blocks/media/MediaCarousel'
-import firebase from "nativescript-plugin-firebase"
 import MessageBus from '@/services/MessageBus'
 
 export default {
