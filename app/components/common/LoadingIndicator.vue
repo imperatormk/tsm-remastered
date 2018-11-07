@@ -1,6 +1,7 @@
 <template>
   <StackLayout :height="full ? '100%' : 'auto'" verticalAlignment="center">
     <ActivityIndicator :color="color" busy="true" width="100" :height="full ? '100' : 'auto'"/>
+    <slot/>
   </StackLayout>
 </template>
 
