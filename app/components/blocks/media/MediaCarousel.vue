@@ -13,7 +13,7 @@
           <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.locLine] : 'lightgray'" borderRadius="100"/>
         </FlexboxLayout>
         <Button marginTop="5" text="Share with the world!" @tap="shareMedia" style="border-width: 1;margin:0px;color:black;border-bottom-width: 0"/>
-        <CommentContainer v-if="!!media[selectedIndex]" :mediaItem="media[selectedIndex]"/>
+        <Button marginTop="5" text="Comments" @tap="openComments" style="border-width: 1;margin:0px;color:black;border-bottom-width: 0"/>
       </StackLayout>
       <Label v-else textAlignment="center" color="#8c8c8c" text="No media in this station..."/>
     </StackLayout>
@@ -23,8 +23,8 @@
 
 <script>
 import Vue from 'vue'
+import CommentsModal from '@/components/views/CommentsModal'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
-import CommentContainer from '@/components/blocks/comments/CommentContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import lineColorMixin from '@/mixins/lineColorMixin'
 import * as SocialShare from "nativescript-social-share"
@@ -72,16 +72,30 @@ export default {
         })
     },
     shareMedia() {
-      const media = this.media[this.selectedIndex]
-      if (media) {
-        SocialShare.shareUrl(`https://www.youtube.com/watch?v=${media.mediaUrl}`, media.mediaDesc)
+      const mediaItem = this.media[this.selectedIndex]
+      if (mediaItem) {
+        SocialShare.shareUrl(`https://www.youtube.com/watch?v=${mediaItem.mediaUrl}`, mediaItem.mediaDesc)
+      }
+    },
+    openComments() {
+      const mediaItem = this.media[this.selectedIndex]
+      if (mediaItem) {
+        this.$showModal(CommentsModal, {
+          animated: true,
+          fullscreen: true,
+          transition: {
+            name: 'slideBottom'
+          },
+          props: {
+            mediaItem
+          }
+        })
       }
     }
   },
   components: {
     MediaContainer,
-    LoadingIndicator,
-    CommentContainer
+    LoadingIndicator
   }
 }
 </script>

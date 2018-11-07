@@ -1,5 +1,5 @@
 <template>
-  <StackLayout>
+  <FlexboxLayout flexDirection="column">
     <FlexboxLayout flexDirection="row">
       <TextField hint="Enter your comment..." 
         v-model="comment" 
@@ -18,7 +18,7 @@
         </GridLayout>
       </ScrollView>
     </StackLayout>
-  </StackLayout>
+  </FlexboxLayout>
 </template>
 
 <script>
