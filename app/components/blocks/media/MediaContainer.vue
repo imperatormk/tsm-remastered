@@ -5,7 +5,7 @@
       <YoutubePlayer v-show="videoLoaded" :id="'player' + mediaItem.mediaId" @videoLoaded="onVideoLoaded" :src="mediaItem.mediaUrl" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
     </StackLayout>
     <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="200">
-      <LoadingIndicator/>
+      <LoadingIndicator color="red"/>
     </StackLayout>
     <Label :text="mediaItem.mediaDesc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
   </StackLayout>
