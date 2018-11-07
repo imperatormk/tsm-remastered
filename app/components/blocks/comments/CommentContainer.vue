@@ -11,18 +11,21 @@
         flexGrow="9"></TextField>
       <Button flexGrow="1" @tap="postComment" style="border-width: 1;margin:0px;color:black;" text="Post"/>
     </FlexboxLayout>
-    <StackLayout>
-      <ScrollView marginTop="7" height="98%">
-        <GridLayout class="m-15" :rows="getAutoCount">
+    <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
+      <LoadingIndicator v-if="!loaded"/>
+      <ScrollView v-else-if="loaded && comments.length" marginTop="7" height="98%">
+        <GridLayout class="m-15" :rows="getAutoCount" v-if="comments.length">
           <CommentItem v-for="(commentItem, idx) in comments" :key="commentItem.commId" :commentItem="commentItem" :row="idx"/>
         </GridLayout>
       </ScrollView>
+      <Label v-else textAlignment="center" fontSize="20" text="Be the first one to comment!" color="#8c8c8c"/>
     </StackLayout>
   </FlexboxLayout>
 </template>
 
 <script>
 import CommentItem from '@/components/blocks/comments/CommentItem'
+import LoadingIndicator from '@/components/common/LoadingIndicator'
 import LoginModal from '@/components/views/LoginModal'
 
 export default {
@@ -38,16 +41,19 @@ export default {
   data() {
     return {
       comment: '',
-      comments: []
+      comments: [],
+      loaded: false
     }
   },
   methods: {
     getComments() {
-      const apiUrl = `https://thatsmontreal.ca/api/getComments.php?mediaId=${this.mediaItem.mediaId}`
+      this.loaded = false
+      const apiUrl = `https://thatsmontreal.ca/api/getComments.php?mediaId=${this.mediaItem.mediaId}&count=100`
       fetch(apiUrl)
         .then(comments => comments.json())
         .then((comments) => {
           this.comments = comments
+          this.loaded = true
         })
     },
     postComment() {
@@ -60,9 +66,9 @@ export default {
             action: 'insert',
             user: {
               0: {
-                uid: currentUser.additionalUserInfo.id,
+                uid: currentUser.additionalUserInfo.profile.id,
                 photoURL: currentUser.profileImageURL,
-                displayName: 'Test Name', // temp
+                displayName: 'Test Name', // tempp
                 providerId: currentUser.additionalUserInfo.providerId,
               }
             },
@@ -108,7 +114,8 @@ export default {
     }
   },
   components: {
-    CommentItem
+    CommentItem,
+    LoadingIndicator
   }
 }
 </script>

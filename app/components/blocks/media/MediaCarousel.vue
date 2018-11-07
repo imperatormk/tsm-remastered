@@ -1,6 +1,7 @@
 <template>
-  <StackLayout verticalAlignment="center">
-    <StackLayout verticalAlignment="center" v-if="loaded">
+  <StackLayout :verticalAlignment="loaded && media.length ? 'top' : 'center'" height="100%">
+    <LoadingIndicator v-if="!loaded" />
+    <StackLayout v-else-if="loaded && media.length" verticalAlignment="center">
       <StackLayout verticalAlignment="center" v-if="media.length > 0">
         <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
           <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
@@ -15,9 +16,8 @@
         <Button marginTop="5" text="Share with the world!" @tap="shareMedia" style="border-width: 1;margin:0px;color:black;border-bottom-width: 0"/>
         <Button marginTop="5" text="Comments" @tap="openComments" style="border-width: 1;margin:0px;color:black;border-bottom-width: 0"/>
       </StackLayout>
-      <Label v-else textAlignment="center" color="#8c8c8c" text="No media in this station..."/>
     </StackLayout>
-    <LoadingIndicator v-else />
+    <Label v-else textAlignment="center" fontSize="20" color="#8c8c8c" text="No media in this station..."/>
   </StackLayout>
 </template>
 
