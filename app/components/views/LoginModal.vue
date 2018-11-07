@@ -16,20 +16,29 @@ export default {
         facebookOptions: {
           scope: ['public_profile', 'email']
         }
-      }).then((result) => {
-        console.log(result)
+      }).then((res) => {
+        this.commitNewUser(res)
+          .then(() => this.$modal.close())
       }, (errorMessage) => {
-        console.log(errorMessage)
+        console.error(errorMessage)
       })
     },
     loginWithGoogle() {
       firebase.login({
         type: firebase.LoginType.GOOGLE,
-      }).then((result) => {
-        console.log(result)
+      }).then((res) => {
+        this.commitNewUser(res)
+          .then(() => this.$modal.close())
       }, (errorMessage) => {
-        console.log(errorMessage)
+        console.error(errorMessage)
       })
+    },
+    commitNewUser(res) {
+      if (res) return Promise.resolve(this.$store.commit('setUser', res))
+      return firebase.getCurrentUser()
+        .then((curUser) => {
+          return Promise.resolve(this.$store.commit('setUser', curUser))
+        })
     }
   }
 }
