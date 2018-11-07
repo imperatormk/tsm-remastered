@@ -55,19 +55,19 @@ export default {
         const comment = this.comment.trim()
         const currentUser = this.getCurrentUser
 
-        if (comment) {
+        if (comment && currentUser.additionalUserInfo) {
           const reqObj = {
             action: 'insert',
             user: {
               0: {
-                uid: currentUser.uid,
+                uid: currentUser.additionalUserInfo.id,
                 photoURL: currentUser.profileImageURL,
                 displayName: 'Test Name', // temp
-                providerId: currentUser.additionalUserInfo ? currentUser.additionalUserInfo.providerId : null,
+                providerId: currentUser.additionalUserInfo.providerId,
               }
             },
             commContent: comment,
-            mediaId: this.mediaItem.mediaId,
+            mediaId: this.mediaItem.mediaId
           }
 
           const apiUrl = 'https://thatsmontreal.ca/api/persistComment.php'
@@ -79,6 +79,8 @@ export default {
               this.comment = ''
               this.getComments()
             })
+        } else {
+          console.error(currentUser.additionalUserInfo)
         }
       } else {
         this.$showModal(LoginModal, {
