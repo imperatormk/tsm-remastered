@@ -1,20 +1,21 @@
 <template>
   <FlexboxLayout flexDirection="column">
-    <FlexboxLayout flexDirection="row">
+    <FlexboxLayout flexDirection="row" paddingBottom="5">
       <TextField hint="Enter your comment..." 
         v-model="comment" 
         secure="false"
-        returnKeyType="done" 
+        returnKeyType="done"
+        fontSize="15"
         autocorrect="false"
-        style="padding-left: 15;margin:0px;border-width:3px;border-right-width:0px;"
+        style="padding-left: 15;margin:0px;border-width:3px;border-right-width:0px;border-color:#e5e5e5"
         class="input input-border"
         flexGrow="9"></TextField>
-      <Button flexGrow="1" @tap="postComment" style="border-width: 1;margin:0px;color:black;" text="Post"/>
+      <Button flexGrow="1" @tap="postComment" style="border-width: 1;border-color:#e5e5e5;margin:0px;color:#8c8c8c;" class="fa" fontSize="20" :text="'fa-paper-plane' | fonticon"/>
     </FlexboxLayout>
     <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
       <LoadingIndicator v-if="!loaded"/>
-      <ScrollView v-else-if="loaded && comments.length" marginTop="7" height="98%">
-        <GridLayout class="m-15" :rows="getAutoCount" v-if="comments.length">
+      <ScrollView v-else-if="loaded && comments.length" height="98%">
+        <GridLayout class="m-10" :rows="getAutoCount" v-if="comments.length">
           <CommentItem v-for="(commentItem, idx) in comments" :key="commentItem.commId" :commentItem="commentItem" :row="idx"/>
         </GridLayout>
       </ScrollView>
