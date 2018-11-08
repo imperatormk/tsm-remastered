@@ -118,7 +118,7 @@ export default {
     },
     getFreeGift() {
       if (this.hasLoggedInUser) {
-        const mediaId = this.media[this.selectedIndex].id
+        const mediaId = this.media[this.selectedIndex].mediaId
         const reqObj = {
           mediaId,
           user: {
