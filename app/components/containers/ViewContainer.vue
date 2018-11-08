@@ -5,10 +5,13 @@
         <Label v-if="loadingText" :text="loadingText" textAlignment="center" fontSize="22" color="#8c8c8c" padding="10"/>
       </LoadingIndicator>
     </StackLayout>
-    <StackLayout verticalAlignment="top" v-else height="100%">
-      <AuthHeader @logout="onLogout"/>
-      <slot/>
-    </StackLayout>
+    <GridLayout rows="*" cols="*" v-else verticalAlignment="top" height="100%">
+      <StackLayout verticalAlignment="top">
+        <Label margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fa" fontSize="20" :text="'fa-bars' | fonticon"/>
+        <slot/>
+      </StackLayout>
+      <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
+    </GridLayout>
   </Page>
 </template>
 
@@ -16,7 +19,8 @@
 import firebase from "nativescript-plugin-firebase"
 import MessageBus from '@/services/MessageBus'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
-import AuthHeader from '@/components/blocks/auth/AuthHeader'
+import LoginModal from '@/components/views/LoginModal'
+import SideDrawer from '@/components/blocks/auth/SideDrawer'
 
 export default {
   props: {
@@ -37,6 +41,14 @@ export default {
       firebase.logout()
       this.$store.commit('setUser', null)
     },
+    onLogin() {
+      this.$showModal(LoginModal, {
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
+    },
     commitNewUser() {
       return firebase.getCurrentUser()
         .then((curUser) => {
@@ -49,7 +61,7 @@ export default {
   },
   components: {
     LoadingIndicator,
-    AuthHeader
+    SideDrawer
   }
 }
 </script>

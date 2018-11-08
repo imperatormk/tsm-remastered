@@ -69,7 +69,7 @@ export default {
               0: {
                 uid: currentUser.additionalUserInfo.profile.id,
                 photoURL: currentUser.profileImageURL,
-                displayName: 'Test Name', // tempp
+                displayName: currentUser.name,
                 providerId: currentUser.additionalUserInfo.providerId,
               }
             },

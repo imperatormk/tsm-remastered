@@ -14,7 +14,8 @@ Vue.use(RadListView);
 
 Vue.registerElement("Carousel", () => require("nativescript-carousel").Carousel);
 Vue.registerElement("CarouselItem", () => require("nativescript-carousel").CarouselItem);
-Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer").YoutubePlayer)
+Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer").YoutubePlayer);
+Vue.registerElement("RadSideDrawer", () => require("nativescript-ui-sidedrawer").RadSideDrawer);
 
 Vue.config.silent = (TNS_ENV === 'production');
 import LineList from '@/components/views/LineList';

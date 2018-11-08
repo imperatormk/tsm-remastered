@@ -1,5 +1,5 @@
 <template>
-  <StackLayout>
+  <StackLayout padding="10">
     <Button text="Facebook" @tap="loginWithFacebook()"/>
     <Button text="Google" @tap="loginWithGoogle()"/>
   </StackLayout>

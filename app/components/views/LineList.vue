@@ -32,7 +32,6 @@ export default {
       })
     },
     temp() {
-      console.log(1)
     }
   },
   components: {
