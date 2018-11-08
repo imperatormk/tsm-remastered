@@ -2,6 +2,13 @@ import Vue from "nativescript-vue";
 import firebase from "nativescript-plugin-firebase";
 import config from "@/shared/firebase-config";
 
+import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
+TNSFontIcon.paths = {
+  fa: './fonts/FontAwesome.css',
+};
+TNSFontIcon.loadCss();
+Vue.filter('fonticon', fonticon);
+
 import RadListView from "nativescript-ui-listview/vue";
 Vue.use(RadListView);
 

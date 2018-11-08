@@ -13,6 +13,7 @@
   "repository": "<fill-your-repository-here>",
   "dependencies": {
     "nativescript-carousel": "^4.0.2",
+    "nativescript-fonticon": "2.0.0",
     "nativescript-imagepicker": "~6.0.0",
     "nativescript-plugin-firebase": "~7.3.0",
     "nativescript-social-share": "1.5.1",
