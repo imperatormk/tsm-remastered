@@ -13,20 +13,22 @@
         <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
           <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.locLine] : 'lightgray'" borderRadius="100"/>
         </FlexboxLayout>
-        <GridLayout columns="* * *" margin="10" width="100%">
+        <GridLayout rows="auto" columns="* auto * auto *" margin="10" width="100%">
           <StackLayout padding="5" horizontalAlignment="center" col="0" @tap="shareMedia">
             <StackLayout horizontalAlignment="center" verticalAlignment="center">
               <Label textAlignment="center" class="fa" :text="'fa-share' | fonticon" color="#8c8c8c" fontSize="23"/>
               <Label textAlignment="center" text="Share" color="#8c8c8c"/>
             </StackLayout>
           </StackLayout>
-          <StackLayout padding="5" horizontalAlignment="center" col="1" @tap="getFreeGift">
+          <StackLayout backgroundColor="#c2c2c2" width="1" col="1"></StackLayout>
+          <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="getFreeGift">
             <StackLayout horizontalAlignment="center" verticalAlignment="center">
               <Label textAlignment="center" class="fa" :text="'fa-gift' | fonticon" color="#8c8c8c" fontSize="23"/>
               <Label textAlignment="center" text="Free gift" color="#8c8c8c"/>
             </StackLayout>
           </StackLayout>
-          <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="openComments">
+          <StackLayout backgroundColor="#c2c2c2" width="1" col="3"></StackLayout>
+          <StackLayout padding="5" horizontalAlignment="center" col="4" @tap="openComments">
             <StackLayout horizontalAlignment="center" verticalAlignment="center">
               <Label textAlignment="center" class="fa" :text="'fa-comments' | fonticon" color="#8c8c8c" fontSize="23"/>
               <Label textAlignment="center" text="Comments" color="#8c8c8c"/>
