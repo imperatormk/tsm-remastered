@@ -57,37 +57,24 @@ export default {
           this.loaded = true
         })
     },
-    postComment() {
+    postComment: async function() {
       if (this.hasLoggedInUser) {
         const comment = this.comment.trim()
-        const currentUser = this.getCurrentUser
+        const currentUser = await this.getUserData(this.getCurrentUser.uid)
 
-        if (comment && currentUser.additionalUserInfo) {
+        if (comment && currentUser.providerData) {
           const reqObj = {
             action: 'insert',
-            user: {
-              0: {
-                uid: currentUser.additionalUserInfo.profile.id,
-                photoURL: currentUser.profileImageURL,
-                displayName: currentUser.name,
-                providerId: currentUser.additionalUserInfo.providerId,
-              }
-            },
+            user: currentUser.providerData,
             commContent: comment,
             mediaId: this.mediaItem.mediaId
           }
 
           const apiUrl = 'https://thatsmontreal.ca/api/persistComment.php'
-          fetch(apiUrl, {
-            method: 'POST',
-            body: JSON.stringify(reqObj)
-          })
-            .then((res) => {
-              this.comment = ''
-              this.getComments()
-            })
-        } else {
-          console.error(currentUser.additionalUserInfo)
+          const res = await this.postCommentToApi(reqObj)
+
+          this.comments.unshift(res.resObj)
+          this.comment = ''
         }
       } else {
         this.$showModal(LoginModal, {
@@ -97,6 +84,18 @@ export default {
           }
         })
       }
+    },
+    getUserData(uid) {
+      const apiUrl = `https://us-central1-thatsmontrealcomments.cloudfunctions.net/getUserById?uid=${uid}`
+      return fetch(apiUrl)
+        .then(res => res.json())
+    },
+    postCommentToApi(apiObj) {
+      const apiUrl = 'https://thatsmontreal.ca/api/persistComment.php'
+      return fetch(apiUrl, {
+        method: 'POST',
+        body: JSON.stringify(apiObj)
+      }).then(res => res.json())
     }
   },
   computed: {
