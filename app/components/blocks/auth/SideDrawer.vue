@@ -14,7 +14,7 @@
         </StackLayout>
       </StackLayout>
       <StackLayout ~mainContent>
-        <Label @tap="onOpenDrawerTap" margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fa" fontSize="20" :text="'fa-bars' | fonticon"/>
+        <Label @tap="onOpenDrawerTap" margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
       </StackLayout>
     </RadSideDrawer>
   </GridLayout>

@@ -10,7 +10,7 @@
         style="padding-left: 15;margin:0px;border-width:3px;border-right-width:0px;border-color:#e5e5e5"
         class="input input-border"
         flexGrow="9"></TextField>
-      <Button flexGrow="1" @tap="postComment" style="border-width: 1;border-color:#e5e5e5;margin:0px;color:#8c8c8c;" class="fa" fontSize="20" :text="'fa-paper-plane' | fonticon"/>
+      <Button flexGrow="1" @tap="postComment" style="border-width: 1;border-color:#e5e5e5;margin:0px;color:#8c8c8c;" class="fas" fontSize="20" :text="'\uf1d8'"/>
     </FlexboxLayout>
     <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
       <LoadingIndicator v-if="!loaded"/>

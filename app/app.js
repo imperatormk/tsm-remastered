@@ -2,13 +2,6 @@ import Vue from "nativescript-vue";
 import firebase from "nativescript-plugin-firebase";
 import config from "@/shared/firebase-config";
 
-import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
-TNSFontIcon.paths = {
-  fa: './fonts/FontAwesome.css',
-};
-TNSFontIcon.loadCss();
-Vue.filter('fonticon', fonticon);
-
 import RadListView from "nativescript-ui-listview/vue";
 Vue.use(RadListView);
 
@@ -18,12 +11,12 @@ Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer")
 Vue.registerElement("RadSideDrawer", () => require("nativescript-ui-sidedrawer").RadSideDrawer);
 
 Vue.config.silent = (TNS_ENV === 'production');
-import LineList from '@/components/views/LineList';
+import HomeScreen from '@/components/views/HomeScreen';
 
 import store from '@/store';
 
 new Vue({
-  render: h => h('frame', [h(LineList)]),
+  render: h => h('frame', [h(HomeScreen)]),
   created() {
     firebase.init(config)
       .then(() => {})
