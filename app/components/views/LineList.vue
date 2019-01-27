@@ -17,7 +17,6 @@
 
 <script>
 import LineDetails from '@/components/views/LineDetails'
-import ViewContainer from '@/components/containers/ViewContainer'
 
 export default {
   methods: {
@@ -33,9 +32,6 @@ export default {
     },
     temp() {
     }
-  },
-  components: {
-    ViewContainer
   }
 }
 </script>

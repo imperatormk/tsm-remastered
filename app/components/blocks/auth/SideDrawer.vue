@@ -1,16 +1,47 @@
 <template>
   <GridLayout>
     <RadSideDrawer ref="drawer" drawerLocation="Right">
-      <StackLayout ~drawerContent>
-        <StackLayout v-if="hasLoggedInUser" horizontalAlignment="right" backgroundColor="white" padding="10">
-          <StackLayout padding="5" verticalAlignment="center" orientation="horizontal">
-            <Image :src="getCurrentUser.profileImageURL" width="40" minWidth="40" style="border-radius:100%"/>
-            <Label textAlignment="right" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18" />
+      <StackLayout ~drawerContent orientation="horizontal">
+        <StackLayout width="30%"></StackLayout>
+        <StackLayout width="70%" style="padding-left:10px;">
+          <StackLayout v-if="hasLoggedInUser" horizontalAlignment="left" backgroundColor="white" padding="10">
+            <StackLayout padding="5" verticalAlignment="center" orientation="horizontal">
+              <Image :src="getCurrentUser.profileImageURL" width="40" minWidth="40" style="border-radius:100%"/>
+              <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18" />
+            </StackLayout>
+            <StackLayout width="100%" @tap="onLogout" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf2f5'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label text="Log out" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
           </StackLayout>
-          <Label fontSize="16" text="Log out" textAlignment="right" padding="15" backgroundColor="#f5f5f5" @tap="onLogout" />
-        </StackLayout>
-        <StackLayout v-else>
-          <Label text="Log in" textAlignment="right" padding="15" backgroundColor="#f5f5f5" @tap="onLogin" />
+          <StackLayout v-else>
+            <StackLayout width="100%" @tap="onLogin" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf2f6'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label text="Log in" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
+          </StackLayout>
+          <StackLayout>
+            <StackLayout width="100%" height="1" backgroundColor="#b5b5b5"></StackLayout>
+            <StackLayout width="100%" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf1ea'" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
+              <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
+            <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
+            <StackLayout width="100%" @tap="goToScreen(1)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf689'" color="#007cc1" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label text="Lines" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
+            <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
+            <StackLayout width="100%" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf0e0'" color="#0cad26" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
+              <Label text="Contact us" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
+            <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
+            <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+              <Label paddingLeft="15" :text="'\uf57d'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label text="Social media" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+            </StackLayout>
+          </StackLayout>
         </StackLayout>
       </StackLayout>
       <StackLayout ~mainContent>
@@ -21,7 +52,16 @@
 </template>
 
 <script>
+import MessageBus from '@/services/MessageBus'
+import LineList from '@/components/views/LineList'
+import SocialMedia from '@/components/views/SocialMedia'
+
 export default {
+  created() {
+    MessageBus.$on('goToScreen', (screen) => {
+      this.goToScreen(screen)
+    })
+  },
   methods: {
     onOpenDrawerTap() {
       this.$refs.drawer.nativeView.showDrawer()
@@ -35,6 +75,20 @@ export default {
     },
     onLogout() {
       this.$emit('logout')
+      this.onCloseDrawerTap()
+    },
+    goToScreen(screen) {
+      let comp = null
+      if (screen === 1) comp = LineList
+      if (screen === 2) comp = SocialMedia
+
+      this.$navigateTo(comp,
+      {
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
       this.onCloseDrawerTap()
     }
   },

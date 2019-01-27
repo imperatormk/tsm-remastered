@@ -17,14 +17,3 @@
     </StackLayout>
   </ViewContainer>
 </template>
-
-<script>
-import ViewContainer from '@/components/containers/ViewContainer'
-
-export default {
-  components: {
-    ViewContainer
-  }
-}
-</script>
-

@@ -10,6 +10,9 @@ Vue.registerElement("CarouselItem", () => require("nativescript-carousel").Carou
 Vue.registerElement("YoutubePlayer", () => require("nativescript-youtubeplayer").YoutubePlayer);
 Vue.registerElement("RadSideDrawer", () => require("nativescript-ui-sidedrawer").RadSideDrawer);
 
+import ViewContainer from '@/components/containers/ViewContainer'
+Vue.component('ViewContainer', ViewContainer)
+
 Vue.config.silent = (TNS_ENV === 'production');
 import HomeScreen from '@/components/views/HomeScreen';
 
