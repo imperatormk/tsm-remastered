@@ -27,17 +27,17 @@
               <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(1)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(1, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf689'" color="#007cc1" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
               <Label text="Lines" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(3, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf0e0'" color="#0cad26" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
               <Label text="Contact us" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(2, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf57d'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
               <Label text="Social media" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
@@ -55,6 +55,7 @@
 import MessageBus from '@/services/MessageBus'
 import LineList from '@/components/views/LineList'
 import SocialMedia from '@/components/views/SocialMedia'
+import ContactUs from '@/components/views/ContactUs'
 
 export default {
   created() {
@@ -77,10 +78,12 @@ export default {
       this.$emit('logout')
       this.onCloseDrawerTap()
     },
-    goToScreen(screen) {
+    goToScreen(screen, fromDrawer) {
       let comp = null
+      console.log(screen)
       if (screen === 1) comp = LineList
       if (screen === 2) comp = SocialMedia
+      if (screen === 3) comp = ContactUs
 
       this.$navigateTo(comp,
       {
@@ -89,7 +92,7 @@ export default {
           name: 'fade'
         }
       })
-      this.onCloseDrawerTap()
+      if (fromDrawer) this.onCloseDrawerTap()
     }
   },
   computed: {

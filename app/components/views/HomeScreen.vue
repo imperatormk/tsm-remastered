@@ -6,7 +6,7 @@
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
           <Button class="quarter top-left"></Button>
           <Button @tap="goToScreen(1)" class="quarter top-right"></Button>
-          <Button class="quarter bottom-left"></Button>
+          <Button @tap="goToScreen(3)" class="quarter bottom-left"></Button>
           <Button @tap="goToScreen(2)" class="quarter bottom-right"></Button>
         </FlexboxLayout>
         <StackLayout col="0" row="0" class="fill-circle"></StackLayout>
@@ -21,6 +21,7 @@ import MessageBus from '@/services/MessageBus'
 export default {
   methods: {
     goToScreen(screen) {
+      console.log(screen)
       MessageBus.$emit('goToScreen', screen)
     }
   }
