@@ -21,7 +21,6 @@ import MessageBus from '@/services/MessageBus'
 export default {
   methods: {
     goToScreen(screen) {
-      console.log(screen)
       MessageBus.$emit('goToScreen', screen)
     }
   }

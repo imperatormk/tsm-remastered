@@ -8,5 +8,10 @@
 
 <script>
 export default {
+  computed: {
+    getCurrentUser() {
+      return this.$store.getters.getCurrentUser
+    }
+  }
 }
 </script>

@@ -4,11 +4,14 @@
       <StackLayout ~drawerContent orientation="horizontal">
         <StackLayout width="30%"></StackLayout>
         <StackLayout width="70%" style="padding-left:10px;">
-          <StackLayout v-if="hasLoggedInUser" horizontalAlignment="left" backgroundColor="white" padding="10">
-            <StackLayout padding="5" verticalAlignment="center" orientation="horizontal">
+          <StackLayout v-if="hasLoggedInUser" horizontalAlignment="left" backgroundColor="white">
+            <StackLayout padding="10" verticalAlignment="center" orientation="horizontal">
               <Image :src="getCurrentUser.profileImageURL" width="40" minWidth="40" style="border-radius:100%"/>
-              <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18" />
+              <StackLayout paddingLeft="5">
+                <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18" />
+              </StackLayout>
             </StackLayout>
+            <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="onLogout" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf2f5'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
               <Label text="Log out" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
@@ -21,7 +24,7 @@
             </StackLayout>
           </StackLayout>
           <StackLayout>
-            <StackLayout width="100%" height="1" backgroundColor="#b5b5b5"></StackLayout>
+            <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf1ea'" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
               <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
@@ -57,6 +60,8 @@ import LineList from '@/components/views/LineList'
 import SocialMedia from '@/components/views/SocialMedia'
 import ContactUs from '@/components/views/ContactUs'
 
+import LoginModal from '@/components/views/LoginModal'
+
 export default {
   created() {
     MessageBus.$on('goToScreen', (screen) => {
@@ -80,10 +85,21 @@ export default {
     },
     goToScreen(screen, fromDrawer) {
       let comp = null
-      console.log(screen)
       if (screen === 1) comp = LineList
       if (screen === 2) comp = SocialMedia
-      if (screen === 3) comp = ContactUs
+      if (screen === 3) {
+        if (this.hasLoggedInUser) {
+          comp = ContactUs
+        } else {
+          this.$showModal(LoginModal, {
+            animated: true,
+            transition: {
+              name: 'fade'
+            }
+          })
+          return
+        }
+      }
 
       this.$navigateTo(comp,
       {
