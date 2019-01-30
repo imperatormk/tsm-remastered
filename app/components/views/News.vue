@@ -6,8 +6,10 @@
           <NewsContainer :news="news" @newsSelected="newsSelected"></NewsContainer>
         </ScrollView>
       </StackLayout>
-      <StackLayout>
-        <MediaContainer v-if="compSelectedNews" :mediaItem="compSelectedNews"/>
+      <StackLayout v-if="compSelectedNews">
+        <MediaContainer :mediaItem="compSelectedNews"/>
+        <StackLayout height="20" width="1"/>
+        <MediaActions :mediaItem="compSelectedNews"></MediaActions>
       </StackLayout>
     </StackLayout>
   </ViewContainer>
@@ -16,6 +18,7 @@
 <script>
 import NewsContainer from '@/components/blocks/news/NewsContainer'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
+import MediaActions from '@/components/blocks/media/MediaActions'
 
 export default {
   created() {
@@ -53,7 +56,8 @@ export default {
   },
   components: {
     NewsContainer,
-    MediaContainer
+    MediaContainer,
+    MediaActions
   }
 }
 </script>
