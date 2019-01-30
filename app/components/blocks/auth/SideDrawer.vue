@@ -25,7 +25,7 @@
           </StackLayout>
           <StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(0, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf1ea'" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
               <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
@@ -55,18 +55,22 @@
 </template>
 
 <script>
-import MessageBus from '@/services/MessageBus'
+import News from '@/components/views/News'
 import LineList from '@/components/views/LineList'
 import SocialMedia from '@/components/views/SocialMedia'
 import ContactUs from '@/components/views/ContactUs'
 
 import LoginModal from '@/components/views/LoginModal'
+import MessageBus from '@/services/MessageBus'
 
 export default {
   created() {
     MessageBus.$on('goToScreen', (screen) => {
       this.goToScreen(screen)
     })
+  },
+  beforeDestroy() {
+    MessageBus.$off('goToScreen')
   },
   methods: {
     onOpenDrawerTap() {
@@ -85,6 +89,7 @@ export default {
     },
     goToScreen(screen, fromDrawer) {
       let comp = null
+      if (screen === 0) comp = News
       if (screen === 1) comp = LineList
       if (screen === 2) comp = SocialMedia
       if (screen === 3) {

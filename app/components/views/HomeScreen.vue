@@ -4,7 +4,7 @@
       <Label text="That's Montreal!" fontSize="30" color="#8c8c8c"/>
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
-          <Button class="quarter top-left"></Button>
+          <Button @tap="goToScreen(0)" class="quarter top-left"></Button>
           <Button @tap="goToScreen(1)" class="quarter top-right"></Button>
           <Button @tap="goToScreen(3)" class="quarter bottom-left"></Button>
           <Button @tap="goToScreen(2)" class="quarter bottom-right"></Button>

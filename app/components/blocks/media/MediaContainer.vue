@@ -1,6 +1,6 @@
 <template>
   <StackLayout>
-    <Label :text="station.locTitle" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
+    <Label v-if="station" :text="station.locTitle" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
     <StackLayout v-if="loaded" backgroundColor="black">
       <YoutubePlayer v-show="videoLoaded" :id="'player' + mediaItem.mediaId" @videoLoaded="onVideoLoaded" :src="mediaItem.mediaUrl" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
     </StackLayout>
@@ -23,7 +23,7 @@ export default {
     },
     station: {
       type: Object,
-      required: true
+      required: false
     }
   },
   mounted() {
