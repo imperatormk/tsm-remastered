@@ -13,7 +13,7 @@
 
 <script>
 import LoadingIndicator from '@/components/common/LoadingIndicator'
-import MessageBus from '@/services/MessageBus'
+import EventBus from '@/services/event-bus'
 
 export default {
   props: {
@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    MessageBus.$emit('getPageRef', (ref) => {
+    EventBus.$emit('getPageRef', (ref) => {
       this.pageRef = ref
       this.loaded = true
     })

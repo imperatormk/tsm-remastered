@@ -22,6 +22,7 @@
 
 <script>
 import Vue from 'vue'
+import api from '@/services/api'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import MediaActions from '@/components/blocks/media/MediaActions'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
@@ -64,11 +65,9 @@ export default {
       }, 300)
     },
     getMediaForStation(stationId) {
-      const apiUrl = `https://thatsmontreal.ca/api/getVideos.php?locId=${stationId}`
       this.loaded = false
 
-      fetch(apiUrl)
-        .then(media => media.json())
+      api.getMediaForLocation(stationId)
         .then((media) => {
           this.media = media
           this.loaded = true

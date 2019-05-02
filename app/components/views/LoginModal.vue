@@ -10,32 +10,27 @@
 </template>
 
 <script>
-import firebase from "nativescript-plugin-firebase"
+import auth from '@/services/auth'
 
 export default {
   methods: {
     loginWithFacebook() {
-      firebase.login({
-        type: firebase.LoginType.FACEBOOK,
-        facebookOptions: {
-          scope: ['public_profile', 'email']
-        }
-      }).then((res) => {
-        this.commitNewUser(res)
-          .then(() => this.$modal.close())
-      }, (errorMessage) => {
-        console.error(errorMessage)
-      })
+      auth.loginWithProvider('fb')
+        .then((res) => {
+          this.commitNewUser(res)
+            .then(() => this.$modal.close())
+        }, (errorMessage) => {
+          console.error(errorMessage)
+        })
     },
     loginWithGoogle() {
-      firebase.login({
-        type: firebase.LoginType.GOOGLE,
-      }).then((res) => {
-        this.commitNewUser(res)
-          .then(() => this.$modal.close())
-      }, (errorMessage) => {
-        console.error(errorMessage)
-      })
+      auth.loginWithProvider('gg')
+        .then((res) => {
+          this.commitNewUser(res)
+            .then(() => this.$modal.close())
+        }, (errorMessage) => {
+          console.error(errorMessage)
+        })
     },
     commitNewUser(res) {
       if (res) return Promise.resolve(this.$store.commit('setUser', res))

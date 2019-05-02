@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import firebase from "nativescript-plugin-firebase"
-import MessageBus from '@/services/MessageBus'
+import auth from '@/services/auth'
+import EventBus from '@/services/event-bus'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import LoginModal from '@/components/views/LoginModal'
 import SideDrawer from '@/components/blocks/auth/SideDrawer'
@@ -35,7 +35,7 @@ export default {
     }
   },
   created() {
-    MessageBus.$on('getPageRef', (cb) => {
+    EventBus.$on('getPageRef', (cb) => {
       cb(this.$refs.pageRef.nativeView)
     })
     this.commitNewUser()
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     onLogout() {
-      firebase.logout()
+      auth.logout()
       this.$store.commit('setUser', null)
     },
     onLogin() {
@@ -62,14 +62,14 @@ export default {
       })
     },
     commitNewUser() {
-      return firebase.getCurrentUser()
+      return auth.getCurrentUser()
         .then((curUser) => {
           return this.$store.commit('setUser', curUser)
         })
     }
   },
   destroyed() {
-    MessageBus.$off('getPageRef')
+    EventBus.$off('getPageRef')
   },
   components: {
     LoadingIndicator,

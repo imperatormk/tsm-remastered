@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import api from '@/services/api'
 import CommentItem from '@/components/blocks/comments/CommentItem'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import LoginModal from '@/components/views/LoginModal'
@@ -49,32 +50,22 @@ export default {
   methods: {
     getComments() {
       this.loaded = false
-      const apiUrl = `https://thatsmontreal.ca/api/getComments.php?mediaId=${this.mediaItem.mediaId}&count=100`
-      fetch(apiUrl)
-        .then(comments => comments.json())
+      api.getComments(this.mediaItem.mediaId)
         .then((comments) => {
           this.comments = comments
           this.loaded = true
         })
     },
-    postComment: async function() {
+    postComment() {
       if (this.hasLoggedInUser) {
-        const comment = this.comment.trim()
-        const currentUser = await this.getUserData(this.getCurrentUser.uid)
+        const commentContent =  this.comment.trim()
 
-        if (comment && currentUser.providerData) {
-          const reqObj = {
-            action: 'insert',
-            user: currentUser.providerData,
-            commContent: comment,
-            mediaId: this.mediaItem.mediaId
-          }
-
-          const apiUrl = 'https://thatsmontreal.ca/api/persistComment.php'
-          const res = await this.postCommentToApi(reqObj)
-
-          this.comments.unshift(res.resObj)
-          this.comment = ''
+        if (commentContent) {
+          const reqComment = { content: commentContent }
+          api.postComment(reqComment)
+            .then((resComment) => {
+              this.comments.push(resComment)
+            })
         }
       } else {
         this.$showModal(LoginModal, {
@@ -89,13 +80,6 @@ export default {
       const apiUrl = `https://us-central1-thatsmontrealcomments.cloudfunctions.net/getUserById?uid=${uid}`
       return fetch(apiUrl)
         .then(res => res.json())
-    },
-    postCommentToApi(apiObj) {
-      const apiUrl = 'https://thatsmontreal.ca/api/persistComment.php'
-      return fetch(apiUrl, {
-        method: 'POST',
-        body: JSON.stringify(apiObj)
-      }).then(res => res.json())
     }
   },
   computed: {

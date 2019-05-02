@@ -16,9 +16,10 @@
 
 <script>
 import Vue from 'vue'
+import api from '@/services/api'
 import StationContainer from '@/components/blocks/stations/StationContainer'
 import MediaCarousel from '@/components/blocks/media/MediaCarousel'
-import MessageBus from '@/services/MessageBus'
+import EventBus from '@/services/event-bus'
 
 export default {
   props: {
@@ -28,11 +29,11 @@ export default {
     }
   },
   created() {
-    MessageBus.$on('authStateChanged', (data) => { // addValueEventListener
+    EventBus.$on('authStateChanged', (data) => { // addValueEventListener
       console.log(data)
     })
 
-    this.getStations()
+    this.getStations(this.locLine)
       .then(() => {
         if (this.stations.length) {
           this.stationSelected(this.stations[0])
@@ -40,14 +41,12 @@ export default {
       })
   },
   destroyed() {
-    MessageBus.$off('authStateChanged')
+    EventBus.$off('authStateChanged')
   },
   methods: {
     getStations() {
-      const apiUrl = `https://thatsmontreal.ca/api/getLocations.php?line=${this.locLine}`
       this.loaded = false
-      return fetch(apiUrl)
-        .then(stations => stations.json())
+      return api.getStations()
         .then((stations) => {
           this.stations = stations
           this.loaded = true

@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import MessageBus from '@/services/MessageBus'
+import EventBus from '@/services/event-bus'
 
 export default {
   methods: {
     goToScreen(screen) {
-      MessageBus.$emit('goToScreen', screen)
+      EventBus.$emit('goToScreen', screen)
     }
   }
 }

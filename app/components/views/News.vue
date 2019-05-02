@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import api from '@/services/api'
 import NewsContainer from '@/components/blocks/news/NewsContainer'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import MediaActions from '@/components/blocks/media/MediaActions'
@@ -33,11 +34,9 @@ export default {
   },
   methods: {
     getLatestMedia() {
-      const apiUrl = `https://thatsmontreal.ca/api/getLatestMedia.php`
       this.loaded = false
 
-      fetch(apiUrl)
-        .then(news => news.json())
+      api.getLatestMedia()
         .then((news) => {
           this.news = news
           this.loaded = true

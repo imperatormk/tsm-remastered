@@ -61,16 +61,16 @@ import SocialMedia from '@/components/views/SocialMedia'
 import ContactUs from '@/components/views/ContactUs'
 
 import LoginModal from '@/components/views/LoginModal'
-import MessageBus from '@/services/MessageBus'
+import EventBus from '@/services/event-bus'
 
 export default {
   created() {
-    MessageBus.$on('goToScreen', (screen) => {
+    EventBus.$on('goToScreen', (screen) => {
       this.goToScreen(screen)
     })
   },
   beforeDestroy() {
-    MessageBus.$off('goToScreen')
+    EventBus.$off('goToScreen')
   },
   methods: {
     onOpenDrawerTap() {
