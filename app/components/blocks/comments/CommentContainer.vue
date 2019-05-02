@@ -16,7 +16,7 @@
       <LoadingIndicator v-if="!loaded"/>
       <ScrollView v-else-if="loaded && comments.length" height="98%">
         <GridLayout class="m-10" :rows="getAutoCount" v-if="comments.length">
-          <CommentItem v-for="(commentItem, idx) in comments" :key="commentItem.commId" :commentItem="commentItem" :row="idx"/>
+          <CommentItem v-for="(commentItem, idx) in comments" :key="commentItem.id" :commentItem="commentItem" :row="idx"/>
         </GridLayout>
       </ScrollView>
       <Label v-else textAlignment="center" fontSize="20" text="Be the first one to comment!" color="#8c8c8c"/>
@@ -62,9 +62,10 @@ export default {
 
         if (commentContent) {
           const reqComment = { content: commentContent }
-          api.postComment(reqComment)
+          api.postComment(this.mediaItem.id, reqComment)
             .then((resComment) => {
               this.comments.push(resComment)
+              this.comment = ''
             })
         }
       } else {

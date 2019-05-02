@@ -35,12 +35,12 @@ export default {
       .then(resp => resp.data)
   },
   getComments(mediaId) {
-    return http.get(`/media${mediaId}/comments`)
+    return http.get(`/media/${mediaId}/comments`)
       .then(resp => resp.data)
   },
   postComment(mediaId, comment) {
     return getAuthHeaders()
-      .then(options => http.post(`/media${mediaId}/comments`, comment, options))
+      .then(options => http.post(`/media/${mediaId}/comments`, comment, options))
       .then(resp => resp.data)
   },
   reqPromoCode(promoId) {
