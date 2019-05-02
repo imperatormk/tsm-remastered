@@ -23,7 +23,7 @@ import EventBus from '@/services/event-bus'
 
 export default {
   props: {
-    locLine: {
+    line: {
       type: Number,
       required: true
     }
@@ -33,7 +33,7 @@ export default {
       console.log(data)
     })
 
-    this.getStations(this.locLine)
+    this.getStations(this.line)
       .then(() => {
         if (this.stations.length) {
           this.stationSelected(this.stations[0])
@@ -44,9 +44,9 @@ export default {
     EventBus.$off('authStateChanged')
   },
   methods: {
-    getStations() {
+    getStations(line) {
       this.loaded = false
-      return api.getStations()
+      return api.getStations(line)
         .then((stations) => {
           this.stations = stations
           this.loaded = true

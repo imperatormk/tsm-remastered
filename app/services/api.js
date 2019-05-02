@@ -16,12 +16,15 @@ const getAuthHeaders = (opts) => {
 export default {
   getStations(line) {
     return http.get('/locations', { params: { line } })
+      .then(resp => resp.data)
   },
   getMedia() {
     return http.get('/media')
+      .then(resp => resp.data)
   },
   getLatestMedia() {
     return http.get('/media/latest')
+      .then(resp => resp.data)
   },
   getMediaForLocation(stationId) {
     return http.get(`/locations/${stationId}/media`)

@@ -1,6 +1,6 @@
 <template>
   <GridLayout class="p-x-15 p-t-10 p-b-0 m-b-0" :columns="getAutoCount">
-    <NewsItem @selected="newsSelected" v-for="(newsItem, idx) in news" :col="idx" :key="newsItem.mediaId" :newsItem="newsItem"/>
+    <NewsItem @selected="newsSelected" v-for="(newsItem, idx) in news" :col="idx" :key="newsItem.id" :newsItem="newsItem"/>
   </GridLayout>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     newsSelected(item) {
-      this.selectedNews = Number(item.mediaId)
+      this.selectedNews = item.id
       this.$emit('newsSelected', item)
     }
   },

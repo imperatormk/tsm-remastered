@@ -4,14 +4,14 @@
     <StackLayout v-else-if="loaded && media.length" verticalAlignment="center">
       <StackLayout verticalAlignment="center" v-if="media.length > 0">
         <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-          <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.mediaId" backgroundColor="#fefefe" verticalAlignment="middle">
+          <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
             <StackLayout v-if="selectedIndex === idx">
               <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
             </StackLayout>
           </CarouselItem>
         </Carousel>
         <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
-          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.locLine] : 'lightgray'" borderRadius="100"/>
+          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.line] : 'lightgray'" borderRadius="100"/>
         </FlexboxLayout>
         <MediaActions :mediaItem="media[selectedIndex]"></MediaActions>
       </StackLayout>
@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     this.eventBus.$on('newStationData', (station) => {
-      this.getMediaForStation(station.locId)
+      this.getMediaForStation(station.id)
       this.currentStation = station // fix duplicates plz
     })
   },

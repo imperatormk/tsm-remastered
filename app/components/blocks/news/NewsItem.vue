@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     getMediaThumbnail() {
-      const mediaType = Number(this.newsItem.mediaType)
+      const mediaType = this.newsItem.type
       if (mediaType === 0) {
         return `http://i3.ytimg.com/vi/${this.newsItem.mediaUrl}/hqdefault.jpg`
       } else if (mediaType === 1) {

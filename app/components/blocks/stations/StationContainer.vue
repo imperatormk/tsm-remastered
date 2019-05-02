@@ -1,6 +1,6 @@
 <template>
   <GridLayout class="p-x-15 p-t-10 p-b-0 m-b-0" :columns="getAutoCount">
-    <StationItem :selectedStation="selectedStation" @selected="stationSelected" v-for="(stationItem, idx) in stations" :col="idx" :key="stationItem.locId" :stationItem="stationItem"/>
+    <StationItem :selectedStation="selectedStation" @selected="stationSelected" v-for="(stationItem, idx) in stations" :col="idx" :key="stationItem.id" :stationItem="stationItem"/>
   </GridLayout>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     stationSelected(item) {
-      this.selectedStation = Number(item.locId)
+      this.selectedStation = item.id
       this.$emit('stationSelected', item)
     }
   },

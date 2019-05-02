@@ -1,17 +1,18 @@
 <template>
   <StackLayout>
-    <Label v-if="station" :text="station.locTitle" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
+    <Label v-if="station" :text="station.title" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
     <StackLayout v-if="loaded" backgroundColor="black">
-      <YoutubePlayer v-show="videoLoaded" :id="'player' + mediaItem.mediaId" @videoLoaded="onVideoLoaded" :src="mediaItem.mediaUrl" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
+      <YoutubeContainer v-show="videoLoaded" :dataItem="mediaItem" @onVideoLoaded="onVideoLoaded"/>
     </StackLayout>
     <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="200">
       <LoadingIndicator color="red"/>
     </StackLayout>
-    <Label :text="mediaItem.mediaDesc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+    <Label :text="mediaItem.desc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
   </StackLayout>
 </template>
 
 <script>
+import YoutubeContainer from '@/components/containers/YoutubeContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import EventBus from '@/services/event-bus'
 
@@ -51,10 +52,17 @@ export default {
       this.videoLoaded = true
     },
     getPlayer() {
-      return this.pageRef.getViewById(`player${this.mediaItem.mediaId}`)
+      return this.pageRef.getViewById(`player${this.mediaItem.id}`)
+    },
+    getYoutubeId(videoUrl) {
+      const url = require('url')
+      const urlParts = url.parse(videoUrl, true)
+      const query = urlParts.query
+      return query.v || null
     }
   },
   components: {
+    YoutubeContainer,
     LoadingIndicator
   }
 }

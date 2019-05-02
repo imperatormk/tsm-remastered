@@ -38,7 +38,7 @@ export default {
     shareMedia() {
       const mediaItem = this.mediaItem
       if (mediaItem) {
-        SocialShare.shareUrl(`https://www.youtube.com/watch?v=${mediaItem.mediaUrl}`, mediaItem.mediaDesc)
+        SocialShare.shareUrl(`https://www.youtube.com/watch?v=${mediaItem.url}`, mediaItem.desc)
       }
     },
     openComments() {
@@ -58,7 +58,7 @@ export default {
     },
     getFreeGift() {
       if (this.hasLoggedInUser) {
-        const mediaId = this.mediaItem.mediaId
+        const mediaId = this.mediaItem.id
         const reqObj = {
           mediaId,
           user: {

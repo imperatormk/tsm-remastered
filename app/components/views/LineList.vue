@@ -20,10 +20,10 @@ import LineDetails from '@/components/views/LineDetails'
 
 export default {
   methods: {
-    goToStation(locLine) {
+    goToStation(line) {
       this.$navigateTo(LineDetails,
       {
-        props: { locLine },
+        props: { line },
         animated: true,
         transition: {
           name: 'fade'

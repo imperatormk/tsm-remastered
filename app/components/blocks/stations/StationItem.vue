@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     getShortenedTitle() {
-      const title = this.stationItem.locTitle
+      const title = this.stationItem.title
 
       if (!title) return "-/-"
       if (title.length > 5) {
@@ -36,8 +36,8 @@ export default {
       return title
     },
     getStyle() {
-      const locLine = Number(this.stationItem.locLine)
-      const lineColor = this.lineColors[locLine]
+      const line = this.stationItem.line
+      const lineColor = this.lineColors[line]
       // globalize?
 
       const obj = {
@@ -53,7 +53,7 @@ export default {
       return this.stationItem.latestCount > 0
     },
     isSelected() {
-      return this.selectedStation === Number(this.stationItem.locId)
+      return this.selectedStation === this.stationItem.id
     }
   }
 }

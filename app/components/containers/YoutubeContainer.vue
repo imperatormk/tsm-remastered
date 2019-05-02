@@ -1,0 +1,22 @@
+<template>
+  <YoutubePlayer :id="'player' + dataItem.id" @videoLoaded="$emit('onVideoLoaded')" :src="getYoutubeId(dataItem.url)" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
+</template>
+
+<script>
+export default {
+  props: {
+    dataItem: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    getYoutubeId(videoUrl) {
+      const url = require('url')
+      const urlParts = url.parse(videoUrl, true)
+      const query = urlParts.query
+      return query.v || null
+    }
+  }
+}
+</script>

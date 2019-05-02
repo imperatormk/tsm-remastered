@@ -50,7 +50,7 @@ export default {
   methods: {
     getComments() {
       this.loaded = false
-      api.getComments(this.mediaItem.mediaId)
+      api.getComments(this.mediaItem.id)
         .then((comments) => {
           this.comments = comments
           this.loaded = true
