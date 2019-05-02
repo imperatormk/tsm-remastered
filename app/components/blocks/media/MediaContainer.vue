@@ -7,7 +7,7 @@
     <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="200">
       <LoadingIndicator color="red"/>
     </StackLayout>
-    <Label :text="mediaItem.desc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+    <Label :text="mediaItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
   </StackLayout>
 </template>
 
@@ -53,12 +53,6 @@ export default {
     },
     getPlayer() {
       return this.pageRef.getViewById(`player${this.mediaItem.id}`)
-    },
-    getYoutubeId(videoUrl) {
-      const url = require('url')
-      const urlParts = url.parse(videoUrl, true)
-      const query = urlParts.query
-      return query.v || null
     }
   },
   components: {

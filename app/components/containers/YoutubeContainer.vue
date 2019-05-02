@@ -11,7 +11,7 @@ export default {
     }
   },
   methods: {
-    getYoutubeId(videoUrl) {
+    getYoutubeId(videoUrl) { // move this to helpers some time
       const url = require('url')
       const urlParts = url.parse(videoUrl, true)
       const query = urlParts.query

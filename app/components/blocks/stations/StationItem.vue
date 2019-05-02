@@ -6,6 +6,8 @@
 </template>
 
 <script>
+const MAX_LENGTH = 10
+
 import lineColorMixin from '@/mixins/lineColorMixin'
 
 export default {
@@ -30,8 +32,8 @@ export default {
       const title = this.stationItem.title
 
       if (!title) return "-/-"
-      if (title.length > 5) {
-        return title.substring(0, 7) + '..'
+      if (title.length > MAX_LENGTH) {
+        return `${title.substring(0, MAX_LENGTH - 2)}..`
       }
       return title
     },
