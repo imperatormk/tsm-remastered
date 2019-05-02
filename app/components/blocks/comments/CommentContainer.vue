@@ -75,11 +75,6 @@ export default {
           }
         })
       }
-    },
-    getUserData(uid) {
-      const apiUrl = `https://us-central1-thatsmontrealcomments.cloudfunctions.net/getUserById?uid=${uid}`
-      return fetch(apiUrl)
-        .then(res => res.json())
     }
   },
   computed: {

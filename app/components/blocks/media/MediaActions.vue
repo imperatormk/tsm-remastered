@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import api from '@/services/api'
+import auth from '@/services/auth'
 import LoginModal from '@/components/views/LoginModal'
 import CommentsModal from '@/components/views/CommentsModal'
 import * as SocialShare from "nativescript-social-share"
@@ -33,6 +35,11 @@ import * as SocialShare from "nativescript-social-share"
 export default {
   props: {
     mediaItem: Object
+  },
+  computed: {
+    hasLoggedInUser() {
+      return this.$store.getters.hasLoggedInUser
+    }
   },
   methods: {
     shareMedia() {
@@ -58,19 +65,9 @@ export default {
     },
     getFreeGift() {
       if (this.hasLoggedInUser) {
-        const mediaId = this.mediaItem.id
-        const reqObj = {
-          mediaId,
-          user: {
-            email: 'darko.simonovski@hotmail.com' // TODO: tempp
-          }
-        }
+        const mediaId = this.mediaItem.id // TODO: well this should be promoId :(
 
-        const apiUrl = 'https://thatsmontreal.ca/api/reqPromo.php'
-        fetch(apiUrl, {
-          method: 'POST',
-          body: JSON.stringify(reqObj)
-        })
+        api.reqPromoCode(mediaId)
           .then((res) => {
             console.log(res) // TODO: show a popup maybe
           })

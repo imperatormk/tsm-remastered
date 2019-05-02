@@ -43,4 +43,8 @@ export default {
       .then(options => http.post(`/media${mediaId}/comments`, comment, options))
       .then(resp => resp.data)
   },
+  reqPromoCode(promoId) {
+    return getAuthHeaders()
+      .then(options => http.post('/req-code', { promoId }, options))
+  },
 }

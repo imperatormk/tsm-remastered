@@ -30,6 +30,11 @@ export default {
     return firebase.getCurrentUser()
   },
   getUserToken() {
-    return 'nothingatm'
+    return firebase.getAuthToken({
+      forceRefresh: false
+    })
+      .then(token => token, (errorMessage) => {
+        return Promise.reject(errorMessage)
+      })
   }
 }
