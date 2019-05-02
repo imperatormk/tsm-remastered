@@ -2,7 +2,8 @@
   <ViewContainer>
     <FlexboxLayout height="100%" alignItems="center">
       <FlexboxLayout flexDirection="column" width="100%" justifyContent="center" alignItems="center" height="80%">
-        <Label text="Contact us!" fontSize="30" color="#8c8c8c" marginBottom="30"/>
+        <Label text="Contact us!" fontSize="30" color="#8c8c8c"/>
+        <StackLayout height="30"></StackLayout>
         <FlexboxLayout flexDirection="column">
           <TextField hint="Subject" 
             v-model="subject" 
@@ -16,7 +17,7 @@
             class="input input-border"></TextField>
           <StackLayout height="20"></StackLayout>
           <TextView hint="Message"
-            v-model="message" 
+            v-model="msg" 
             secure="false"
             textWrap="true"
             returnKeyType="done"
@@ -28,7 +29,7 @@
             style="margin:0px;border-width:3px;border-color:#e5e5e5"
             class="input input-border"></TextView>
           <StackLayout height="15"></StackLayout>
-          <Button class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
+          <Button @tap="sendContact" :isEnabled="valid" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
         </FlexboxLayout>
       </FlexboxLayout>
     </FlexboxLayout>
@@ -36,19 +37,42 @@
 </template>
 
 <script>
+import api from '@/services/api'
+
 export default {
-  mounted() {
-    console.log(this.getCurrentUser)
-  },
   data() {
     return {
       subject: '',
-      message: ''
+      msg: ''
     }
   },
   computed: {
     getCurrentUser() {
       return this.$store.getters.getCurrentUser
+    },
+    valid() {
+      const msg = this.msg.trim()
+      const subject = this.subject.trim()
+      return !!(subject && msg)
+    }
+  },
+  methods: {
+    sendContact() {
+      if (!this.valid) return
+
+      const email = this.$store.getters.getCurrentUser.email
+      const msg = this.msg.trim()
+      const subject = this.subject.trim()
+
+      const contactObj = {
+        email,
+        subject,
+        msg
+      }
+      api.contactUs(contactObj)
+        .then((res) => {
+          console.log(res) // TODO: show popup
+        })
     }
   }
 }

@@ -47,4 +47,8 @@ export default {
     return getAuthHeaders()
       .then(options => http.post('/req-code', { promoId }, options))
   },
+  contactUs(contactObj) {
+    return http.post('/contact-us', contactObj)
+      .then(resp => resp.data)
+  }
 }
