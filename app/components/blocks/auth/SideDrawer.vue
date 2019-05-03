@@ -25,22 +25,22 @@
           </StackLayout>
           <StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(0, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(0)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf1ea'" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
               <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(1, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(1)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf689'" color="#007cc1" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
               <Label text="Lines" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(3, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(3)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf0e0'" color="#0cad26" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
               <Label text="Contact us" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
-            <StackLayout width="100%" @tap="goToScreen(2, true)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
+            <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf57d'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
               <Label text="Social media" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
@@ -55,23 +55,9 @@
 </template>
 
 <script>
-import News from '@/components/views/News'
-import LineList from '@/components/views/LineList'
-import SocialMedia from '@/components/views/SocialMedia'
-import ContactUs from '@/components/views/ContactUs'
-
-import LoginModal from '@/components/views/LoginModal'
 import EventBus from '@/services/event-bus'
 
 export default {
-  created() {
-    EventBus.$on('goToScreen', (screen) => {
-      this.goToScreen(screen)
-    })
-  },
-  beforeDestroy() {
-    EventBus.$off('goToScreen')
-  },
   methods: {
     onOpenDrawerTap() {
       this.$refs.drawer.nativeView.showDrawer()
@@ -87,33 +73,9 @@ export default {
       this.$emit('logout')
       this.onCloseDrawerTap()
     },
-    goToScreen(screen, fromDrawer) {
-      let comp = null
-      if (screen === 0) comp = News
-      if (screen === 1) comp = LineList
-      if (screen === 2) comp = SocialMedia
-      if (screen === 3) {
-        if (this.hasLoggedInUser) {
-          comp = ContactUs
-        } else {
-          this.$showModal(LoginModal, {
-            animated: true,
-            transition: {
-              name: 'fade'
-            }
-          })
-          return
-        }
-      }
-
-      this.$navigateTo(comp,
-      {
-        animated: true,
-        transition: {
-          name: 'fade'
-        }
-      })
-      if (fromDrawer) this.onCloseDrawerTap()
+    goToScreen(screen) {
+      EventBus.$emit('goToScreen', screen)
+      this.onCloseDrawerTap()
     }
   },
   computed: {
