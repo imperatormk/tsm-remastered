@@ -22,6 +22,10 @@ export default {
     return http.get('/media')
       .then(resp => resp.data)
   },
+  getMediaItem(mediaId) {
+    return http.get(`/media/${mediaId}`)
+      .then(resp => resp.data)
+  },
   getLatestMedia() {
     return http.get('/media/latest')
       .then(resp => resp.data)

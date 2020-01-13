@@ -1,19 +1,25 @@
 <template>
   <StackLayout :verticalAlignment="loaded && media.length ? 'top' : 'center'" height="100%">
-    <LoadingIndicator v-if="!loaded" />
+    <LoadingIndicator v-if="!loaded"/>
     <StackLayout v-else-if="loaded && media.length" verticalAlignment="center">
       <StackLayout verticalAlignment="center" v-if="media.length > 0">
-        <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-          <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
-            <StackLayout v-if="selectedIndex === idx">
-              <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
-            </StackLayout>
-          </CarouselItem>
-        </Carousel>
-        <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
-          <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.line] : 'lightgray'" borderRadius="100"/>
-        </FlexboxLayout>
-        <MediaActions :mediaItem="media[selectedIndex]"></MediaActions>
+        <PromoContainer v-if="showPromos" :mediaItem="{ ...media[selectedIndex], line: currentStation.line }"/>
+
+        <StackLayout v-else>
+          <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+            <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
+              <StackLayout v-if="selectedIndex === idx">
+                <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
+              </StackLayout>
+            </CarouselItem>
+          </Carousel>
+
+          <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
+            <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.line] : 'lightgray'" borderRadius="100"/>
+          </FlexboxLayout>
+
+          <MediaActions :mediaItem="media[selectedIndex]" @showPromos="onShowPromos"></MediaActions>
+        </StackLayout>
       </StackLayout>
     </StackLayout>
     <Label v-else textAlignment="center" fontSize="20" color="#8c8c8c" text="No media in this station..."/>
@@ -23,10 +29,13 @@
 <script>
 import Vue from 'vue'
 import api from '@/services/api'
+import lineColorMixin from '@/mixins/lineColorMixin'
+
+import LoadingIndicator from '@/components/common/LoadingIndicator'
+
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import MediaActions from '@/components/blocks/media/MediaActions'
-import LoadingIndicator from '@/components/common/LoadingIndicator'
-import lineColorMixin from '@/mixins/lineColorMixin'
+import PromoContainer from '@/components/blocks/promo/PromoContainer'
 
 export default {
   mixins: [lineColorMixin],
@@ -35,6 +44,7 @@ export default {
   },
   mounted() {
     this.eventBus.$on('newStationData', (station) => {
+      this.showPromos = false
       this.getMediaForStation(station.id)
       this.currentStation = station // fix duplicates plz
     })
@@ -47,6 +57,7 @@ export default {
       media: [],
       selectedIndex: 0,
       currentStation: null,
+      showPromos: false,
       hideMediaContainer: false,
       loaded: true
     }
@@ -59,6 +70,7 @@ export default {
   methods: {
     pageChanged(e) {
       this.hideMediaContainer = true
+      this.showPromos = false
       setTimeout(() => {
         this.selectedIndex = e.index
         this.hideMediaContainer = false
@@ -74,11 +86,18 @@ export default {
         .finally(() => {
           this.loaded = true
         })
+    },
+    onShowPromos() {
+      const selectedMedia = this.media[this.selectedIndex]
+      if (selectedMedia.promos.length) {
+        this.showPromos = true
+      }
     }
   },
   components: {
     MediaContainer,
     MediaActions,
+    PromoContainer,
     LoadingIndicator
   }
 }
