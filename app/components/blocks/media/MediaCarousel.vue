@@ -3,10 +3,10 @@
     <LoadingIndicator v-if="!loaded"/>
     <StackLayout v-else-if="loaded && media.length" verticalAlignment="center">
       <StackLayout verticalAlignment="center" v-if="media.length > 0">
-        <PromoContainer v-if="showPromos" :mediaItem="{ ...media[selectedIndex], line: currentStation.line }"/>
+        <PromoContainer v-if="showPromos" :mediaItem="{ ...media[selectedIndex], line: currentStation.line }" @hidePromos="showPromos = false"/>
 
         <StackLayout v-else>
-          <Carousel height="280" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+          <Carousel height="300" width="100%" @pageChanged="pageChanged" :selectedPage="selectedIndex" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
             <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
               <StackLayout v-if="selectedIndex === idx">
                 <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>

@@ -4,7 +4,7 @@
     <StackLayout v-if="loaded" backgroundColor="black">
       <YoutubeContainer v-show="videoLoaded" :dataItem="mediaItem" @onVideoLoaded="onVideoLoaded"/>
     </StackLayout>
-    <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="200">
+    <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="232">
       <LoadingIndicator color="red"/>
     </StackLayout>
     <Label :text="mediaItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
