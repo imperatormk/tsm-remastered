@@ -1,7 +1,7 @@
 <template>
   <StackLayout>
     <StackLayout padding="30">
-      <Label padding="5" text="Log in to open the door!" fontSize="18" />
+      <Label padding="5" text="Pick your favorite social network to unlock" fontSize="18" textWrap="true" textAlignment="center"/>
       <StackLayout height="25"/>
       <Button style="width: 70%;border-radius:10px;" background="#3c5a99" color="white" class="fab" fontSize="22" :text="'\uf39e'" @tap="loginWithFacebook()"/>
       <StackLayout height="10"/>

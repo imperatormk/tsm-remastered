@@ -8,7 +8,7 @@
             <StackLayout padding="10" verticalAlignment="center" orientation="horizontal">
               <Image :src="getCurrentUser.profileImageURL" width="40" minWidth="40" style="border-radius:100%"/>
               <StackLayout paddingLeft="5">
-                <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18" />
+                <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18"/>
               </StackLayout>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>

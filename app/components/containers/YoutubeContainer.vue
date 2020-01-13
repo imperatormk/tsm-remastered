@@ -1,5 +1,7 @@
 <template>
-  <YoutubePlayer :id="'player' + dataItem.id" @videoLoaded="$emit('onVideoLoaded')" :src="getYoutubeId(dataItem.url)" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
+  <StackLayout backgroundColor="black">
+    <YoutubePlayer v-if="show" :id="'player' + dataItem.id" @videoLoaded="$emit('onVideoLoaded')" :src="getYoutubeId(dataItem.url)" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
+  </StackLayout>
 </template>
 
 <script>
@@ -10,6 +12,14 @@ export default {
       required: true
     }
   },
+  mounted() {
+    setTimeout(() => {
+      this.show = true
+    }, 250)
+  },
+  data: () => ({
+    show: false
+  }),
   methods: {
     getYoutubeId(videoUrl) { // move this to helpers some time
       const url = require('url')

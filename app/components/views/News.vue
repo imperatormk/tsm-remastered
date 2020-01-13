@@ -7,9 +7,10 @@
         </ScrollView>
       </StackLayout>
       <StackLayout v-if="compSelectedNews">
-        <PromoContainer v-if="showPromos" :mediaItem="{ ...compSelectedNews, line: -1 }" @hidePromos="showPromos = false"/>
+        <PromoContainer v-if="showPromos" :mediaItem="{ ...compSelectedNews, line: compSelectedNews.location.line }" @hidePromos="showPromos = false"/>
 
         <StackLayout v-else>
+          <Label :text="compSelectedNews.title" paddingBottom="10" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
           <MediaContainer :mediaItem="compSelectedNews"/>
           <StackLayout height="20" width="1"/>
           <MediaActions :mediaItem="compSelectedNews" @showPromos="onShowPromos"></MediaActions>

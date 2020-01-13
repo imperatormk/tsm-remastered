@@ -28,7 +28,7 @@
       <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in ((selectedIndex != null ? promos[selectedIndex].promoImages : promos).length || 1)" :key="n" :backgroundColor="(selectedIndex != null ? selectedPromoImageIndex : highlightedIndex) === n-1 ? (lineColors[mediaItem.line] || 'black') : 'lightgray'" borderRadius="100"/>
     </FlexboxLayout>
 
-    <StackLayout marginTop="10">
+    <StackLayout>
       <GridLayout rows="auto" columns="* auto *" margin="10" width="100%">
         <StackLayout padding="5" horizontalAlignment="center" col="0" @tap="selectedIndex == null ? $emit('hidePromos') : pickPromo(null)">
           <StackLayout horizontalAlignment="center" verticalAlignment="center">

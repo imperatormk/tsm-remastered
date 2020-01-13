@@ -21,7 +21,7 @@
             <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.line] : 'lightgray'" borderRadius="100"/>
           </FlexboxLayout>
 
-          <MediaActions marginTop="10" :mediaItem="media[selectedIndex]" @showPromos="onShowPromos"></MediaActions>
+          <MediaActions :mediaItem="media[selectedIndex]" @showPromos="onShowPromos"></MediaActions>
         </StackLayout>
       </StackLayout>
     </StackLayout>

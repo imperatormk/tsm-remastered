@@ -2,7 +2,7 @@
   <FlexboxLayout flexDirection="column" padding="5" @tap="$emit('selected', newsItem)">
     <GridLayout rows="*" backgroundColor="White">
       <GridLayout rows="*" columns="*" margin="0">
-        <Image class="img-rounded" :src="getMediaThumbnail" stretch="aspectFill" />
+        <Image class="img-rounded" :src="getMediaThumbnail" stretch="fill"/>
         <GridLayout verticalAlignment="bottom">
           <StackLayout padding="4" backgroundColor="rgba(0,0,0,0.5)" borderRadius="5" width="100%">
             <Label :text="getMediaTitle" color="white" fontSize="11"/>
