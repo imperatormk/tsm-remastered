@@ -41,8 +41,8 @@
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf57d'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
-              <Label text="Social media" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+              <Label paddingLeft="15" :text="'\uf44d'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label text="Dashboard" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
         </StackLayout>

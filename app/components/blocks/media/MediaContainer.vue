@@ -1,13 +1,11 @@
 <template>
   <StackLayout>
-    <Label v-if="station" :text="station.title" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
     <StackLayout v-if="loaded" backgroundColor="black">
       <YoutubeContainer v-show="videoLoaded" :dataItem="mediaItem" @onVideoLoaded="onVideoLoaded"/>
     </StackLayout>
     <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="232">
       <LoadingIndicator color="red"/>
     </StackLayout>
-    <Label :text="mediaItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
   </StackLayout>
 </template>
 

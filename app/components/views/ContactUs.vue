@@ -6,7 +6,7 @@
         <StackLayout height="30"></StackLayout>
         <FlexboxLayout flexDirection="column">
           <TextField hint="Your email" 
-            v-model="email" 
+            v-model.trim="email" 
             secure="false"
             returnKeyType="done"
             fontSize="15"
@@ -17,7 +17,7 @@
             class="input input-border"></TextField>
           <StackLayout height="20"></StackLayout>
           <TextField hint="Subject" 
-            v-model="subject" 
+            v-model.trim="subject" 
             secure="false"
             returnKeyType="done"
             fontSize="15"
@@ -28,7 +28,7 @@
             class="input input-border"></TextField>
           <StackLayout height="20"></StackLayout>
           <TextView hint="Message"
-            v-model="msg" 
+            v-model.trim="msg" 
             secure="false"
             textWrap="true"
             returnKeyType="done"
@@ -66,9 +66,7 @@ export default {
       return this.$store.getters.getCurrentUser
     },
     valid() {
-      const email = this.email.trim()
-      const msg = this.msg.trim()
-      const subject = this.subject.trim()
+      const { email, msg, subject } = this
       return !!(email && subject && msg)
     }
   },

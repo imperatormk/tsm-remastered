@@ -5,7 +5,7 @@
         <Image class="img-rounded" :src="getMediaThumbnail" stretch="aspectFill" />
         <GridLayout verticalAlignment="bottom">
           <StackLayout padding="4" backgroundColor="rgba(0,0,0,0.5)" borderRadius="5" width="100%">
-            <Label :text="getMediaTitle" color="white" fontSize="10"/>
+            <Label :text="getMediaTitle" color="white" fontSize="11"/>
           </StackLayout>
         </GridLayout>
       </GridLayout>

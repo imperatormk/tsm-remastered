@@ -1,5 +1,5 @@
 <template>
-  <ViewContainer>
+  <ViewContainer footer>
     <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
       <Label text="Pick a line and travel!" marginBottom="50" fontSize="30" color="#8c8c8c"/>
       <GridLayout columns="*" rows="*" width="300" height="300">

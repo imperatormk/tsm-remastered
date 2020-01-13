@@ -6,7 +6,9 @@
         <PromoContainer v-if="showPromos" :mediaItem="{ ...media[selectedIndex], line: currentStation.line }" @hidePromos="showPromos = false"/>
 
         <StackLayout v-else>
-          <Carousel height="300" width="100%" @pageChanged="pageChanged" :selectedPage="selectedIndex" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+          <Label v-if="currentStation" :text="currentStation.title" paddingBottom="10" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
+
+          <Carousel height="230" width="100%" @pageChanged="slideChanged" :selectedPage="selectedIndex" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
             <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
               <StackLayout v-if="selectedIndex === idx">
                 <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
@@ -14,11 +16,12 @@
             </CarouselItem>
           </Carousel>
 
+          <Label v-if="media[selectedIndex] != null" :text="media[selectedIndex].title" paddingTop="10" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
           <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
             <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in media.length" :key="n" :backgroundColor="selectedIndex === n-1 ? lineColors[currentStation.line] : 'lightgray'" borderRadius="100"/>
           </FlexboxLayout>
 
-          <MediaActions :mediaItem="media[selectedIndex]" @showPromos="onShowPromos"></MediaActions>
+          <MediaActions marginTop="10" :mediaItem="media[selectedIndex]" @showPromos="onShowPromos"></MediaActions>
         </StackLayout>
       </StackLayout>
     </StackLayout>
@@ -68,13 +71,13 @@ export default {
     }
   },
   methods: {
-    pageChanged(e) {
+    slideChanged(e) {
       this.hideMediaContainer = true
       this.showPromos = false
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.selectedIndex = e.index
         this.hideMediaContainer = false
-      }, 300)
+      })
     },
     getMediaForStation(stationId) {
       this.loaded = false

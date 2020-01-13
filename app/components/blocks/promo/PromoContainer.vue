@@ -1,32 +1,34 @@
 <template>
   <StackLayout>
-    <Label :text="selectedIndex == null ? mediaItem.title : promos[selectedIndex].title" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
+    <Label :text="selectedIndex == null ? mediaItem.title : promos[selectedIndex].title" paddingBottom="10" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
 
-    <StackLayout backgroundColor="black" height="260">
-      <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" height="260" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+    <StackLayout height="230">
+      <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
         <CarouselItem v-for="(promoItem) in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
             <Image height="230" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="fill"/>
-            <Label :text="promoItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
           </StackLayout>
         </CarouselItem>
       </Carousel>
 
-      <Carousel v-if="!hideCarousel && selectedIndex != null" height="260" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+      <Carousel v-if="!hideCarousel && selectedIndex != null" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
         <CarouselItem v-for="(promoImage) in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
             <Image height="230" :src="getImageUrl(promoImage.imageUrl)" stretch="fill"/>
-            <Label :text="promoImage.desc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
           </StackLayout>
         </CarouselItem>
       </Carousel>
     </StackLayout>
 
+    <Label v-if="selectedIndex == null && promos[highlightedIndex] != null" paddingTop="10" :text="promos[highlightedIndex].title" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+    <Label v-else-if="selectedIndex != null && promos[selectedIndex] != null" :text="promos[selectedIndex].desc" paddingTop="10" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+    <Label v-else text="hidden" paddingTop="10" color="transparent" fontSize="17" horizontalAlignment="center"/>
+
     <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
-      <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in ((selectedIndex != null ? promos[selectedIndex].promoImages : promos).length)" :key="n" :backgroundColor="(selectedIndex != null ? selectedPromoImageIndex : highlightedIndex) === n-1 ? lineColors[mediaItem.line] : 'lightgray'" borderRadius="100"/>
+      <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in ((selectedIndex != null ? promos[selectedIndex].promoImages : promos).length || 1)" :key="n" :backgroundColor="(selectedIndex != null ? selectedPromoImageIndex : highlightedIndex) === n-1 ? (lineColors[mediaItem.line] || 'black') : 'lightgray'" borderRadius="100"/>
     </FlexboxLayout>
 
-    <StackLayout>
+    <StackLayout marginTop="10">
       <GridLayout rows="auto" columns="* auto *" margin="10" width="100%">
         <StackLayout padding="5" horizontalAlignment="center" col="0" @tap="selectedIndex == null ? $emit('hidePromos') : pickPromo(null)">
           <StackLayout horizontalAlignment="center" verticalAlignment="center">
@@ -109,8 +111,12 @@ export default {
     getImageUrl(url) {
       return `${serverUrl}${url}`
     },
-    pageChanged(e) {
-      this.highlightedIndex = e.index
+    slideChanged(e) {
+      if (this.selectedIndex == null) {
+        this.highlightedIndex = e.index
+      } else {
+        this.selectedPromoImageIndex = e.index
+      }
     }
   }
 }

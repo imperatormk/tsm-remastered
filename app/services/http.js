@@ -7,7 +7,6 @@ const getAxiosApi = () => {
   const httpAxios = axios.create({
     baseURL: serverUrl
   })
-  httpAxios.defaults.timeout = 5 * 1000
   return httpAxios
 }
 

@@ -1,7 +1,7 @@
 <template>
-  <ViewContainer :loading="!loaded" loadingText="Loading stations..." footer>
+  <ViewContainer :loading="!loaded" loadingText="Loading stations...">
     <StackLayout>
-      <StackLayout class="p-b-20">
+      <StackLayout>
         <ScrollView orientation="horizontal" height="100">
           <StationContainer :stations="stations" @stationSelected="stationSelected"/>
         </ScrollView>

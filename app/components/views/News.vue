@@ -7,9 +7,13 @@
         </ScrollView>
       </StackLayout>
       <StackLayout v-if="compSelectedNews">
-        <MediaContainer :mediaItem="compSelectedNews"/>
-        <StackLayout height="20" width="1"/>
-        <MediaActions :mediaItem="compSelectedNews"></MediaActions>
+        <PromoContainer v-if="showPromos" :mediaItem="{ ...compSelectedNews, line: -1 }" @hidePromos="showPromos = false"/>
+
+        <StackLayout v-else>
+          <MediaContainer :mediaItem="compSelectedNews"/>
+          <StackLayout height="20" width="1"/>
+          <MediaActions :mediaItem="compSelectedNews" @showPromos="onShowPromos"></MediaActions>
+        </StackLayout>
       </StackLayout>
     </StackLayout>
   </ViewContainer>
@@ -21,6 +25,7 @@ import api from '@/services/api'
 import NewsContainer from '@/components/blocks/news/NewsContainer'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import MediaActions from '@/components/blocks/media/MediaActions'
+import PromoContainer from '@/components/blocks/promo/PromoContainer'
 
 export default {
   created() {
@@ -30,6 +35,7 @@ export default {
     return {
       news: [],
       selectedNews: null,
+      showPromos: false,
       loaded: false
     }
   },
@@ -47,6 +53,11 @@ export default {
     },
     newsSelected(item) {
       this.selectedNews = item
+    },
+    onShowPromos() {
+      if (this.compSelectedNews.promos.length) {
+        this.showPromos = true
+      }
     }
   },
   computed: {
@@ -59,7 +70,8 @@ export default {
   components: {
     NewsContainer,
     MediaContainer,
-    MediaActions
+    MediaActions,
+    PromoContainer
   }
 }
 </script>
