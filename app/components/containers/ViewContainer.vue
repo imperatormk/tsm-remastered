@@ -7,9 +7,9 @@
     </StackLayout>
     <GridLayout rows="*" cols="*" v-else verticalAlignment="top" height="100%">
       <StackLayout verticalAlignment="top">
-        <FlexboxLayout justifyContent="space-between">
-          <Label @tap="gotoHome" margin="0" padding="15" style="padding-bottom:10px;color:#1976d2;horizontal-align:left;" fontSize="22" text="That's Montreal"/>
-          <Label margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
+        <FlexboxLayout justifyContent="space-between" padding="10" backgroundColor="#bcbcbc">
+          <Image src="~/images/logce.png" height="50"/>
+          <Label color="white" margin="0" padding="15" style="padding-bottom:10px;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
         </FlexboxLayout>
         <slot/>
         <Footer v-if="footer"/>

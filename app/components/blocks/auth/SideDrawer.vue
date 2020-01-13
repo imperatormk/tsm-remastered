@@ -48,7 +48,7 @@
         </StackLayout>
       </StackLayout>
       <StackLayout ~mainContent>
-        <Label @tap="onOpenDrawerTap" margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
+        <Label @tap="onOpenDrawerTap" color="white" margin="0" paddingTop="25" paddingRight="25" style="padding-bottom:10px;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
       </StackLayout>
     </RadSideDrawer>
   </GridLayout>

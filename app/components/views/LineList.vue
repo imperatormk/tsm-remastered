@@ -1,6 +1,6 @@
 <template>
   <ViewContainer footer>
-    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
+    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="75%">
       <Label text="Pick a line and travel!" marginBottom="50" fontSize="30" color="#8c8c8c"/>
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
@@ -9,7 +9,11 @@
           <Button @tap="goToStation(3)" class="quarter bottom-left"></Button>
           <Button @tap="goToStation(2)" class="quarter bottom-right"></Button>
         </FlexboxLayout>
-        <StackLayout @tap="temp()" col="0" row="0" class="fill-circle"></StackLayout>
+        <StackLayout col="0" row="0" class="fill-circle" @tap="temp()">
+          <FlexboxLayout justifyContent="center" alignItems="center" width="100%" height="100%">
+            <Label :text="'\uf5ab'" class="fas" fontSize="100" color="#8c8c8c"/>
+          </FlexboxLayout>
+        </StackLayout>
       </GridLayout>
     </FlexboxLayout>
   </ViewContainer>
@@ -45,8 +49,8 @@ export default {
   .fill-circle {
     width: 65%;
     height: 65%;
-    background-color:#000;
-    border-radius:100%;
+    background-color: white;
+    border-radius: 100%;
   }
 
   .top-left {

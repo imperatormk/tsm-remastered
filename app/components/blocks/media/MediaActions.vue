@@ -8,9 +8,9 @@
         </StackLayout>
       </StackLayout>
       <StackLayout backgroundColor="#c2c2c2" width="1" col="1"></StackLayout>
-      <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="$emit('showPromos')">
+      <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="hasPromos ? $emit('showPromos') : () => {}">
         <StackLayout horizontalAlignment="center" verticalAlignment="center">
-          <Label textAlignment="center" class="fas" :text="'\uf06b'" color="#8c8c8c" fontSize="23"/>
+          <Label textAlignment="center" class="fas" :text="'\uf06b'" :color="hasPromos ? '#8c8c8c' : '#c9c9c9'" fontSize="23"/>
           <Label textAlignment="center" text="Free gift" color="#8c8c8c"/>
         </StackLayout>
       </StackLayout>
@@ -39,6 +39,9 @@ export default {
   computed: {
     hasLoggedInUser() {
       return this.$store.getters.hasLoggedInUser
+    },
+    hasPromos() {
+      return this.mediaItem && this.mediaItem.promos.length
     }
   },
   methods: {
