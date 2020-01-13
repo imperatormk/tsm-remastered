@@ -1,5 +1,5 @@
 <template>
-  <ViewContainer :loading="!loaded" loadingText="Loading stations...">
+  <ViewContainer :loading="!loaded" loadingText="Loading stations..." footer>
     <StackLayout>
       <StackLayout class="p-b-20">
         <ScrollView orientation="horizontal" height="100">
@@ -8,7 +8,7 @@
       </StackLayout>
       <StackLayout>
         <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
-        <Label v-else textAlignment="center" text="Please select a station..." />
+        <Label fontSize="20" v-else textAlignment="center" text="Please select a station..." />
       </StackLayout>
     </StackLayout>
   </ViewContainer>

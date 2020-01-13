@@ -17,6 +17,7 @@
 
 <script>
 import api from '@/services/api'
+
 import NewsContainer from '@/components/blocks/news/NewsContainer'
 import MediaContainer from '@/components/blocks/media/MediaContainer'
 import MediaActions from '@/components/blocks/media/MediaActions'

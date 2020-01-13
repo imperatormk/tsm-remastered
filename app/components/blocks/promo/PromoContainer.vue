@@ -2,23 +2,25 @@
   <StackLayout>
     <Label :text="selectedIndex == null ? mediaItem.title : promos[selectedIndex].title" paddingBottom="5" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
 
-    <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" height="300" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-      <CarouselItem v-for="(promoItem) in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
-        <StackLayout>
-          <Image height="270" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="fill"/>
-          <Label :text="promoItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
-        </StackLayout>
-      </CarouselItem>
-    </Carousel>
+    <StackLayout backgroundColor="black" height="260">
+      <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" height="260" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+        <CarouselItem v-for="(promoItem) in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
+          <StackLayout>
+            <Image height="230" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="fill"/>
+            <Label :text="promoItem.title" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+          </StackLayout>
+        </CarouselItem>
+      </Carousel>
 
-    <Carousel v-if="!hideCarousel && selectedIndex != null" height="300" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-      <CarouselItem v-for="(promoImage) in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
-        <StackLayout>
-          <Image height="270" :src="getImageUrl(promoImage.imageUrl)" stretch="fill"/>
-          <Label :text="promoImage.desc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
-        </StackLayout>
-      </CarouselItem>
-    </Carousel>
+      <Carousel v-if="!hideCarousel && selectedIndex != null" height="260" width="100%" @pageChanged="pageChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+        <CarouselItem v-for="(promoImage) in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
+          <StackLayout>
+            <Image height="230" :src="getImageUrl(promoImage.imageUrl)" stretch="fill"/>
+            <Label :text="promoImage.desc" paddingTop="5" color="#8c8c8c" fontSize="17" horizontalAlignment="center"/>
+          </StackLayout>
+        </CarouselItem>
+      </Carousel>
+    </StackLayout>
 
     <FlexboxLayout flexDirection="row" justifyContent="center" margin="10">
       <StackLayout marginLeft="2" marginRight="2" height="10" width="10" v-for="n in ((selectedIndex != null ? promos[selectedIndex].promoImages : promos).length)" :key="n" :backgroundColor="(selectedIndex != null ? selectedPromoImageIndex : highlightedIndex) === n-1 ? lineColors[mediaItem.line] : 'lightgray'" borderRadius="100"/>

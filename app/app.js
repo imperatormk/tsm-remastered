@@ -38,7 +38,7 @@ new Vue({
       let comp = null
       if (screen === 0) comp = News
       if (screen === 1) comp = LineList
-      if (screen === 2) comp = null // TODO
+      // if (screen === 2) comp = null // TODO
       if (screen === 3) comp = ContactUs
 
       if (comp) this.$navigateTo(comp, {

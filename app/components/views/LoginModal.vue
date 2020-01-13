@@ -3,8 +3,9 @@
     <StackLayout padding="30">
       <Label padding="5" text="Log in to open the door!" fontSize="18" />
       <StackLayout height="25"/>
-      <Button style="width: 70%;" background="#3c5a99" color="white" class="fab" fontSize="22" :text="'\uf39e'" @tap="loginWithFacebook()"/>
-      <Button style="width: 70%;" background="#db4437" color="white" class="fab" fontSize="22" :text="'\uf1a0'" @tap="loginWithGoogle()"/>
+      <Button style="width: 70%;border-radius:10px;" background="#3c5a99" color="white" class="fab" fontSize="22" :text="'\uf39e'" @tap="loginWithFacebook()"/>
+      <StackLayout height="10"/>
+      <Button style="width: 70%;border-radius:10px;" background="#db4437" color="white" class="fab" fontSize="22" :text="'\uf1a0'" @tap="loginWithGoogle()"/>
     </StackLayout>
   </StackLayout>
 </template>
