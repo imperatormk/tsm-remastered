@@ -12,7 +12,7 @@
           <Label margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
         </FlexboxLayout>
         <slot/>
-        <Footer/>
+        <Footer v-if="footer"/>
       </StackLayout>
       <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
     </GridLayout>
@@ -40,7 +40,8 @@ export default {
     backgroundImage: {
       type: String,
       default: ''
-    }
+    },
+    footer: Boolean
   },
   created() {
     EventBus.$on('getPageRef', (cb) => {

@@ -1,10 +1,21 @@
 <template>
   <ViewContainer>
-    <FlexboxLayout height="100%" alignItems="center">
-      <FlexboxLayout flexDirection="column" width="100%" justifyContent="center" alignItems="center" height="80%">
-        <Label text="Contact us!" fontSize="30" color="#8c8c8c"/>
+    <FlexboxLayout height="100%">
+      <FlexboxLayout flexDirection="column" width="100%" alignItems="center" height="80%">
+        <Label text="Contact us!" fontSize="30" marginTop="50" color="#8c8c8c"/>
         <StackLayout height="30"></StackLayout>
         <FlexboxLayout flexDirection="column">
+          <TextField hint="Your email" 
+            v-model="email" 
+            secure="false"
+            returnKeyType="done"
+            fontSize="15"
+            autocorrect="false"
+            padding="15"
+            width="90%"
+            style="margin:0px;border-width:3px;border-color:#e5e5e5"
+            class="input input-border"></TextField>
+          <StackLayout height="20"></StackLayout>
           <TextField hint="Subject" 
             v-model="subject" 
             secure="false"
@@ -25,7 +36,7 @@
             autocorrect="false"
             padding="15"
             width="85%"
-            height="60%"
+            height="40%"
             style="margin:0px;border-width:3px;border-color:#e5e5e5"
             class="input input-border"></TextView>
           <StackLayout height="15"></StackLayout>
@@ -40,8 +51,12 @@
 import api from '@/services/api'
 
 export default {
+  mounted() {
+    if (this.getCurrentUser) this.email = this.getCurrentUser.email
+  },
   data() {
     return {
+      email: '',
       subject: '',
       msg: ''
     }
@@ -51,16 +66,17 @@ export default {
       return this.$store.getters.getCurrentUser
     },
     valid() {
+      const email = this.email.trim()
       const msg = this.msg.trim()
       const subject = this.subject.trim()
-      return !!(subject && msg)
+      return !!(email && subject && msg)
     }
   },
   methods: {
     sendContact() {
       if (!this.valid) return
 
-      const email = this.$store.getters.getCurrentUser.email
+      const email = this.email.trim()
       const msg = this.msg.trim()
       const subject = this.subject.trim()
 
