@@ -1,14 +1,14 @@
 <template>
   <GridLayout>
-    <RadSideDrawer ref="drawer" drawerLocation="Right">
+    <RadSideDrawer ref="drawer" drawerLocation="Right" v-if="show">
       <StackLayout ~drawerContent orientation="horizontal">
         <StackLayout width="30%"></StackLayout>
         <StackLayout width="70%" style="padding-left:10px;">
           <StackLayout v-if="hasLoggedInUser" horizontalAlignment="left" backgroundColor="white">
             <StackLayout padding="10" verticalAlignment="center" orientation="horizontal">
-              <Image :src="getCurrentUser.profileImageURL" width="40" minWidth="40" style="border-radius:100%"/>
+              <Image :src="getCurrentUser.photoURL" width="40" minWidth="40" style="border-radius:100%"/>
               <StackLayout paddingLeft="5">
-                <Label textAlignment="left" padding="5" :text="getCurrentUser.name.split(' ')[0]" fontSize="18"/>
+                <Label textAlignment="left" padding="5" :text="(getCurrentUser.displayName || '').split(' ')[0]" fontSize="18"/>
               </StackLayout>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
@@ -58,6 +58,14 @@
 import EventBus from '@/services/event-bus'
 
 export default {
+  mounted() {
+    setTimeout(() => { // sorry
+      this.show = true
+    }, 300)
+  },
+  data: () => ({
+    show: false
+  }),
   methods: {
     onOpenDrawerTap() {
       this.$refs.drawer.nativeView.showDrawer()

@@ -74,6 +74,11 @@ export default {
     selectedPromoImageIndex: 0,
     hideCarousel: false
   }),
+  computed: {
+    hasLoggedInUser() {
+      return this.$store.getters.hasLoggedInUser
+    }
+  },
   methods: {
     getPromos() {
       this.hideCarousel = true

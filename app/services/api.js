@@ -4,6 +4,7 @@ import http from './http'
 const getAuthHeaders = (opts) => {
   const options = opts || {}
   return auth.getUserToken()
+    .then(resp => (resp ? resp.token : ''))
     .then((token) => {
       const optionsRes = options
       optionsRes.headers = {
