@@ -55,6 +55,8 @@ export default {
       api.getComments(this.mediaItem.id)
         .then((comments) => {
           this.comments = comments
+        })
+        .finally(() => {
           this.loaded = true
         })
     },
@@ -69,6 +71,8 @@ export default {
             .then((resComment) => {
               this.comments.unshift(resComment)
               this.comment = ''
+            })
+            .finally(() => {
               this.commenting = false
             })
         }

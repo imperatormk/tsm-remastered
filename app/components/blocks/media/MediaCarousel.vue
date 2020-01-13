@@ -70,6 +70,8 @@ export default {
       api.getMediaForLocation(stationId)
         .then((media) => {
           this.media = media
+        })
+        .finally(() => {
           this.loaded = true
         })
     }

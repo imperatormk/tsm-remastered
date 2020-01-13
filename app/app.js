@@ -1,6 +1,5 @@
 import Vue from 'nativescript-vue'
-import firebase from 'nativescript-plugin-firebase'
-import config from '@/shared/firebase-config'
+import firebaseSrv from '@/services/firebase'
 
 import RadListView from "nativescript-ui-listview/vue"
 Vue.use(RadListView)
@@ -29,7 +28,7 @@ import store from '@/store'
 new Vue({
   render: h => h('frame', [h(HomeScreen)]),
   created() {
-    firebase.init(config)
+    firebaseSrv.initService()
       .then(() => {})
       .catch(err => console.error(err))
     EventBus.$on('goToScreen', screen => this.goToScreen(screen))

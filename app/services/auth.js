@@ -1,4 +1,4 @@
-import firebase from 'nativescript-plugin-firebase'
+import firebaseSrv from '@/services/firebase'
 
 export default {
   loginWithProvider(provider) {
@@ -6,7 +6,7 @@ export default {
     switch (provider) {
       case 'fb':
         providerObj = {
-          type: firebase.LoginType.FACEBOOK,
+          type: firebaseSrv.instance().LoginType.FACEBOOK,
           facebookOptions: {
             scope: ['public_profile', 'email']
           }
@@ -14,23 +14,26 @@ export default {
         break
       case 'gg':
         providerObj = {
-          type: firebase.LoginType.GOOGLE
+          type: firebaseSrv.instance().LoginType.GOOGLE
         }
         break
       default:
         providerObj = {}
     }
-    return firebase.login(providerObj)
+    return firebaseSrv.instance().login(providerObj)
       .catch(err => Promise.reject(err.code))
   },
   logout() {
-    return firebase.logout()
+    firebaseSrv.initService()
+      .then(() => {
+        firebaseSrv.instance().logout()
+      })
   },
   getCurrentUser() {
-    return firebase.getCurrentUser()
+    return firebaseSrv.instance().getCurrentUser()
   },
   getUserToken() {
-    return firebase.getAuthToken({
+    return firebaseSrv.instance().getAuthToken({
       forceRefresh: false
     })
       .then(token => token, (errorMessage) => {
