@@ -7,8 +7,12 @@
     </StackLayout>
     <GridLayout rows="*" cols="*" v-else verticalAlignment="top" height="100%">
       <StackLayout verticalAlignment="top">
-        <Label margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
+        <FlexboxLayout justifyContent="space-between">
+          <Label @tap="gotoHome" margin="0" padding="15" style="padding-bottom:10px;color:#1976d2;horizontal-align:left;" fontSize="22" text="That's Montreal"/>
+          <Label margin="0" padding="15" style="padding-bottom:10px;color:#8c8c8c;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
+        </FlexboxLayout>
         <slot/>
+        <Footer/>
       </StackLayout>
       <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
     </GridLayout>
@@ -18,9 +22,13 @@
 <script>
 import auth from '@/services/auth'
 import EventBus from '@/services/event-bus'
+
 import LoadingIndicator from '@/components/common/LoadingIndicator'
+
 import LoginModal from '@/components/views/LoginModal'
+import HomeScreen from '@/components/views/HomeScreen'
 import SideDrawer from '@/components/blocks/auth/SideDrawer'
+import Footer from '@/components/Footer'
 
 export default {
   props: {
@@ -66,12 +74,21 @@ export default {
         .then((curUser) => {
           return this.$store.commit('setUser', curUser)
         })
+    },
+    gotoHome() {
+      this.$navigateTo(HomeScreen, {
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
     }
   },
   destroyed() {
     EventBus.$off('getPageRef')
   },
   components: {
+    Footer,
     LoadingIndicator,
     SideDrawer
   }

@@ -17,7 +17,6 @@ import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'
 import LineList from '@/components/views/LineList'
-import SocialMedia from '@/components/views/SocialMedia'
 import ContactUs from '@/components/views/ContactUs'
 
 import LoginModal from '@/components/views/LoginModal'
@@ -41,7 +40,7 @@ new Vue({
       let comp = null
       if (screen === 0) comp = News
       if (screen === 1) comp = LineList
-      if (screen === 2) comp = SocialMedia
+      if (screen === 2) // TODO
       if (screen === 3) {
         if (!this.hasLoggedInUser) {
           this.$showModal(LoginModal, {

@@ -1,7 +1,7 @@
 <template>
   <StackLayout horizontalAlignment="center">
     <Button margin="7" height="50" width="50" :text="hasLatest ? `+${stationItem.latestCount}` : ''" borderRadius="100" :style="getStyle" @tap="onSelected"/>
-    <Label textAlignment="center" :text="getShortenedTitle" fontSize="10" />
+    <Label textAlignment="center" :text="getShortenedTitle" fontSize="11" />
   </StackLayout>
 </template>
 
