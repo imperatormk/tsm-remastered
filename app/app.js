@@ -1,9 +1,6 @@
 import Vue from 'nativescript-vue'
 import firebaseSrv from '@/services/firebase'
 
-import RadListView from "nativescript-ui-listview/vue"
-Vue.use(RadListView)
-
 Vue.registerElement('Carousel', () => require('nativescript-carousel').Carousel)
 Vue.registerElement('CarouselItem', () => require('nativescript-carousel').CarouselItem)
 Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer)
