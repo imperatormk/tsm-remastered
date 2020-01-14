@@ -8,7 +8,7 @@
         <StackLayout v-else>
           <Label v-if="currentStation" :text="currentStation.title" paddingBottom="10" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
 
-          <Carousel height="230" width="100%" @pageChanged="slideChanged" :selectedPage="selectedIndex" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
+          <Carousel :height="getPlayerHeight()" width="100%" @pageChanged="slideChanged" :selectedPage="selectedIndex" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
             <CarouselItem v-for="(mediaItem, idx) in media" :key="mediaItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
               <StackLayout v-if="selectedIndex === idx">
                 <MediaContainer v-if="!hideMediaContainer" :station="currentStation" :mediaItem="mediaItem"/>
@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import api from '@/services/api'
+import systemSrv from '@/services/system'
 import lineColorMixin from '@/mixins/lineColorMixin'
 
 import LoadingIndicator from '@/components/common/LoadingIndicator'
@@ -95,6 +95,9 @@ export default {
       if (selectedMedia.promos.length) {
         this.showPromos = true
       }
+    },
+    getPlayerHeight() {
+      return systemSrv.getPlayerHeight()
     }
   },
   components: {

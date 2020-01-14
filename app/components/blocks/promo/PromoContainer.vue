@@ -2,11 +2,11 @@
   <StackLayout>
     <Label :text="selectedIndex == null ? mediaItem.title : promos[selectedIndex].title" paddingBottom="10" color="#8c8c8c" fontSize="25" horizontalAlignment="center"/>
 
-    <StackLayout height="230">
+    <StackLayout :height="getPlayerHeight()">
       <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
         <CarouselItem v-for="(promoItem) in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
-            <Image height="230" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="fill"/>
+            <Image :height="getPlayerHeight()" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="aspectFill"/>
           </StackLayout>
         </CarouselItem>
       </Carousel>
@@ -14,7 +14,7 @@
       <Carousel v-if="!hideCarousel && selectedIndex != null" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
         <CarouselItem v-for="(promoImage) in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
-            <Image height="230" :src="getImageUrl(promoImage.imageUrl)" stretch="fill"/>
+            <Image :height="getPlayerHeight()" :src="getImageUrl(promoImage.imageUrl)" stretch="aspectFill"/>
           </StackLayout>
         </CarouselItem>
       </Carousel>
@@ -51,6 +51,7 @@
 <script>
 import api from '@/services/api'
 import toast from '@/services/toast'
+import systemSrv from '@/services/system'
 import lineColorMixin from '@/mixins/lineColorMixin'
 
 import LoginModal from '@/components/views/LoginModal'
@@ -130,6 +131,9 @@ export default {
       } else {
         this.selectedPromoImageIndex = e.index
       }
+    },
+    getPlayerHeight() {
+      return systemSrv.getPlayerHeight()
     }
   }
 }

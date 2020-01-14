@@ -9,7 +9,7 @@ Vue.registerElement('RadSideDrawer', () => require('nativescript-ui-sidedrawer')
 import ViewContainer from '@/components/containers/ViewContainer'
 Vue.component('ViewContainer', ViewContainer)
 
-Vue.config.silent = true
+Vue.config.silent = false
 import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'

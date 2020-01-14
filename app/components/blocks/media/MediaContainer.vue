@@ -3,7 +3,7 @@
     <StackLayout v-if="loaded" backgroundColor="black">
       <YoutubeContainer v-show="videoLoaded" :dataItem="mediaItem" @onVideoLoaded="onVideoLoaded"/>
     </StackLayout>
-    <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" height="232">
+    <StackLayout verticalAlignment="center" v-if="!videoLoaded" backgroundColor="black" :height="getPlayerHeight()">
       <LoadingIndicator color="red"/>
     </StackLayout>
   </StackLayout>
@@ -13,6 +13,7 @@
 import YoutubeContainer from '@/components/containers/YoutubeContainer'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 import EventBus from '@/services/event-bus'
+import systemSrv from '@/services/system'
 
 export default {
   props: {
@@ -63,6 +64,9 @@ export default {
     },
     getPlayer(playerId) {
       return this.pageRef.getViewById(playerId)
+    },
+    getPlayerHeight() {
+      return systemSrv.getPlayerHeight()
     }
   },
   components: {

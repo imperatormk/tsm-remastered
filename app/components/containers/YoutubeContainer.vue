@@ -1,10 +1,12 @@
 <template>
-  <StackLayout backgroundColor="black" height="232">
+  <StackLayout backgroundColor="black" :height="getPlayerHeight()">
     <YoutubePlayer v-if="isOnTopTrans" :id="videoId" @videoLoaded="$emit('onVideoLoaded', videoId)" :src="getYoutubeId(dataItem.url)" width="100%" apiKey="AIzaSyDw-n7SxuoPBw3f1AqmEKu7xOZSFyMTJ0Y"/>
   </StackLayout>
 </template>
 
 <script>
+import systemSrv from '@/services/system'
+
 export default {
   props: {
     dataItem: {
@@ -46,6 +48,9 @@ export default {
       const urlParts = url.parse(videoUrl, true)
       const query = urlParts.query
       return query.v || null
+    },
+    getPlayerHeight() {
+      return systemSrv.getPlayerHeight()
     }
   }
 }

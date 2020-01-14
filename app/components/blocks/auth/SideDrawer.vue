@@ -20,7 +20,7 @@
           <StackLayout v-else>
             <StackLayout width="100%" @tap="onLogin" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf2f6'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
-              <Label text="Log in" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+              <Label :text="getPlayerHeight()" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
           <StackLayout>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import systemSrv from '@/services/system'
 import EventBus from '@/services/event-bus'
 
 export default {
@@ -85,6 +86,9 @@ export default {
     goToScreen(screen) {
       EventBus.$emit('goToScreen', screen)
       this.onCloseDrawerTap()
+    },
+    getPlayerHeight() {
+      return systemSrv.getPlayerHeight()
     }
   },
   computed: {
@@ -93,7 +97,7 @@ export default {
     },
     getCurrentUser() {
       return this.$store.getters.getCurrentUser || {}
-    },
+    }
   }
 }
 </script>
