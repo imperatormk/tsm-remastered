@@ -9,9 +9,11 @@
           <Button @tap="goToStation(3)" class="quarter bottom-left"></Button>
           <Button @tap="goToStation(2)" class="quarter bottom-right"></Button>
         </FlexboxLayout>
-        <StackLayout col="0" row="0" class="fill-circle" @tap="temp()">
+        <StackLayout col="0" row="0" class="fill-circle">
           <FlexboxLayout justifyContent="center" alignItems="center" width="100%" height="100%">
-            <Label :text="'\uf5ab'" class="fas" fontSize="100" color="#8c8c8c"/>
+            <FlexboxLayout @tap="()=>{}" justifyContent="center" alignItems="center" class="fill-circle">
+              <Label :text="'\uf239'" class="fas" fontSize="100" color="#8c8c8c"/>
+            </FlexboxLayout>
           </FlexboxLayout>
         </StackLayout>
       </GridLayout>
@@ -33,8 +35,6 @@ export default {
           name: 'fade'
         }
       })
-    },
-    temp() {
     }
   }
 }
