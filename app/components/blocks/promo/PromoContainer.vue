@@ -50,6 +50,7 @@
 
 <script>
 import api from '@/services/api'
+import toast from '@/services/toast'
 import lineColorMixin from '@/mixins/lineColorMixin'
 
 import LoginModal from '@/components/views/LoginModal'
@@ -99,7 +100,7 @@ export default {
         const promo = this.promos[promoIndex]
         api.reqPromoCode(promo.id)
           .then((res) => {
-            console.log(res) // TODO: show a popup maybe
+            toast.showToast({ text: 'Code generated! Please check your email for further instructions.' })
           })
           .finally(() => {
             this.requesting = false

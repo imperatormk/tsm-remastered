@@ -49,6 +49,7 @@
 
 <script>
 import api from '@/services/api'
+import toast from '@/services/toast'
 
 export default {
   mounted() {
@@ -87,7 +88,7 @@ export default {
       }
       api.contactUs(contactObj)
         .then((res) => {
-          console.log(res) // TODO: show popup
+          toast.showToast({ text: 'Message sent, thank you!' })
         })
         .finally(() => {
           this.contacting = false
