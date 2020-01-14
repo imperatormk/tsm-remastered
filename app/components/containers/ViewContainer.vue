@@ -12,7 +12,9 @@
           <Label color="white" margin="0" padding="15" style="padding-bottom:10px;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
         </FlexboxLayout>
         <slot/>
-        <Footer v-if="footer"/>
+        <FlexboxLayout justifyContent="center" alignItems="flex-end" height="100%" paddingBottom="35">
+          <Footer v-if="footer"/>
+        </FlexboxLayout>
       </StackLayout>
       <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
     </GridLayout>
