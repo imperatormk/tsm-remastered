@@ -30,13 +30,24 @@ export default {
       this.pageRef = ref
       this.loaded = true
     })
+    EventBus.$on('onBackButton', (e) => {
+      e.cancel = true
+      this.loaded = false
+      this.$nextTick(() => {
+        this.$navigateBack()
+      })
+    })
+  },
+  beforeDestroy() {
+    this.loaded = false
   },
   data() {
     return {
       loaded: false,
       videoLoaded: false,
       currentState: null,
-      pageRef: null
+      pageRef: null,
+      videoId: null
     }
   },
   methods: {
@@ -48,6 +59,7 @@ export default {
 
       this.currentState = 'paused'
       this.videoLoaded = true
+      this.playerId = playerId
     },
     getPlayer(playerId) {
       return this.pageRef.getViewById(playerId)

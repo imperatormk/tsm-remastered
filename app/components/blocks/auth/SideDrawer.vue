@@ -92,7 +92,7 @@ export default {
       return this.$store.getters.hasLoggedInUser
     },
     getCurrentUser() {
-      return this.$store.getters.getCurrentUser
+      return this.$store.getters.getCurrentUser || {}
     },
   }
 }

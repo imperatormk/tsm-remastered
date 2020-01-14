@@ -8,7 +8,8 @@
       </StackLayout>
       <StackLayout>
         <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
-        <Label fontSize="20" v-else textAlignment="center" text="Please select a station..."/>
+        <Label fontSize="20" v-else-if="stations.length" textAlignment="center" text="Please select a station..."/>
+        <Label fontSize="20" v-else textAlignment="center" text="Nothing to see here..."/>
       </StackLayout>
     </StackLayout>
   </ViewContainer>
@@ -29,19 +30,12 @@ export default {
     }
   },
   created() {
-    EventBus.$on('authStateChanged', (data) => { // addValueEventListener
-      console.log(data)
-    })
-
     this.getStations(this.line)
       .then(() => {
         if (this.stations.length) {
           this.stationSelected(this.stations[0])
         }
       })
-  },
-  destroyed() {
-    EventBus.$off('authStateChanged')
   },
   methods: {
     getStations(line) {

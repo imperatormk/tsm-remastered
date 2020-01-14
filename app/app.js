@@ -19,6 +19,15 @@ import ContactUs from '@/components/views/ContactUs'
 import EventBus from '@/services/event-bus'
 import store from '@/store'
 
+const application = require('application')
+const androidModule = application.android
+if (androidModule) {
+  const event = application.AndroidApplication.activityBackPressedEvent
+  androidModule.on(event, (e) => {
+    EventBus.$emit('onBackButton', e)
+  })
+}
+
 new Vue({
   render: h => h('frame', [h(HomeScreen)]),
   created() {
