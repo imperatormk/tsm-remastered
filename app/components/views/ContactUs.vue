@@ -40,7 +40,7 @@
             style="margin:0px;border-width:3px;border-color:#e5e5e5"
             class="input input-border"></TextView>
           <StackLayout height="15"></StackLayout>
-          <Button @tap="sendContact" :isEnabled="valid" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
+          <Button @tap="sendContact" :isEnabled="valid && !contacting" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
         </FlexboxLayout>
       </FlexboxLayout>
     </FlexboxLayout>
@@ -58,7 +58,8 @@ export default {
     return {
       email: '',
       subject: '',
-      msg: ''
+      msg: '',
+      contacting: false
     }
   },
   computed: {
@@ -72,7 +73,8 @@ export default {
   },
   methods: {
     sendContact() {
-      if (!this.valid) return
+      if (!this.valid || this.contacting) return
+      this.contacting = true
 
       const email = this.email.trim()
       const msg = this.msg.trim()
@@ -86,6 +88,9 @@ export default {
       api.contactUs(contactObj)
         .then((res) => {
           console.log(res) // TODO: show popup
+        })
+        .finally(() => {
+          this.contacting = false
         })
     }
   }

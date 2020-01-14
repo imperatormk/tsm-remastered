@@ -72,7 +72,8 @@ export default {
     highlightedIndex: 0,
     selectedIndex: null,
     selectedPromoImageIndex: 0,
-    hideCarousel: false
+    hideCarousel: false,
+    requesting: false
   }),
   computed: {
     hasLoggedInUser() {
@@ -91,11 +92,17 @@ export default {
         })
     },
     reqPromo(promoIndex) {
+      if (this.requesting) return
+
       if (this.hasLoggedInUser) {
+        this.requesting = true
         const promo = this.promos[promoIndex]
         api.reqPromoCode(promo.id)
           .then((res) => {
             console.log(res) // TODO: show a popup maybe
+          })
+          .finally(() => {
+            this.requesting = false
           })
       } else {
         this.$showModal(LoginModal, {
