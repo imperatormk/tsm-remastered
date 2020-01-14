@@ -40,8 +40,8 @@ export default {
     }
   },
   methods: {
-    onVideoLoaded() {
-      const player = this.getPlayer()
+    onVideoLoaded(playerId) {
+      const player = this.getPlayer(playerId)
       if (player) {
         player.playerStyle = 2
       }
@@ -49,8 +49,8 @@ export default {
       this.currentState = 'paused'
       this.videoLoaded = true
     },
-    getPlayer() {
-      return this.pageRef.getViewById(`player${this.mediaItem.id}`)
+    getPlayer(playerId) {
+      return this.pageRef.getViewById(playerId)
     }
   },
   components: {

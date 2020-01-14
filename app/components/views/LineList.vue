@@ -1,6 +1,6 @@
 <template>
   <ViewContainer footer>
-    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="75%">
+    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="65%">
       <Label text="Pick a line and travel!" marginBottom="50" fontSize="30" color="#8c8c8c"/>
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
