@@ -8,7 +8,7 @@
     <GridLayout rows="*" cols="*" v-else verticalAlignment="top" height="100%">
       <StackLayout verticalAlignment="top">
         <FlexboxLayout justifyContent="space-between" padding="10" backgroundColor="#bcbcbc">
-          <Image src="~/images/logce.png" height="50"/>
+          <Image @tap="gotoHome" src="~/images/logce.png" height="50"/>
           <Label color="white" margin="0" padding="15" style="padding-bottom:10px;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
         </FlexboxLayout>
         <slot/>
@@ -16,7 +16,9 @@
           <Footer v-if="footer"/>
         </FlexboxLayout>
       </StackLayout>
-      <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
+      <StackLayout verticalAlignment="top">
+        <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
+      </StackLayout>
     </GridLayout>
   </Page>
 </template>

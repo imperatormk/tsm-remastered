@@ -1,6 +1,6 @@
 <template>
-  <GridLayout>
-    <RadSideDrawer ref="drawer" drawerLocation="Right" v-if="show">
+  <GridLayout :height="opened ? '100%' : 70">
+    <RadSideDrawer @drawerOpening="opened = true" @drawerClosed="opened = false" ref="drawer" drawerLocation="Right" v-if="show">
       <StackLayout ~drawerContent orientation="horizontal">
         <StackLayout width="30%"></StackLayout>
         <StackLayout width="70%" style="padding-left:10px;">
@@ -64,7 +64,8 @@ export default {
     }, 300)
   },
   data: () => ({
-    show: false
+    show: false,
+    opened: false
   }),
   methods: {
     onOpenDrawerTap() {
