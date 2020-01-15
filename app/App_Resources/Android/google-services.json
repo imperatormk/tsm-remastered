@@ -8,14 +8,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:874619178274:android:28927e75d66edfe6",
+        "mobilesdk_app_id": "1:874619178274:android:a5f22914cfb4a9a6ca697b",
         "android_client_info": {
-          "package_name": "ca.thatsmontreal"
+          "package_name": "com.thatsmontreal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "874619178274-u0iq3e5uiabll9agvoc88j0nfb7set53.apps.googleusercontent.com",
+          "client_id": "874619178274-shipcvb5kmioaki7nksheavf1pjjjpuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thatsmontreal",
+            "certificate_hash": "c5e3f6650f21ebe8e5feaf99255393cc91a9f401"
+          }
+        },
+        {
+          "client_id": "874619178274-50udtbp8i04ji4q26d02iqc89ucq9sv1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -25,15 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874619178274-50udtbp8i04ji4q26d02iqc89ucq9sv1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
