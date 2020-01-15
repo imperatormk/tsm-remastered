@@ -114,6 +114,9 @@ export default {
           animated: true,
           transition: {
             name: 'fade'
+          },
+          props: {
+            stay: true
           }
         })
       }

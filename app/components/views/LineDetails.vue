@@ -50,7 +50,7 @@ export default {
     },
     stationSelected(station) {
       this.selectedStation = station
-      this.nextTick(() => {
+      this.$nextTick(() => {
         this.getEventBus().$emit('newStationData', station)
       })
     },
