@@ -1,5 +1,5 @@
 <template>
-  <ViewContainer :loading="!loaded">
+  <ViewContainer :loading="!loaded" loadingText="Loading news...">
     <StackLayout>
       <StackLayout class="p-b-10">
         <ScrollView orientation="horizontal" height="100">

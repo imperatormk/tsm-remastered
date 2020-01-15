@@ -40,7 +40,9 @@
             style="margin:0px;border-width:3px;border-color:#e5e5e5"
             class="input input-border"></TextView>
           <StackLayout height="15"></StackLayout>
-          <Button @tap="sendContact" :isEnabled="valid && !contacting" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
+          <LoadingWrapper :loading="contacting">
+            <Button @tap="sendContact" :isEnabled="valid && !contacting" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
+          </LoadingWrapper>
         </FlexboxLayout>
       </FlexboxLayout>
     </FlexboxLayout>
@@ -51,6 +53,8 @@
 import api from '@/services/api'
 import toast from '@/services/toast'
 
+import LoadingWrapper from '@/components/common/LoadingWrapper'
+
 export default {
   mounted() {
     if (this.getCurrentUser) this.email = this.getCurrentUser.email
@@ -58,8 +62,6 @@ export default {
   data() {
     return {
       email: '',
-      subject: '',
-      msg: '',
       contacting: false
     }
   },
@@ -78,8 +80,8 @@ export default {
       this.contacting = true
 
       const email = this.email.trim()
-      const msg = this.msg.trim()
       const subject = this.subject.trim()
+      const msg = this.msg.trim()
 
       const contactObj = {
         email,
@@ -89,11 +91,16 @@ export default {
       api.contactUs(contactObj)
         .then((res) => {
           toast.showToast({ text: 'Message sent, thank you!' })
+          this.subject = ''
+          this.msg = ''
         })
         .finally(() => {
           this.contacting = false
         })
     }
+  },
+  components: {
+    LoadingWrapper
   }
 }
 </script>

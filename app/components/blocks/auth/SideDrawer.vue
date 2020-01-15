@@ -5,12 +5,12 @@
         <StackLayout width="30%"></StackLayout>
         <StackLayout width="70%" style="padding-left:10px;">
           <StackLayout v-if="hasLoggedInUser" horizontalAlignment="left" backgroundColor="white">
-            <StackLayout padding="10" verticalAlignment="center" orientation="horizontal">
+            <FlexboxLayout padding="10" alignItems="center">
               <Image :src="getCurrentUser.photoURL" width="40" minWidth="40" style="border-radius:100%"/>
-              <StackLayout paddingLeft="5">
-                <Label textAlignment="left" padding="5" :text="(getCurrentUser.displayName || '').split(' ')[0]" fontSize="18"/>
+              <StackLayout paddingLeft="10">
+                <Label textAlignment="left" :text="(getCurrentUser.displayName || '').split(' ')[0]" fontSize="18"/>
               </StackLayout>
-            </StackLayout>
+            </FlexboxLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="onLogout" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf2f5'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
@@ -20,7 +20,7 @@
           <StackLayout v-else>
             <StackLayout width="100%" @tap="onLogin" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf2f6'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
-              <Label :text="getPlayerHeight()" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+              <Label text="Log in" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
           <StackLayout>
@@ -86,9 +86,6 @@ export default {
     goToScreen(screen) {
       EventBus.$emit('goToScreen', screen)
       this.onCloseDrawerTap()
-    },
-    getPlayerHeight() {
-      return systemSrv.getPlayerHeight()
     }
   },
   computed: {

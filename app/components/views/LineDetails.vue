@@ -9,14 +9,13 @@
       <StackLayout>
         <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
         <Label fontSize="20" v-else-if="stations.length" textAlignment="center" text="Please select a station..."/>
-        <Label fontSize="20" v-else textAlignment="center" text="Nothing to see here..."/>
+        <Label fontSize="30" v-else textAlignment="center" text="Nothing to see here..."/>
       </StackLayout>
     </StackLayout>
   </ViewContainer>
 </template>
 
 <script>
-import Vue from 'vue'
 import api from '@/services/api'
 import StationContainer from '@/components/blocks/stations/StationContainer'
 import MediaCarousel from '@/components/blocks/media/MediaCarousel'
@@ -51,7 +50,7 @@ export default {
     },
     stationSelected(station) {
       this.selectedStation = station
-      Vue.nextTick(() => {
+      this.nextTick(() => {
         this.getEventBus().$emit('newStationData', station)
       })
     },

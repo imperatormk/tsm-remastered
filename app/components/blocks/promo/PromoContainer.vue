@@ -38,10 +38,12 @@
         </StackLayout>
         <StackLayout backgroundColor="#c2c2c2" width="1" col="1"></StackLayout>
         <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="selectedIndex == null ? pickPromo(highlightedIndex) : reqPromo(selectedIndex)">
-          <StackLayout horizontalAlignment="center" verticalAlignment="center">
-            <Label textAlignment="center" class="fas" :text="'\uf06b'" color="#8c8c8c" fontSize="23"/>
-            <Label textAlignment="center" :text="selectedIndex == null ? 'Pick gift' : 'Get gift'" color="#8c8c8c"/>
-          </StackLayout>
+          <LoadingWrapper :loading="requesting">
+            <StackLayout horizontalAlignment="center" verticalAlignment="center">
+              <Label textAlignment="center" class="fas" :text="'\uf06b'" color="#8c8c8c" fontSize="23"/>
+              <Label textAlignment="center" :text="selectedIndex == null ? 'Pick gift' : 'Get gift'" color="#8c8c8c"/>
+            </StackLayout>
+          </LoadingWrapper>
         </StackLayout>
       </GridLayout>
     </StackLayout>
@@ -55,6 +57,7 @@ import systemSrv from '@/services/system'
 import lineColorMixin from '@/mixins/lineColorMixin'
 
 import LoginModal from '@/components/views/LoginModal'
+import LoadingWrapper from '@/components/common/LoadingWrapper'
 
 const serverUrl = 'https://thatsmontreal.com'
 
@@ -135,6 +138,9 @@ export default {
     getPlayerHeight() {
       return systemSrv.getPlayerHeight()
     }
+  },
+  components: {
+    LoadingWrapper
   }
 }
 </script>
