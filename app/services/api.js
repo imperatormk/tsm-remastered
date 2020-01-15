@@ -52,6 +52,11 @@ export default {
     return getAuthHeaders()
       .then(options => http.post('/req-code', { promoId }, options))
   },
+  getCodes() {
+    return getAuthHeaders()
+      .then(options => http.get('/codes', options))
+      .then(resp => resp.data)
+  },
   verifyCode(reqObj) {
     return getAuthHeaders()
       .then(options => http.post('/verify-code', reqObj, options))
