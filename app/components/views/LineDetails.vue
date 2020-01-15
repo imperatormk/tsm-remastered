@@ -8,8 +8,8 @@
       </StackLayout>
       <StackLayout>
         <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
-        <Label fontSize="20" v-else-if="stations.length" textAlignment="center" text="Please select a station..."/>
-        <Label fontSize="30" v-else textAlignment="center" text="Nothing to see here..."/>
+        <Label v-else-if="stations.length" text="Please select a station..." fontSize="20" padding="10" textAlignment="center"/>
+        <Label v-else text="Nothing to see here..." fontSize="30" padding="10" textAlignment="center"/>
       </StackLayout>
     </StackLayout>
   </ViewContainer>

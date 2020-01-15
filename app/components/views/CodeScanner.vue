@@ -2,14 +2,14 @@
   <ViewContainer>
     <FlexboxLayout flexDirection="column" alignItems="center" marginTop="40">
       <StackLayout v-if="scanResult">
-        <Label :text="scanResult.code" fontSize="50" :color="codeStatus === 'valid' ? 'green' : 'red'"/>
+        <Label :text="scanResult.code" fontSize="50" :color="statusColor"/>
       </StackLayout>
       <StackLayout v-if="codeStatus">
-        <Label :text="getStatus(codeStatus)" fontSize="25" :color="codeStatus === 'valid' ? 'green' : 'red'"/>
+        <Label :text="getStatus(codeStatus)" fontSize="25" :color="statusColor"/>
       </StackLayout>
       <StackLayout v-if="verifyResult">
         <StackLayout height="20" width="1"/>
-        <Label :text="verifyResult.promoId" fontSize="25" :color="codeStatus === 'valid' ? 'green' : 'red'"/>
+        <Label :text="verifyResult.promoId" fontSize="25" :color="statusColor"/>
       </StackLayout>
       <StackLayout height="20" width="1"/>
       <Button @tap="scan" text="Scan again" fontSize="22" padding="15"/>
@@ -30,6 +30,11 @@ export default {
     verifyResult: null,
     codeStatus: null
   }),
+  computed: {
+    statusColor() {
+      return this.codeStatus === 'ready' ? '#32d967' : 'red'
+    }
+  },
   methods: {
     scan() {
       new BarcodeScanner().scan({
@@ -59,7 +64,7 @@ export default {
       this.verifyCode(this.scanResult, false)
         .then((verifyResult) => {
           this.verifyResult = verifyResult
-          this.codeStatus = 'valid'
+          this.codeStatus = verifyResult.status
         })
         .catch((e) => {
           this.codeStatus = e.response.data.msg
@@ -73,7 +78,7 @@ export default {
       return api.verifyCode(reqObj)
     },
     getStatus(codeStatus) {
-      if (codeStatus === 'valid') return 'Valid'
+      if (codeStatus === 'ready') return 'Valid'
       if (codeStatus === 'badCode') return 'Invalid code'
       if (codeStatus === 'bannedCode') return 'Banned code'
       if (codeStatus === 'usedCode') return 'Code already used'

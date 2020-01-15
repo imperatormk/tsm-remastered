@@ -19,6 +19,7 @@ import ContactUs from '@/components/views/ContactUs'
 
 import CodeScanner from '@/components/views/CodeScanner'
 import UserDashboard from '@/components/views/UserDashboard'
+import LoginModal from '@/components/views/LoginModal'
 
 import api from '@/services/api'
 import EventBus from '@/services/event-bus'
@@ -44,12 +45,27 @@ new Vue({
   destroyed() {
     EventBus.$off('goToScreen')
   },
+  computed: {
+    hasLoggedInUser() {
+      return this.$store.getters.hasLoggedInUser
+    }
+  },
   methods: {
     async goToScreen(screen) {
       let comp = null
       if (screen === 0) comp = News
       if (screen === 1) comp = LineList
       if (screen === 2) {
+        if (!this.hasLoggedInUser) {
+          this.$showModal(LoginModal, {
+            animated: true,
+            transition: {
+              name: 'fade'
+            }
+          })
+          return
+        }
+
         const user = await api.getUser()
         const type = user.type || 0
         const dashboardScreens = [
