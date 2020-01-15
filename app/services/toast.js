@@ -1,17 +1,8 @@
-import { Toasty, ToastDuration } from 'nativescript-toasty'
-import { Color } from 'tns-core-modules/color'
+import * as Toast from 'nativescript-toast'
 
-const showToast = (opts = {}) => {
-  const obj = {
-    ...opts,
-    text: `  ${opts.text || ''}  `,
-    yAxisOffset: 20,
-    backgroundColor: '#e5e5e5',
-    textColor: new Color('#8c8c8c'),
-    duration: ToastDuration.LONG
-  }
-  const toast = new Toasty(obj)
-  toast.show()
+const showToast = (text) => {
+  if (!text) return
+  Toast.makeText(text, 'long').show()
 }
 
 export default {

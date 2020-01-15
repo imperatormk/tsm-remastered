@@ -5,17 +5,22 @@ Vue.registerElement('Carousel', () => require('nativescript-carousel').Carousel)
 Vue.registerElement('CarouselItem', () => require('nativescript-carousel').CarouselItem)
 Vue.registerElement('YoutubePlayer', () => require('nativescript-youtubeplayer').YoutubePlayer)
 Vue.registerElement('RadSideDrawer', () => require('nativescript-ui-sidedrawer').RadSideDrawer)
+Vue.registerElement('BarcodeScanner', () => require('nativescript-barcodescanner').BarcodeScannerView)
 
 import ViewContainer from '@/components/containers/ViewContainer'
 Vue.component('ViewContainer', ViewContainer)
 
-Vue.config.silent = false
+Vue.config.silent = true
 import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'
 import LineList from '@/components/views/LineList'
 import ContactUs from '@/components/views/ContactUs'
 
+import CodeScanner from '@/components/views/CodeScanner'
+import UserDashboard from '@/components/views/UserDashboard'
+
+import api from '@/services/api'
 import EventBus from '@/services/event-bus'
 import store from '@/store'
 
@@ -40,11 +45,19 @@ new Vue({
     EventBus.$off('goToScreen')
   },
   methods: {
-    goToScreen(screen) {
+    async goToScreen(screen) {
       let comp = null
       if (screen === 0) comp = News
       if (screen === 1) comp = LineList
-      // if (screen === 2) comp = null // TODO
+      if (screen === 2) {
+        const user = await api.getUser()
+        const type = user.type || 0
+        const dashboardScreens = [
+          CodeScanner,
+          UserDashboard
+        ]
+        comp = dashboardScreens[type]
+      }
       if (screen === 3) comp = ContactUs
 
       if (comp) this.$navigateTo(comp, {

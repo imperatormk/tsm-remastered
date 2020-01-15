@@ -41,7 +41,7 @@
             class="input input-border"></TextView>
           <StackLayout height="15"></StackLayout>
           <LoadingWrapper :loading="contacting">
-            <Button @tap="sendContact" :isEnabled="valid && !contacting" class="btn-flat" background="#e5e5e5" color="#8c8c8c" fontSize="22" text="Send"/>
+            <Button @tap="sendContact" :isEnabled="valid" text="Send" color="black" fontSize="22" padding="15"/>
           </LoadingWrapper>
         </FlexboxLayout>
       </FlexboxLayout>
@@ -62,6 +62,8 @@ export default {
   data() {
     return {
       email: '',
+      subject: '',
+      msg: '',
       contacting: false
     }
   },
@@ -90,7 +92,7 @@ export default {
       }
       api.contactUs(contactObj)
         .then((res) => {
-          toast.showToast({ text: 'Message sent, thank you!' })
+          toast.showToast('Message sent, thank you!')
           this.subject = ''
           this.msg = ''
         })
@@ -104,10 +106,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .btn-flat {
-    border-color: transparent;
-    border-width: 1;
-  }
-</style>

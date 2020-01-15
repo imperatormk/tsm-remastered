@@ -104,7 +104,7 @@ export default {
         const promo = this.promos[promoIndex]
         api.reqPromoCode(promo.id)
           .then((res) => {
-            toast.showToast({ text: 'Code generated! Please check your email for further instructions.' })
+            toast.showToast('Code generated! Please check your email for further instructions.')
           })
           .finally(() => {
             this.requesting = false

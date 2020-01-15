@@ -12,7 +12,7 @@
         class="input input-border"
         flexGrow="9"></TextField>
       <LoadingWrapper :loading="commenting">
-        <Button flexGrow="1" @tap="postComment" :isEnabled="!commenting" style="border-width: 1;border-color:#e5e5e5;margin:0px;color:#8c8c8c;" class="fas" fontSize="20" :text="commenting ? '\uf110' : '\uf1d8'"/>
+        <Button flexGrow="1" @tap="postComment" style="border-width: 1;border-color:#e5e5e5;margin:0px;color:#8c8c8c;" class="fas" fontSize="20" :text="commenting ? '\uf110' : '\uf1d8'"/>
       </LoadingWrapper>
     </FlexboxLayout>
     <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
