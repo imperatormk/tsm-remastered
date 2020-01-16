@@ -1,13 +1,13 @@
 <template>
   <ViewContainer>
-    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="65%">
-      <Label text="That's Montreal!" marginBottom="40" fontSize="30" color="#8c8c8c"/>
+    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
+      <Label text="Hop in a coupe and fasten" marginBottom="40" fontSize="30" color="#8c8c8c"/>
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
-          <Button @tap="goToScreen(0)" class="quarter top-left"></Button>
-          <Button @tap="goToScreen(1)" class="quarter top-right"></Button>
-          <Button @tap="goToScreen(3)" class="quarter bottom-left"></Button>
-          <Button @tap="goToScreen(2)" class="quarter bottom-right"></Button>
+          <Button @tap="goToScreen(0)" class="quarter top-left far" fontSize="22" color="white" :text="'.   \uf1ea'" textAlignment="left"></Button>
+          <Button @tap="goToScreen(1)" class="quarter top-right fas" fontSize="22" color="white" :text="'\uf689   .'" textAlignment="right"></Button>
+          <Button @tap="goToScreen(3)" class="quarter bottom-left far" fontSize="22" color="white" :text="'.   \uf0e0'" textAlignment="left"></Button>
+          <Button @tap="goToScreen(2)" class="quarter bottom-right fas" fontSize="22" color="white" :text="'\uf06b   .'" textAlignment="right"></Button>
         </FlexboxLayout>
         <StackLayout col="0" row="0" class="fill-circle">
           <FlexboxLayout justifyContent="center" alignItems="center" width="100%" height="100%">
