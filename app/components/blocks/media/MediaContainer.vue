@@ -32,11 +32,13 @@ export default {
       this.loaded = true
     })
     EventBus.$on('onBackButton', (e) => {
-      e.cancel = true
-      this.loaded = false
-      this.$nextTick(() => {
-        this.$navigateBack()
-      })
+      if (this.getModalCount === 0) {
+        e.cancel = true
+        this.loaded = false
+        this.$nextTick(() => {
+          this.$navigateBack()
+        })
+      }
     })
   },
   beforeDestroy() {
@@ -49,6 +51,11 @@ export default {
       currentState: null,
       pageRef: null,
       videoId: null
+    }
+  },
+  computed: {
+    getModalCount() {
+      return this.$store.getters.getModalCount
     }
   },
   methods: {

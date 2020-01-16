@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     user: {},
-    videos: []
+    videos: [],
+    modalCount: 0
   },
   mutations: {
     setUser(state, user) {
@@ -17,7 +18,10 @@ const store = new Vuex.Store({
     },
     popVideo(state, video) {
       state.videos = state.videos.filter(item => item !== video)
-    }
+    },
+    changeModalCount(state, val) {
+      state.modalCount += val
+    },
   },
   getters: {
     getCurrentUser: state => {
@@ -26,7 +30,8 @@ const store = new Vuex.Store({
     hasLoggedInUser: state => {
       return !!state.user && !!state.user.uid
     },
-    getVideos: state => state.videos
+    getVideos: state => state.videos,
+    getModalCount: state => state.modalCount
   }
 })
 

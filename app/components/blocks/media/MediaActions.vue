@@ -63,7 +63,10 @@ export default {
           props: {
             mediaItem
           }
+        }).then(() => {
+          this.$store.commit('changeModalCount', -1)
         })
+        this.$store.commit('changeModalCount', 1)
       }
     }
   }
