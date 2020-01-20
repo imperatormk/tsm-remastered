@@ -1,3 +1,4 @@
+import api from '@/services/api'
 import firebaseSrv from '@/services/firebase'
 
 export default {
@@ -21,6 +22,7 @@ export default {
         providerObj = {}
     }
     return firebaseSrv.instance().login(providerObj)
+      .then(() => api.getUser())
       .catch(err => Promise.reject(err.code))
   },
   logout() {
