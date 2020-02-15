@@ -1,20 +1,13 @@
 <template>
   <Page :verticalAlignment="loading ? 'center' : 'top'" actionBarHidden="true" xmlns:ui="nativescript-youtubeplayer" ref="pageRef" :style="getStyle">
-    <StackLayout v-if="loading" verticalAlignment="center">
+    <StackLayout v-if="loading && !forceLoaded" verticalAlignment="center">
       <LoadingIndicator :full="true">
         <Label v-if="loadingText" :text="loadingText" textAlignment="center" fontSize="22" color="#8c8c8c" padding="10"/>
       </LoadingIndicator>
     </StackLayout>
     <GridLayout rows="*" cols="*" v-else verticalAlignment="top" height="100%">
-      <StackLayout verticalAlignment="top">
-        <FlexboxLayout justifyContent="space-between" padding="10" backgroundColor="#bcbcbc">
-          <Image @tap="gotoHome" src="~/images/logce.png" height="50"/>
-          <Label color="white" margin="0" padding="15" style="padding-bottom:10px;horizontal-align:right;" class="fas" fontSize="22" :text="'\uf0c9'"/>
-        </FlexboxLayout>
+      <StackLayout verticalAlignment="top" :marginTop="offsetTop ? 55 : 0">
         <slot/>
-        <FlexboxLayout justifyContent="center" alignItems="flex-end" height="100%" paddingBottom="35">
-          <Footer v-if="footer"/>
-        </FlexboxLayout>
       </StackLayout>
       <StackLayout verticalAlignment="top">
         <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
@@ -32,7 +25,6 @@ import LoadingIndicator from '@/components/common/LoadingIndicator'
 import LoginModal from '@/components/views/LoginModal'
 import HomeScreen from '@/components/views/HomeScreen'
 import SideDrawer from '@/components/blocks/auth/SideDrawer'
-import Footer from '@/components/Footer'
 
 export default {
   props: {
@@ -45,7 +37,10 @@ export default {
       type: String,
       default: ''
     },
-    footer: Boolean
+    offsetTop: {
+      type: Boolean,
+      default: true
+    }
   },
   created() {
     EventBus.$on('getPageRef', (cb) => {
@@ -53,6 +48,12 @@ export default {
     })
     this.commitNewUser()
   },
+  beforeDestroy() {
+    this.forceLoaded = true
+  },
+  data: () => ({
+    forceLoaded: false
+  }),
   computed: {
     getStyle() {
       return {
@@ -93,7 +94,6 @@ export default {
     EventBus.$off('getPageRef')
   },
   components: {
-    Footer,
     LoadingIndicator,
     SideDrawer
   }

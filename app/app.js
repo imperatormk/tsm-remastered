@@ -14,7 +14,7 @@ Vue.config.silent = true
 import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'
-import LineList from '@/components/views/LineList'
+import LineDetails from '@/components/views/LineDetails'
 import ContactUs from '@/components/views/ContactUs'
 
 import CodeScanner from '@/components/views/CodeScanner'
@@ -41,6 +41,7 @@ new Vue({
       .then(() => {})
       .catch(err => console.error(err))
     EventBus.$on('goToScreen', screen => this.goToScreen(screen))
+    EventBus.$on('goToStation', station => this.goToStation(station))
   },
   destroyed() {
     EventBus.$off('goToScreen')
@@ -54,7 +55,7 @@ new Vue({
     async goToScreen(screen) {
       let comp = null
       if (screen === 0) comp = News
-      if (screen === 1) comp = LineList
+      if (screen === 1) comp = null
       if (screen === 2) {
         if (!this.hasLoggedInUser) {
           this.$showModal(LoginModal, {
@@ -77,6 +78,16 @@ new Vue({
       if (screen === 3) comp = ContactUs
 
       if (comp) this.$navigateTo(comp, {
+        animated: true,
+        transition: {
+          name: 'fade'
+        }
+      })
+    },
+    goToStation(line) {
+      this.$navigateTo(LineDetails,
+      {
+        props: { line },
         animated: true,
         transition: {
           name: 'fade'

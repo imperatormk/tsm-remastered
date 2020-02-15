@@ -1,13 +1,31 @@
 <template>
-  <ViewContainer>
+  <ViewContainer :offsetTop="false">
     <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
-      <Label text="Hop in a coupe and fasten" marginBottom="40" fontSize="30" color="#8c8c8c"/>
+      <Image src="~/images/logce-dark.png" height="60" marginTop="90" marginBottom="70"/>
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
-          <Button @tap="goToScreen(0)" class="quarter top-left far" fontSize="22" color="white" :text="'.   \uf1ea'" textAlignment="left"></Button>
-          <Button @tap="goToScreen(1)" class="quarter top-right fas" fontSize="22" color="white" :text="'\uf689   .'" textAlignment="right"></Button>
-          <Button @tap="goToScreen(3)" class="quarter bottom-left far" fontSize="22" color="white" :text="'.   \uf0e0'" textAlignment="left"></Button>
-          <Button @tap="goToScreen(2)" class="quarter bottom-right fas" fontSize="22" color="white" :text="'\uf06b   .'" textAlignment="right"></Button>
+          <FlexboxLayout height="40%">
+            <StackLayout @tap="goToStation(0)" class="quarter top-left"></StackLayout>
+            <FlexboxLayout @tap="goToScreen(0)" width="20%" height="100%" backgroundColor="#d4d4d4" justifyContent="center">
+              <Label text="N" color="black" fontSize="25" fontWeight="bold" paddingTop="10"/>
+            </FlexboxLayout>
+            <StackLayout @tap="goToStation(1)" class="quarter top-right"></StackLayout>
+          </FlexboxLayout>
+          <FlexboxLayout height="20%">
+            <FlexboxLayout width="50%" backgroundColor="#d4d4d4" alignItems="center">
+              <Label text="W" color="black" fontSize="25" fontWeight="bold" paddingLeft="15"/>
+            </FlexboxLayout>
+            <FlexboxLayout @tap="goToScreen(3)" width="50%" backgroundColor="#d4d4d4" justifyContent="flex-end" alignItems="center">
+              <Label text="E" color="black" fontSize="25" fontWeight="bold" paddingRight="20"/>
+            </FlexboxLayout>
+          </FlexboxLayout>
+          <FlexboxLayout height="40%">
+            <StackLayout @tap="goToStation(3)" class="quarter bottom-left"></StackLayout>
+            <FlexboxLayout @tap="goToScreen(2)" width="20%" height="100%" backgroundColor="#d4d4d4" justifyContent="center" alignItems="flex-end">
+              <Label text="S" color="black" fontSize="25" fontWeight="bold" paddingBottom="10"/>
+            </FlexboxLayout>
+            <StackLayout @tap="goToStation(2)" class="quarter bottom-right"></StackLayout>
+          </FlexboxLayout>
         </FlexboxLayout>
         <StackLayout col="0" row="0" class="fill-circle">
           <FlexboxLayout justifyContent="center" alignItems="center" width="100%" height="100%">
@@ -22,12 +40,16 @@
 </template>
 
 <script>
+import LineDetails from '@/components/views/LineDetails'
 import EventBus from '@/services/event-bus'
 
 export default {
   methods: {
     goToScreen(screen) {
       EventBus.$emit('goToScreen', screen)
+    },
+    goToStation(station) {
+      EventBus.$emit('goToStation', station)
     }
   }
 }
@@ -35,8 +57,7 @@ export default {
 
 <style lang="scss" scoped>
   .quarter {
-    width: 50%;
-    height: 50%;
+    width: 40%;
   }
 
   .fill-circle {

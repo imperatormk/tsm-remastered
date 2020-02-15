@@ -6,7 +6,7 @@
           <NewsContainer :news="news" @newsSelected="newsSelected"></NewsContainer>
         </ScrollView>
       </StackLayout>
-      <StackLayout v-if="compSelectedNews">
+      <StackLayout v-if="compSelectedNews" paddingTop="15">
         <PromoContainer v-if="showPromos" :mediaItem="{ ...compSelectedNews, line: compSelectedNews.location.line }" @hidePromos="showPromos = false"/>
 
         <StackLayout v-else>

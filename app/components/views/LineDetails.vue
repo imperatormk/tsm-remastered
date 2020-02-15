@@ -6,7 +6,7 @@
           <StationContainer :stations="stations" @stationSelected="stationSelected"/>
         </ScrollView>
       </StackLayout>
-      <StackLayout>
+      <StackLayout paddingTop="15">
         <MediaCarousel v-if="selectedStation" :eventBus="getEventBus()"/>
         <Label v-else-if="stations.length" text="Please select a station..." fontSize="20" padding="10" textAlignment="center"/>
         <Label v-else text="Nothing to see here..." fontSize="30" padding="10" textAlignment="center"/>

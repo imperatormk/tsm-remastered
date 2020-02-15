@@ -109,7 +109,7 @@ export default {
     },
     getStatus(codeStatus) {
       if (codeStatus === 'valid') return 'Valid'
-      if (codeStatus === 'inactive') return 'Promo expired'
+      if (codeStatus === 'inactive') return 'Expired code'
       if (codeStatus === 'badCode') return 'Invalid code'
       if (codeStatus === 'bannedCode') return 'Banned code'
       if (codeStatus === 'usedCode') return 'Code already used'
