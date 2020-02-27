@@ -9,7 +9,7 @@
       <StackLayout verticalAlignment="top" :marginTop="offsetTop ? 55 : 0">
         <slot/>
       </StackLayout>
-      <StackLayout verticalAlignment="top">
+      <StackLayout v-if="false" verticalAlignment="top">
         <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
       </StackLayout>
     </GridLayout>

@@ -2,7 +2,7 @@
   <ViewContainer>
     <FlexboxLayout height="100%">
       <FlexboxLayout flexDirection="column" width="100%" alignItems="center" height="80%">
-        <Label text="Contact us!" fontSize="30" marginTop="50" color="#8c8c8c"/>
+        <Label text="Email us!" fontSize="30" marginTop="50" color="#8c8c8c"/>
         <StackLayout height="30"></StackLayout>
         <FlexboxLayout flexDirection="column">
           <TextField hint="Your email" 

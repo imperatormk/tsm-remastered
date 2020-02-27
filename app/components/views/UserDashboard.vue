@@ -1,7 +1,7 @@
 <template>
   <ViewContainer :loading="!loaded">
     <FlexboxLayout flexDirection="column" alignItems="center" marginTop="40">
-      <Label text="Your promo codes" fontSize="25"/>
+      <Label text="Save with gifts" fontSize="25"/>
       <FlexboxLayout flexDirection="column" alignItems="center" marginTop="40">
         <ScrollView v-if="codes.length" height="70%">
           <StackLayout>

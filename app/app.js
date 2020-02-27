@@ -13,7 +13,7 @@ Vue.component('ViewContainer', ViewContainer)
 Vue.config.silent = true
 import HomeScreen from '@/components/views/HomeScreen'
 
-import News from '@/components/views/News'
+import AboutUs from '@/components/views/AboutUs'
 import LineDetails from '@/components/views/LineDetails'
 import ContactUs from '@/components/views/ContactUs'
 
@@ -55,7 +55,7 @@ new Vue({
     async goToScreen(screen) {
       let comp = null
       if (screen === 0) comp = News
-      if (screen === 1) comp = null
+      if (screen === 1) comp = AboutUs
       if (screen === 2) {
         if (!this.hasLoggedInUser) {
           this.$showModal(LoginModal, {

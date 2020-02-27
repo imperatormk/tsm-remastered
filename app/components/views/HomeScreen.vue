@@ -1,7 +1,13 @@
 <template>
   <ViewContainer :offsetTop="false">
     <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
-      <Image src="~/images/logce-dark.png" height="60" marginTop="90" marginBottom="70"/>
+
+      <StackLayout height="90"></StackLayout>
+      <Image src="~/images/logce-dark.png" height="60"/>
+      <StackLayout height="70"></StackLayout>
+      <Label text="Choose a direction or a color!" fontSize="28"/>
+      <StackLayout height="70"></StackLayout>
+
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
           <FlexboxLayout height="40%">
@@ -12,7 +18,7 @@
             <StackLayout @tap="goToStation(1)" class="quarter top-right"></StackLayout>
           </FlexboxLayout>
           <FlexboxLayout height="20%">
-            <FlexboxLayout width="50%" backgroundColor="#d4d4d4" alignItems="center">
+            <FlexboxLayout @tap="goToScreen(1)" width="50%" backgroundColor="#d4d4d4" alignItems="center">
               <Label text="W" color="black" fontSize="25" fontWeight="bold" paddingLeft="15"/>
             </FlexboxLayout>
             <FlexboxLayout @tap="goToScreen(3)" width="50%" backgroundColor="#d4d4d4" justifyContent="flex-end" alignItems="center">
