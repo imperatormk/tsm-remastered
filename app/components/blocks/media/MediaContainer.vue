@@ -32,7 +32,7 @@ export default {
       this.loaded = true
     })
     EventBus.$on('onBackButton', (e) => {
-      if (this.getModalCount === 0) {
+      if (!this.getModalCount) {
         e.cancel = true
         this.loaded = false
         this.$nextTick(() => {

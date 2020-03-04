@@ -29,8 +29,8 @@
 import api from '@/services/api'
 import auth from '@/services/auth'
 import LoginModal from '@/components/views/LoginModal'
-import CommentsModal from '@/components/views/CommentsModal'
-import * as SocialShare from "nativescript-social-share"
+import EventBus from '@/services/event-bus'
+import * as SocialShare from 'nativescript-social-share'
 
 export default {
   props: {
@@ -54,16 +54,7 @@ export default {
     openComments() {
       const mediaItem = this.mediaItem
       if (mediaItem) {
-        this.$showModal(CommentsModal, {
-          animated: true,
-          fullscreen: true,
-          transition: {
-            name: 'slideBottom'
-          },
-          props: {
-            mediaItem
-          }
-        }).then(() => {
+        EventBus.$emit('showCommentsForMedia', mediaItem, () => {
           this.$store.commit('changeModalCount', -1)
         })
         this.$store.commit('changeModalCount', 1)

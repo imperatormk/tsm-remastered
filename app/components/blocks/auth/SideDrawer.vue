@@ -1,6 +1,6 @@
 <template>
   <GridLayout :height="opened ? '100%' : 70">
-    <RadSideDrawer @drawerOpening="opened = true" @drawerClosed="opened = false" ref="drawer" drawerLocation="Right" v-if="show">
+    <RadSideDrawer @drawerOpening="changeDrawerState(true)" @drawerClosed="changeDrawerState(false)" ref="drawer" drawerLocation="Right" v-if="show">
       <StackLayout ~drawerContent orientation="horizontal">
         <StackLayout width="30%"></StackLayout>
         <StackLayout width="70%" style="padding-left:10px;">
@@ -42,7 +42,7 @@
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
               <Label paddingLeft="15" :text="'\uf06b'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
-              <Label text="Services" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
+              <Label text="Save with gifts" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
         </StackLayout>
@@ -74,6 +74,14 @@ export default {
     },
     onCloseDrawerTap() {
       this.$refs.drawer.nativeView.closeDrawer()
+    },
+    changeDrawerState(val) {
+      this.opened = val
+      if (val) {
+        this.$emit('drawerOpened')
+      } else {
+        this.$emit('drawerClosed')  
+      }
     },
     onLogin() {
       this.$emit('login')

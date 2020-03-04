@@ -9,9 +9,13 @@
       <StackLayout verticalAlignment="top" :marginTop="offsetTop ? 55 : 0">
         <slot/>
       </StackLayout>
-      <StackLayout v-if="false" verticalAlignment="top">
-        <SideDrawer row="0" col="0" @logout="onLogout" @login="onLogin"/>
+      <StackLayout verticalAlignment="top">
+        <FlexboxLayout justifyContent="space-between" alignItems="center">
+          <Button v-show="!drawerOpened" @tap="goBack" backgroundColor="#fff" color="#8c8c8c" class="fas" :text="'\uf060'" fontSize="22" marginLeft="10" padding="5" style="border-width: 1;border-color:transparent;z-index: 0;"/>
+          <SideDrawer row="0" col="0" @drawerOpened="drawerOpened=true" @drawerClosed="drawerOpened=false" @logout="onLogout" @login="onLogin"/>
+        </FlexboxLayout>
       </StackLayout>
+      <CommentsModal/>
     </GridLayout>
   </Page>
 </template>
@@ -23,8 +27,11 @@ import EventBus from '@/services/event-bus'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 
 import LoginModal from '@/components/views/LoginModal'
+import CommentsModal from '@/components/views/CommentsModal'
 import HomeScreen from '@/components/views/HomeScreen'
 import SideDrawer from '@/components/blocks/auth/SideDrawer'
+
+const frameModule = require('ui/frame')
 
 export default {
   props: {
@@ -52,7 +59,8 @@ export default {
     this.forceLoaded = true
   },
   data: () => ({
-    forceLoaded: false
+    forceLoaded: false,
+    drawerOpened: false,
   }),
   computed: {
     getStyle() {
@@ -72,6 +80,9 @@ export default {
         animated: true,
         transition: {
           name: 'fade'
+        },
+        props: {
+          stay: true
         }
       })
     },
@@ -88,6 +99,10 @@ export default {
           name: 'fade'
         }
       })
+    },
+    goBack() {
+      const topmost = frameModule.topmost()
+      topmost.goBack()
     }
   },
   destroyed() {
@@ -95,7 +110,8 @@ export default {
   },
   components: {
     LoadingIndicator,
-    SideDrawer
+    SideDrawer,
+    CommentsModal
   }
 }
 </script>
