@@ -1,12 +1,12 @@
 <template>
-  <ViewContainer :offsetTop="false">
-    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="80%">
+  <ViewContainer :offsetTop="false" class="home-screen" isHome>
+    <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="85%">
 
-      <StackLayout height="90"></StackLayout>
-      <Image src="~/images/logce-dark.png" height="60"/>
-      <StackLayout height="70"></StackLayout>
-      <Label text="Choose a direction or a color!" fontSize="28"/>
-      <StackLayout height="70"></StackLayout>
+      <StackLayout height="100"></StackLayout>
+      <Image src="~/images/logce-new.png" height="175"/>
+      <StackLayout height="35"></StackLayout>
+      <Label text="Choose a direction or color!" fontSize="28"/>
+      <StackLayout height="50"></StackLayout>
 
       <GridLayout columns="*" rows="*" width="300" height="300">
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
@@ -61,7 +61,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.home-screen {
   .quarter {
     width: 40%;
   }
@@ -92,4 +93,5 @@ export default {
     border-bottom-right-radius: 200vw;
     background: #ffd400;
   }
+}
 </style>

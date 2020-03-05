@@ -30,8 +30,9 @@ export default {
     })
 
     EventBus.$on('onBackButton', (e) => {
+      if (!this.displayed) return
       e.cancel = true
-      this.close()
+      this.hide()
     })
   },
   data: () => ({
@@ -45,6 +46,9 @@ export default {
     },
     mainHeight() {
       return `${this.height - 5}%`
+    },
+    displayed() {
+      return this.height > 0
     }
   },
   methods: {

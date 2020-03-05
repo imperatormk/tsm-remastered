@@ -11,7 +11,9 @@
       </StackLayout>
       <StackLayout verticalAlignment="top">
         <FlexboxLayout justifyContent="space-between" alignItems="center">
-          <Button v-show="!drawerOpened" @tap="goBack" backgroundColor="#fff" color="#8c8c8c" class="fas" :text="'\uf060'" fontSize="22" marginLeft="10" padding="5" style="border-width: 1;border-color:transparent;z-index: 0;"/>
+          <FlexboxLayout v-show="!drawerOpened && !isHome" justifyContent="space-between" alignItems="center">
+            <Button @tap="goBack" backgroundColor="#fff" color="#8c8c8c" class="fas" :text="'\uf060'" fontSize="22" marginLeft="10" padding="5" style="border-width: 1;border-color:transparent;z-index: 0;"/>
+          </FlexboxLayout>
           <SideDrawer row="0" col="0" @drawerOpened="drawerOpened=true" @drawerClosed="drawerOpened=false" @logout="onLogout" @login="onLogin"/>
         </FlexboxLayout>
       </StackLayout>
@@ -47,7 +49,8 @@ export default {
     offsetTop: {
       type: Boolean,
       default: true
-    }
+    },
+    isHome: Boolean
   },
   created() {
     EventBus.$on('getPageRef', (cb) => {
@@ -60,7 +63,7 @@ export default {
   },
   data: () => ({
     forceLoaded: false,
-    drawerOpened: false,
+    drawerOpened: false
   }),
   computed: {
     getStyle() {
