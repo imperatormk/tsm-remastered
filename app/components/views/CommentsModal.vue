@@ -1,6 +1,6 @@
 <template>
   <StackLayout @swipe="onSwipe" :height="heightWrapper" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.5)" width="100%" row="0" col="0">
-    <FlexboxLayout width="100%" :height="height > 90 ? '5%' : 0" justifyContent="center" alignItems="center">
+    <FlexboxLayout v-if="height > 90" width="100%" height="5%" justifyContent="center" alignItems="center">
       <Label class="fas" fontSize="22" :text="'\uf7a4'" color="white"/>
     </FlexboxLayout>
     <StackLayout backgroundColor="white" :height="mainHeight" width="100%">
@@ -27,6 +27,11 @@ export default {
       } else {
         this.hide()
       }
+    })
+
+    EventBus.$on('onBackButton', (e) => {
+      e.cancel = true
+      this.close()
     })
   },
   data: () => ({
