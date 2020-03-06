@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "874619178274-shipcvb5kmioaki7nksheavf1pjjjpuq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.thatsmontreal",
-            "certificate_hash": "c5e3f6650f21ebe8e5feaf99255393cc91a9f401"
-          }
-        },
-        {
           "client_id": "874619178274-50udtbp8i04ji4q26d02iqc89ucq9sv1.apps.googleusercontent.com",
           "client_type": 3
         }

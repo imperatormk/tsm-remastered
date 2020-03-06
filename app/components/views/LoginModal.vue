@@ -40,7 +40,7 @@ export default {
     },
     commitNewUser(res) {
       if (res) return Promise.resolve(this.$store.commit('setUser', res))
-      return firebase.getCurrentUser()
+      return auth.getCurrentUser()
         .then((curUser) => {
           return Promise.resolve(this.$store.commit('setUser', curUser))
         })

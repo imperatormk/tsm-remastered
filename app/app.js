@@ -24,7 +24,9 @@ import UserDashboard from '@/components/views/UserDashboard'
 import LoginModal from '@/components/views/LoginModal'
 
 import api from '@/services/api'
+import systemSrv from '@/services/system'
 import EventBus from '@/services/event-bus'
+
 import store from '@/store'
 
 const application = require('application')
@@ -36,16 +38,8 @@ if (androidModule) {
   })
 }
 
-let initialScreen = HomeScreen
-
-import systemSrv from '@/services/system'
 const everStarted = systemSrv.getValue('EVER_STARTED', 'boolean')
-setTimeout(() => {
-  console.log(everStarted)
-}, 3000)
-if (everStarted !== true) {
-  initialScreen = HowItWorks
-}
+const initialScreen = everStarted === true ? HomeScreen : HowItWorks
 
 new Vue({
   render: h => h('frame', [h(initialScreen)]),

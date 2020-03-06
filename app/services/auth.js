@@ -1,5 +1,6 @@
 import api from '@/services/api'
 import firebaseSrv from '@/services/firebase'
+import EventBus from '@/services/event-bus'
 
 export default {
   loginWithProvider(provider) {
@@ -22,12 +23,16 @@ export default {
         providerObj = {}
     }
     return firebaseSrv.instance().login(providerObj)
-      .then(() => api.getUser())
+      .then(() => {
+        EventBus.$emit('reloadSideDrawer')
+        api.getUser()
+      })
       .catch(err => Promise.reject(err.code))
   },
   logout() {
     firebaseSrv.initService()
       .then(() => {
+        EventBus.$emit('reloadSideDrawer')
         firebaseSrv.instance().logout()
       })
   },

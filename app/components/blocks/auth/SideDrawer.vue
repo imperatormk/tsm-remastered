@@ -63,11 +63,25 @@ export default {
     setTimeout(() => { // sorry
       this.show = true
     }, 300)
+
+    EventBus.$on('reloadSideDrawer', () => {
+      this.needsReload = true
+    })
   },
   data: () => ({
     show: false,
-    opened: false
+    opened: false,
+    needsReload: false
   }),
+  watch: {
+    needsReload(val) {
+      if (val) {
+        setTimeout(() => {
+          this.needsReload = false
+        }, 1000)
+      }
+    }
+  },
   methods: {
     onOpenDrawerTap() {
       this.$refs.drawer.nativeView.showDrawer()
@@ -98,7 +112,7 @@ export default {
   },
   computed: {
     hasLoggedInUser() {
-      return this.$store.getters.hasLoggedInUser
+      return this.$store.getters.hasLoggedInUser || this.needsReload
     },
     getCurrentUser() {
       return this.$store.getters.getCurrentUser || {}
