@@ -3,8 +3,6 @@
     <FlexboxLayout flexDirection="column" alignItems="center" justifyContent="center" height="85%">
 
       <StackLayout height="100"></StackLayout>
-      <Image src="~/images/logce-new.png" height="175"/>
-      <StackLayout height="35"></StackLayout>
       <Label text="Choose a direction or color!" fontSize="28"/>
       <StackLayout height="50"></StackLayout>
 
@@ -12,31 +10,31 @@
         <FlexboxLayout col="0" row="0" flexWrap="wrap" alignItems="space-around" justifyContent="center">
           <FlexboxLayout height="40%">
             <StackLayout @tap="goToStation(0)" class="quarter top-left"></StackLayout>
-            <FlexboxLayout @tap="goToScreen(0)" width="20%" height="100%" backgroundColor="#d4d4d4" justifyContent="center">
-              <Label text="N" color="black" fontSize="25" fontWeight="bold" paddingTop="10"/>
+            <FlexboxLayout @tap="goToScreen(0)" class="compass-node" width="20%" height="100%" justifyContent="center">
+              <Label text="N" color="#ffde00" fontSize="25" fontWeight="bold" paddingTop="10"/>
             </FlexboxLayout>
             <StackLayout @tap="goToStation(1)" class="quarter top-right"></StackLayout>
           </FlexboxLayout>
           <FlexboxLayout height="20%">
-            <FlexboxLayout @tap="goToScreen(1)" width="50%" backgroundColor="#d4d4d4" alignItems="center">
-              <Label text="W" color="black" fontSize="25" fontWeight="bold" paddingLeft="15"/>
+            <FlexboxLayout @tap="goToScreen(1)" class="compass-node" width="50%" alignItems="center">
+              <Label text="W" color="#ffde00" fontSize="25" fontWeight="bold" paddingLeft="15"/>
             </FlexboxLayout>
-            <FlexboxLayout @tap="goToScreen(3)" width="50%" backgroundColor="#d4d4d4" justifyContent="flex-end" alignItems="center">
-              <Label text="E" color="black" fontSize="25" fontWeight="bold" paddingRight="20"/>
+            <FlexboxLayout @tap="goToScreen(3)" class="compass-node" width="50%" justifyContent="flex-end" alignItems="center">
+              <Label text="E" color="#ffde00" fontSize="25" fontWeight="bold" paddingRight="20"/>
             </FlexboxLayout>
           </FlexboxLayout>
           <FlexboxLayout height="40%">
             <StackLayout @tap="goToStation(3)" class="quarter bottom-left"></StackLayout>
-            <FlexboxLayout @tap="goToScreen(2)" width="20%" height="100%" backgroundColor="#d4d4d4" justifyContent="center" alignItems="flex-end">
-              <Label text="S" color="black" fontSize="25" fontWeight="bold" paddingBottom="10"/>
+            <FlexboxLayout @tap="goToScreen(2)" class="compass-node" width="20%" height="100%" justifyContent="center" alignItems="flex-end">
+              <Label text="S" color="#ffde00" fontSize="25" fontWeight="bold" paddingBottom="10"/>
             </FlexboxLayout>
             <StackLayout @tap="goToStation(2)" class="quarter bottom-right"></StackLayout>
           </FlexboxLayout>
         </FlexboxLayout>
         <StackLayout col="0" row="0" class="fill-circle">
           <FlexboxLayout justifyContent="center" alignItems="center" width="100%" height="100%">
-            <FlexboxLayout @tap="()=>{}" justifyContent="center" alignItems="center" class="fill-circle">
-              <Label :text="'\uf239'" class="fas" fontSize="100" color="#8c8c8c"/>
+            <FlexboxLayout @tap="()=>{}" justifyContent="center" alignItems="center">
+              <Image src="~/images/logce-new-circle.png" height="800"/>
             </FlexboxLayout>
           </FlexboxLayout>
         </StackLayout>
@@ -70,8 +68,12 @@ export default {
   .fill-circle {
     width: 65%;
     height: 65%;
-    background-color:white;
+    background-color:#fff;
     border-radius: 100%;
+  }
+
+  .compass-node {
+    background-color: black;
   }
 
   .top-left {

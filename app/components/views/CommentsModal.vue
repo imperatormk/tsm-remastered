@@ -3,8 +3,8 @@
     <FlexboxLayout v-if="height > 90" width="100%" height="5%" justifyContent="center" alignItems="center">
       <Label class="fas" fontSize="22" :text="'\uf7a4'" color="white"/>
     </FlexboxLayout>
-    <StackLayout backgroundColor="white" :height="mainHeight" width="100%">
-      <CommentContainer v-if="mediaItem && height > 30" :mediaItem="mediaItem"/>
+    <StackLayout :height="mainHeight" width="100%">
+      <CommentContainer v-if="mediaItem && height > 50" :mediaItem="mediaItem"/>
     </StackLayout>
   </StackLayout>
 </template>

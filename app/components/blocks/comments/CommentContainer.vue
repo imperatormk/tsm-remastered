@@ -1,5 +1,5 @@
 <template>
-  <FlexboxLayout flexDirection="column">
+  <FlexboxLayout flexDirection="column" backgroundColor="white" borderRadius="25">
     <FlexboxLayout flexDirection="row" paddingBottom="5">
       <TextField hint="Enter your comment..." 
         v-model="comment" 
@@ -8,11 +8,14 @@
         returnKeyType="done"
         fontSize="15"
         autocorrect="false"
-        style="padding-left:15;margin:0px;border-width:3px;border-right-width:0px;border-color:#e5e5e5"
+        paddingLeft="15"
+        margin="0"
+        borderColor="#e5e5e5"
+        style="border-bottom-width:3px;"
         class="input input-border"
         flexGrow="9"></TextField>
       <LoadingWrapper :loading="commenting">
-        <Button flexGrow="1" @tap="postComment" style="border-width: 1;border-color:#e5e5e5;z-index: 0;color:#8c8c8c;margin:0;" class="fas" fontSize="20" :text="commenting ? '\uf110' : '\uf1d8'"/>
+        <Button margin="0" color="#8c8c8c" borderColor="#e5e5e5" flexGrow="1" @tap="postComment" style="border-bottom-width:1; z-index: 0;" class="fas" fontSize="20" :text="commenting ? '\uf110' : '\uf1d8'"/>
       </LoadingWrapper>
     </FlexboxLayout>
     <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
