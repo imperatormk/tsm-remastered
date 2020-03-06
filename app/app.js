@@ -11,6 +11,7 @@ import ViewContainer from '@/components/containers/ViewContainer'
 Vue.component('ViewContainer', ViewContainer)
 
 Vue.config.silent = true
+import HowItWorks from '@/components/views/HowItWorks'
 import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'
@@ -35,8 +36,19 @@ if (androidModule) {
   })
 }
 
+let initialScreen = HomeScreen
+
+import systemSrv from '@/services/system'
+const everStarted = systemSrv.getValue('EVER_STARTED', 'boolean')
+setTimeout(() => {
+  console.log(everStarted)
+}, 3000)
+if (everStarted !== true) {
+  initialScreen = HowItWorks
+}
+
 new Vue({
-  render: h => h('frame', [h(HomeScreen)]),
+  render: h => h('frame', [h(initialScreen)]),
   created() {
     firebaseSrv.initService()
       .then(() => {})

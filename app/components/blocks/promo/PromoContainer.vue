@@ -4,7 +4,7 @@
 
     <StackLayout :height="getPlayerHeight()">
       <Carousel v-if="!hideCarousel && selectedIndex == null" :selectedPage="highlightedIndex" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-        <CarouselItem v-for="(promoItem) in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
+        <CarouselItem v-for="promoItem in promos" :key="promoItem.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
             <Image :height="getPlayerHeight()" :src="getImageUrl(promoItem.promoImages[0].imageUrl)" stretch="aspectFill"/>
           </StackLayout>
@@ -12,7 +12,7 @@
       </Carousel>
 
       <Carousel v-if="!hideCarousel && selectedIndex != null" width="100%" @pageChanged="slideChanged" finite="false" bounce="false" showIndicator="false" verticalAlignment="top" color="white">
-        <CarouselItem v-for="(promoImage) in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
+        <CarouselItem v-for="promoImage in promos[selectedIndex].promoImages" :key="promoImage.id" backgroundColor="#fefefe" verticalAlignment="middle">
           <StackLayout>
             <Image :height="getPlayerHeight()" :src="getImageUrl(promoImage.imageUrl)" stretch="aspectFill"/>
           </StackLayout>

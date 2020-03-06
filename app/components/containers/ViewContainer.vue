@@ -9,7 +9,7 @@
       <StackLayout verticalAlignment="top" :marginTop="offsetTop ? 55 : 0">
         <slot/>
       </StackLayout>
-      <StackLayout verticalAlignment="top">
+      <StackLayout verticalAlignment="top" v-if="!noHeader">
         <FlexboxLayout justifyContent="space-between" alignItems="center">
           <FlexboxLayout v-show="!drawerOpened && !isHome" justifyContent="space-between" alignItems="center">
             <Button @tap="goBack" backgroundColor="#fff" color="#8c8c8c" class="fas" :text="'\uf060'" fontSize="22" marginLeft="10" padding="5" style="border-width: 1;border-color:transparent;z-index: 0;"/>
@@ -50,7 +50,8 @@ export default {
       type: Boolean,
       default: true
     },
-    isHome: Boolean
+    isHome: Boolean,
+    noHeader: Boolean
   },
   created() {
     EventBus.$on('getPageRef', (cb) => {
