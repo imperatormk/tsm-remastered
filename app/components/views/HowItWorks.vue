@@ -4,11 +4,11 @@
       <FlexboxLayout flexDirection="column" alignItems="center">
         <Image src="~/images/logce-dark.png" height="60" marginTop="50"/>
         <Label text="How it works" fontSize="40" marginTop="40" color="#8c8c8c"/>
-        <StackLayout height="60"></StackLayout>
+        <StackLayout height="50"></StackLayout>
 
-        <Carousel @pageChanged="slideChanged" height="200" width="100%" finite="false" bounce="false" showIndicator="true" indicatorColor="#8c8c8c" indicatorColorUnselected="#dfdfdf" verticalAlignment="top" color="white">
+        <Carousel @pageChanged="slideChanged" height="120" width="100%" finite="false" bounce="false" showIndicator="true" indicatorColor="#8c8c8c" indicatorColorUnselected="#dfdfdf" verticalAlignment="top" color="white">
           <CarouselItem v-for="(stepItem, idx) in steps" :key="idx" backgroundColor="#fefefe" verticalAlignment="middle">
-            <FlexboxLayout width="100%" flexDirection="column" alignItems="center" padding="50 0">
+            <FlexboxLayout width="100%" flexDirection="column" alignItems="center" padding="10 0">
               <Label :text="stepItem.title" fontSize="28" color="#8c8c8c" textWrap="true" textAlignment="center"/>
               <Label v-if="stepItem.desc" :text="stepItem.desc" fontSize="22" color="#8c8c8c"/>
             </FlexboxLayout>

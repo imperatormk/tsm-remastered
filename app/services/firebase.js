@@ -3,7 +3,8 @@ import config from '@/shared/firebase-config'
 
 export default {
   initService() {
-    return firebase.init(config)
+    firebase.init(config)
+    return Promise.resolve()
   },
   instance() {
     return firebase

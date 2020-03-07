@@ -45,8 +45,6 @@ new Vue({
   render: h => h('frame', [h(initialScreen)]),
   created() {
     firebaseSrv.initService()
-      .then(() => {})
-      .catch(err => console.error(err))
     EventBus.$on('goToScreen', screen => this.goToScreen(screen))
     EventBus.$on('goToStation', station => this.goToStation(station))
   },
