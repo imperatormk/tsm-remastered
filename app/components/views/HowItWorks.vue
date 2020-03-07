@@ -2,8 +2,9 @@
   <ViewContainer noHeader>
     <StackLayout width="80%" textAlignment="center">
       <FlexboxLayout flexDirection="column" alignItems="center">
-        <Label text="How it works" fontSize="32" marginTop="50" color="#8c8c8c"/>
-        <StackLayout height="50"></StackLayout>
+        <Image src="~/images/logce-dark.png" height="60" marginTop="50"/>
+        <Label text="How it works" fontSize="40" marginTop="40" color="#8c8c8c"/>
+        <StackLayout height="60"></StackLayout>
 
         <Carousel @pageChanged="slideChanged" height="200" width="100%" finite="false" bounce="false" showIndicator="true" indicatorColor="#8c8c8c" indicatorColorUnselected="#dfdfdf" verticalAlignment="top" color="white">
           <CarouselItem v-for="(stepItem, idx) in steps" :key="idx" backgroundColor="#fefefe" verticalAlignment="middle">

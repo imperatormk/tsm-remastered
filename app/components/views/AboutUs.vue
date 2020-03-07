@@ -12,9 +12,9 @@
         <StackLayout height="40"></StackLayout>
 
         <StackLayout width="100%">
-          <Label fontSize="21" text="- Trouve ta Station et Clik-un-clip!"/>
-          <Label fontSize="21" text="- Find your Station and Clik-a-clip!"/>
-          <Label fontSize="21" text="- Login to our platform to unlock discounts and gifts"/>
+          <Label fontSize="21" textWrap="true" text="- Trouve ta Station et Clik-un-clip!"/>
+          <Label fontSize="21" textWrap="true" text="- Find your Station and Clik-a-clip!"/>
+          <Label fontSize="21" textWrap="true" text="- Login to our platform to unlock discounts and gifts"/>
         </StackLayout>
       </FlexboxLayout>
     </FlexboxLayout>
