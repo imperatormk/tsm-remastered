@@ -42,10 +42,8 @@ export default {
       return api.getStations(line)
         .then((stations) => {
           this.stations = stations
-          return Promise.resolve()
-        })
-        .finally(() => {
           this.loaded = true
+          return Promise.resolve()
         })
     },
     stationSelected(station) {

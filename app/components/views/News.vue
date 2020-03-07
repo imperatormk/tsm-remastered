@@ -47,8 +47,6 @@ export default {
       api.getLatestMedia()
         .then((news) => {
           this.news = news
-        })
-        .finally(() => {
           this.loaded = true
         })
     },

@@ -17,7 +17,7 @@
         </ScrollView>
         <FlexboxLayout v-else @tap="gotoNews" flexDirection="column" alignItems="center">
           <Label :text="'\uf06b'" class="fas" fontSize="100" padding="10" textAlignment="center"/>
-          <Label text="No gifts (yet)... why'd you not check out News section?" fontSize="20" padding="10" textAlignment="center" textWrap="true"/>
+          <Label text="No gifts (yet)... why'd you not check out the News section?" fontSize="20" padding="10" textAlignment="center" textWrap="true"/>
         </FlexboxLayout>
       </FlexboxLayout>
     </FlexboxLayout>
@@ -54,8 +54,6 @@ export default {
       api.getCodes()
         .then((codes) => {
           this.codes = codes
-        })
-        .finally(() => {
           this.loaded = true
         })
     },

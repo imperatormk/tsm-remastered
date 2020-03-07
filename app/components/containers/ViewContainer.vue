@@ -25,6 +25,7 @@
 <script>
 import auth from '@/services/auth'
 import EventBus from '@/services/event-bus'
+import toast from '@/services/toast'
 
 import LoadingIndicator from '@/components/common/LoadingIndicator'
 
@@ -57,6 +58,19 @@ export default {
     EventBus.$on('getPageRef', (cb) => {
       cb(this.$refs.pageRef.nativeView)
     })
+    EventBus.$on('onBackButton', (e) => {
+      if (this.loading) {
+        e.cancel = true
+      }
+    })
+    EventBus.$on('onApiFailed', () => {
+      if (this.loading) {
+        setTimeout(() => {
+          toast.showToast('Something went wrong, please try again.')
+          if (this.getModalCount === 0) this.$navigateBack()
+        }, 1000)
+      }
+    })
     this.commitNewUser()
   },
   beforeDestroy() {
@@ -67,6 +81,9 @@ export default {
     drawerOpened: false
   }),
   computed: {
+    getModalCount() {
+      return this.$store.getters.getModalCount
+    },
     getStyle() {
       return {
         'background-image': this.backgroundImage,

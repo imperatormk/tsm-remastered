@@ -4,7 +4,7 @@
       <Label class="fas" fontSize="22" :text="'\uf7a4'" color="white"/>
     </FlexboxLayout>
     <StackLayout :height="mainHeight" width="100%">
-      <CommentContainer v-if="mediaItem && height > 50" :mediaItem="mediaItem"/>
+      <CommentContainer v-if="mediaItem && height > 50" :mediaItem="mediaItem" @error="onError"/>
     </StackLayout>
   </StackLayout>
 </template>
@@ -38,7 +38,8 @@ export default {
   data: () => ({
     height: 0,
     mediaItem: null,
-    onCloseCb: null
+    onCloseCb: null,
+    shouldStop: false
   }),
   computed: {
     heightWrapper() {
@@ -57,6 +58,10 @@ export default {
       if (isDown) this.hide()
     },
     show() {
+      if (this.shouldStop) {
+        this.shouldStop = false
+        return
+      }
       if (this.height >= 100) {
         this.height = 100
         return
@@ -80,6 +85,12 @@ export default {
       setTimeout(() => {
         this.hide()
       }, TIMEOUT)
+    },
+    onError() {
+      this.shouldStop = true
+      setTimeout(() => {
+        this.hide()
+      }, TIMEOUT + 10)
     }
   },
   components: {

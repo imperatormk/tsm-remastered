@@ -61,9 +61,10 @@ export default {
       api.getComments(this.mediaItem.id)
         .then((comments) => {
           this.comments = comments
-        })
-        .finally(() => {
           this.loaded = true
+        })
+        .catch(() => {
+          this.$emit('error')
         })
     },
     postComment() {
