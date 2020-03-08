@@ -11,7 +11,6 @@ import ViewContainer from '@/components/containers/ViewContainer'
 Vue.component('ViewContainer', ViewContainer)
 
 Vue.config.silent = true
-import HowItWorks from '@/components/views/HowItWorks'
 import HomeScreen from '@/components/views/HomeScreen'
 
 import News from '@/components/views/News'
@@ -24,7 +23,6 @@ import UserDashboard from '@/components/views/UserDashboard'
 import LoginModal from '@/components/views/LoginModal'
 
 import api from '@/services/api'
-import systemSrv from '@/services/system'
 import EventBus from '@/services/event-bus'
 
 import store from '@/store'
@@ -38,8 +36,7 @@ if (androidModule) {
   })
 }
 
-const everStarted = systemSrv.getValue('EVER_STARTED', 'boolean')
-const initialScreen = everStarted === true ? HomeScreen : HowItWorks
+const initialScreen = HomeScreen
 
 new Vue({
   render: h => h('frame', [h(initialScreen)]),

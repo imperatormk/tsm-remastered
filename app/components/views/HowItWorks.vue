@@ -1,32 +1,39 @@
 <template>
-  <ViewContainer noHeader>
-    <StackLayout width="80%" textAlignment="center">
-      <FlexboxLayout flexDirection="column" alignItems="center">
-        <Image src="~/images/logce-dark.png" height="60" marginTop="50"/>
-        <Label text="How it works" fontSize="40" marginTop="40" color="#8c8c8c"/>
-        <StackLayout height="50"></StackLayout>
-
-        <Carousel @pageChanged="slideChanged" height="120" width="100%" finite="false" bounce="false" showIndicator="true" indicatorColor="#8c8c8c" indicatorColorUnselected="#dfdfdf" verticalAlignment="top" color="white">
-          <CarouselItem v-for="(stepItem, idx) in steps" :key="idx" backgroundColor="#fefefe" verticalAlignment="middle">
-            <FlexboxLayout width="100%" flexDirection="column" alignItems="center" padding="10 0">
-              <Label :text="stepItem.title" fontSize="28" color="#8c8c8c" textWrap="true" textAlignment="center"/>
-              <Label v-if="stepItem.desc" :text="stepItem.desc" fontSize="22" color="#8c8c8c"/>
-            </FlexboxLayout>
-          </CarouselItem>
-        </Carousel>
-      </FlexboxLayout>
-
+  <StackLayout width="100%" textAlignment="center" padding="5 10">
+    <FlexboxLayout flexDirection="column" alignItems="center">
+      <Image src="~/images/logce-dark.png" height="60" marginTop="50"/>
+      <Label text="How it works" fontSize="40" marginTop="40" color="#8c8c8c"/>
       <StackLayout height="50"></StackLayout>
-      <Button v-if="isAtLast" @tap="proceedToHome" text="Got it!" color="black" fontSize="22" padding="15"/>
-    </StackLayout>
-  </ViewContainer>
+
+      <Carousel @pageChanged="slideChanged" height="120" width="100%" finite="false" bounce="false" showIndicator="true" indicatorColor="#8c8c8c" indicatorColorUnselected="#dfdfdf" verticalAlignment="top" color="white">
+        <CarouselItem v-for="(stepItem, idx) in steps" :key="idx" backgroundColor="#fefefe" verticalAlignment="middle">
+          <FlexboxLayout width="100%" flexDirection="column" alignItems="center" padding="10 5">
+            <Label :text="stepItem.title" fontSize="28" color="#8c8c8c" textWrap="true" textAlignment="center"/>
+            <Label v-if="stepItem.desc" :text="stepItem.desc" fontSize="22" color="#8c8c8c"/>
+          </FlexboxLayout>
+        </CarouselItem>
+      </Carousel>
+    </FlexboxLayout>
+
+    <StackLayout height="50"></StackLayout>
+    <Button @tap="proceedToHome" :isEnabled="isAtLast" text="Got it!" :color="isAtLast ? 'black' : 'grey'" fontSize="22" padding="15"/>
+  </StackLayout>
 </template>
 
 <script>
-import HomeScreen from '@/components/views/HomeScreen'
+import EventBus from '@/services/event-bus'
 import systemSrv from '@/services/system'
 
 export default {
+  mounted() {
+    this.isVisible = true
+    EventBus.$on('onBackButton', (e) => {
+      if (this.isVisible) e.cancel = true
+    })
+  },
+  destroyed() {
+    this.isVisible = false
+  },
   data: () => ({
     steps: [{
       title: 'Choose a color of metro line',
@@ -45,25 +52,17 @@ export default {
       desc: '',
       image: ''
     }],
-    currentPage: 0
+    isVisible: false,
+    isAtLast: false
   }),
-  computed: {
-    isAtLast() {
-      return this.currentPage === this.steps.length - 1
-    }
-  },
   methods: {
     slideChanged(e) {
-      this.currentPage = e.index
+      const isAtLast = e.index === this.steps.length - 1
+      if (isAtLast) this.isAtLast = true
     },
     proceedToHome() {
       systemSrv.storeValue({ key: 'EVER_STARTED', value: true })
-      this.$navigateTo(HomeScreen, {
-        animated: true,
-        transition: {
-          name: 'fade'
-        }
-      })
+      this.$modal.close()
     }
   }
 }

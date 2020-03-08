@@ -45,9 +45,25 @@
 
 <script>
 import LineDetails from '@/components/views/LineDetails'
+import HowItWorks from '@/components/views/HowItWorks'
+
 import EventBus from '@/services/event-bus'
+import systemSrv from '@/services/system'
 
 export default {
+  mounted() {
+    const everStarted = systemSrv.getValue('EVER_STARTED', 'boolean')
+    setTimeout(() => {
+      if (!everStarted) {
+        this.$showModal(HowItWorks, {
+          animated: true,
+          transition: {
+            name: 'fade'
+          }
+        })
+      }
+    }, 1000)
+  },
   methods: {
     goToScreen(screen) {
       EventBus.$emit('goToScreen', screen)
