@@ -1,7 +1,7 @@
 <template>
   <StackLayout @swipe="onSwipe" :height="heightWrapper" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.5)" width="100%" row="0" col="0">
     <FlexboxLayout v-if="height > 90" width="100%" height="5%" justifyContent="center" alignItems="center">
-      <Label class="fas" fontSize="22" :text="'\uf7a4'" color="white"/>
+      <Label fontSize="22" class="fa" :text="'fa-caret-down' | fonticon" color="white"/>
     </FlexboxLayout>
     <StackLayout :height="mainHeight" width="100%">
       <CommentContainer v-if="mediaItem && height > 50" :mediaItem="mediaItem" @error="onError"/>

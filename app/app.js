@@ -10,6 +10,15 @@ Vue.registerElement('BarcodeScanner', () => require('nativescript-barcodescanner
 import ViewContainer from '@/components/containers/ViewContainer'
 Vue.component('ViewContainer', ViewContainer)
 
+import { TNSFontIcon, fonticon } from 'nativescript-fonticon'
+
+TNSFontIcon.debug = true
+TNSFontIcon.paths = {
+  'fa': './assets/css/font-awesome.css'
+}
+TNSFontIcon.loadCss()
+Vue.filter('fonticon', fonticon)
+
 Vue.config.silent = true
 import HomeScreen from '@/components/views/HomeScreen'
 

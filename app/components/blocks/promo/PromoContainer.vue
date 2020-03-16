@@ -32,7 +32,7 @@
       <GridLayout rows="auto" columns="* auto *" margin="10" width="100%">
         <StackLayout padding="5" horizontalAlignment="center" col="0" @tap="selectedIndex == null ? $emit('hidePromos') : pickPromo(null)">
           <StackLayout horizontalAlignment="center" verticalAlignment="center">
-            <Label textAlignment="center" class="fas" :text="'\uf060'" color="#8c8c8c" fontSize="23"/>
+            <Label textAlignment="center" class="fa" :text="'fa-caret-left' | fonticon" color="#8c8c8c" fontSize="23"/>
             <Label textAlignment="center" text="Back" color="#8c8c8c"/>
           </StackLayout>
         </StackLayout>
@@ -40,7 +40,7 @@
         <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="selectedIndex == null ? pickPromo(highlightedIndex) : reqPromo(selectedIndex)">
           <LoadingWrapper :loading="requesting">
             <StackLayout horizontalAlignment="center" verticalAlignment="center">
-              <Label textAlignment="center" class="fas" :text="'\uf06b'" color="#8c8c8c" fontSize="23"/>
+              <Label textAlignment="center" class="fa" :text="'fa-gift' | fonticon" color="#8c8c8c" fontSize="23"/>
               <Label textAlignment="center" :text="selectedIndex == null ? 'Pick gift' : 'Get gift'" color="#8c8c8c"/>
             </StackLayout>
           </LoadingWrapper>

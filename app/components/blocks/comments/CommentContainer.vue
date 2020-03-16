@@ -15,7 +15,7 @@
         class="input input-border"
         flexGrow="9"></TextField>
       <LoadingWrapper :loading="commenting">
-        <Button margin="0" color="#8c8c8c" borderColor="#e5e5e5" flexGrow="1" @tap="postComment" style="border-bottom-width:1; z-index: 0;" class="fas" fontSize="20" :text="commenting ? '\uf110' : '\uf1d8'"/>
+        <Button margin="0" color="#8c8c8c" borderColor="#e5e5e5" flexGrow="1" @tap="postComment" style="border-bottom-width:1; z-index: 0;" class="fa" :text="commentingIcon | fonticon" fontSize="20"/>
       </LoadingWrapper>
     </FlexboxLayout>
     <StackLayout :verticalAlignment="loaded && comments.length ? 'top' : 'center'" :height="loaded && comments.length ? 'auto' : '100%'">
@@ -109,6 +109,9 @@ export default {
         str = `${str} auto`
       ])
       return str.trim()
+    },
+    commentingIcon() {
+      return this.commenting ? '\uf110' : '\uf1d8'
     }
   },
   components: {

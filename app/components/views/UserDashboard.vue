@@ -16,7 +16,7 @@
           </StackLayout>
         </ScrollView>
         <FlexboxLayout v-else @tap="gotoNews" flexDirection="column" alignItems="center">
-          <Label :text="'\uf06b'" class="fas" fontSize="100" padding="10" textAlignment="center"/>
+          <Label class="fa" :text="'fa-gift' | fonticon" fontSize="100" padding="10" textAlignment="center"/>
           <Label text="No gifts (yet)... why'd you not check out the News section?" fontSize="20" padding="10" textAlignment="center" textWrap="true"/>
         </FlexboxLayout>
       </FlexboxLayout>

@@ -3,21 +3,21 @@
     <GridLayout rows="auto" columns="* auto * auto *" margin="10" width="100%">
       <StackLayout padding="5" horizontalAlignment="center" col="0" @tap="shareMedia">
         <StackLayout horizontalAlignment="center" verticalAlignment="center">
-          <Label textAlignment="center" class="fas" :text="'\uf064'" color="#8c8c8c" fontSize="23"/>
+          <Label textAlignment="center" class="fa" :text="'fa-share' | fonticon" color="#8c8c8c" fontSize="23"/>
           <Label textAlignment="center" text="Share" color="#8c8c8c"/>
         </StackLayout>
       </StackLayout>
       <StackLayout backgroundColor="#c2c2c2" width="1" col="1"></StackLayout>
       <StackLayout padding="5" horizontalAlignment="center" col="2" @tap="hasPromos ? $emit('showPromos') : () => {}">
         <StackLayout horizontalAlignment="center" verticalAlignment="center">
-          <Label textAlignment="center" class="fas" :text="'\uf06b'" :color="hasPromos ? '#8c8c8c' : '#c9c9c9'" fontSize="23"/>
+          <Label textAlignment="center" class="fa" :text="'fa-gift' | fonticon" :color="hasPromos ? '#8c8c8c' : '#c9c9c9'" fontSize="23"/>
           <Label textAlignment="center" text="Free gift" color="#8c8c8c"/>
         </StackLayout>
       </StackLayout>
       <StackLayout backgroundColor="#c2c2c2" width="1" col="3"></StackLayout>
       <StackLayout padding="5" horizontalAlignment="center" col="4" @tap="openComments">
         <StackLayout horizontalAlignment="center" verticalAlignment="center">
-          <Label textAlignment="center" class="fas" :text="'\uf086'" color="#8c8c8c" fontSize="23"/>
+          <Label textAlignment="center" class="fa" :text="'fa-comments-o' | fonticon" color="#8c8c8c" fontSize="23"/>
           <Label textAlignment="center" text="Comments" color="#8c8c8c"/>
         </StackLayout>
       </StackLayout>

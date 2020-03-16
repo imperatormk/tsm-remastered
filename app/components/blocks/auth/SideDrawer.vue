@@ -13,42 +13,42 @@
             </FlexboxLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="onLogout" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf2f5'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label paddingLeft="15" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-sign-out' | fonticon"/>
               <Label text="Log out" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
           <StackLayout v-else>
             <StackLayout width="100%" @tap="onLogin" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf2f6'" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label paddingLeft="15" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-sign-in' | fonticon"/>
               <Label text="Log in" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
           <StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(0)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf1ea'" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
+              <Label paddingLeft="15" color="#ed8900" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-newspaper-o' | fonticon"/>
               <Label text="News" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(1)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf689'" color="#007cc1" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label paddingLeft="15" color="#007cc1" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-info' | fonticon"/>
               <Label text="Who are we?" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(3)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf0e0'" color="#0cad26" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="far"/>
+              <Label paddingLeft="15" color="#0cad26" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-envelope-o' | fonticon"/>
               <Label text="Email us" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
             <StackLayout width="100%" height="0.5" backgroundColor="#d3d3d3"></StackLayout>
             <StackLayout width="100%" @tap="goToScreen(2)" horizontalAlignment="left" orientation="horizontal" backgroundColor="#f5f5f5">
-              <Label paddingLeft="15" :text="'\uf06b'" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fas"/>
+              <Label paddingLeft="15" color="#ffd400" textAlignment="left" paddingTop="15" fontSize="20" backgroundColor="#f5f5f5" class="fa" :text="'fa-gift' | fonticon"/>
               <Label text="Save with gifts" textAlignment="left" padding="15" backgroundColor="#f5f5f5"/>
             </StackLayout>
           </StackLayout>
         </StackLayout>
       </StackLayout>
       <FlexboxLayout ~mainContent justifyContent="flex-end" alignItems="center">
-        <Label @tap="onOpenDrawerTap" :color="opened ? 'transparent' : '#8c8c8c'" margin="0" padding="15 20 15 0" class="fas" fontSize="22" :text="'\uf0c9'"/>
+        <Label @tap="onOpenDrawerTap" :color="opened ? 'transparent' : '#8c8c8c'" margin="0" padding="15 20 15 0" class="fa" fontSize="22" :text="'fa-bars' | fonticon"/>
       </FlexboxLayout>
     </RadSideDrawer>
   </GridLayout>

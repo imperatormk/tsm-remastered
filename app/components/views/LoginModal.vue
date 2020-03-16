@@ -3,9 +3,9 @@
     <StackLayout padding="30">
       <Label padding="5" text="Pick your favorite social network to unlock" fontSize="18" textWrap="true" textAlignment="center"/>
       <StackLayout height="25"/>
-      <Button style="width: 70%;border-radius:10px;" background="#3c5a99" color="white" class="fab" fontSize="22" :text="'\uf39e'" @tap="loginWith('fb')"/>
+      <Button style="width: 70%;border-radius:10px;" background="#3c5a99" color="white" class="fa" :text="'fa-facebook' | fonticon" fontSize="22" @tap="loginWith('fb')"/>
       <StackLayout height="10"/>
-      <Button style="width: 70%;border-radius:10px;" background="#db4437" color="white" class="fab" fontSize="22" :text="'\uf1a0'" @tap="loginWith('gg')"/>
+      <Button style="width: 70%;border-radius:10px;" background="#db4437" color="white" class="fa" :text="'fa-google' | fonticon" fontSize="22" @tap="loginWith('gg')"/>
     </StackLayout>
   </StackLayout>
 </template>
